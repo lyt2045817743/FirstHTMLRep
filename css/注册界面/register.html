@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* css reset start */
+        body{
+            margin:0;
+            background-color:#f9f9f9;
+            font-size:14px;
+            font-weight: normal;
+        }
+        h4{
+            margin:0;
+        }
+        input{
+            border: 0;
+            outline: none;
+            color:#333;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul{
+            margin:0;
+            padding:0;
+        }
+        /* css reset end */
+        .register-container{
+            background-color:#fff;
+            width: 854px;
+            height: 500px;
+            margin:0 auto;
+            margin-top:100px;
+            padding:0 34px 30px;
+        }
+        /* logo start*/
+        .register-container .logo a{
+            width: 49px;
+            height: 48px;
+            display:block;
+            background-image:url('../images/milogo.png');
+            margin:0 auto;
+            cursor: default;
+        }
+        .register-container .logo{
+            padding-bottom:40px;
+        }
+        /* logo end*/
+
+        /*.register-info start*/
+        .register-container .register-info h4{
+            font-size:30px;
+            text-align:center;
+            font-weight:normal;
+        }
+        /*.register-info end*/
+
+        /*.register-form start*/
+        .register-container .register-form{
+            width: 332px;
+            padding: 30px 0;
+            margin:0 auto;
+        }
+
+        .tit-normal h4{
+            font-weight:normal;
+            color:#333;
+            padding:0 0 5px;
+        }
+        /*.select-regions start*/
+        .select-regions{
+            border:1px  #e8e8e8 solid;
+            height: 40px;
+            line-height:40px;
+            padding-left:14px;
+            margin: 0 0 15px;
+        }
+        .select-regions p{
+            float: left;
+            width: 275px;
+            margin:0;
+            color: #555;
+            border-right: 1px #e8e8e8 solid;
+        }
+        .select-regions i{
+            width: 16px;
+            height: 16px;
+            float: right;
+            margin: 11px 12px 0 12px;
+            background-image:url('../images/icon_user.png');
+        }
+        /*.select-regions end*/
+        .region-tit-text{
+            margin: -10px 0 15px;
+        }
+        .phone{
+            
+            border:1px  #e8e8e8 solid;
+            height: 40px;
+            line-height:40px;
+            margin: 0 0 15px;
+        }
+        .listtit{
+            float: left;
+            padding:0 9px;
+            height: 40px;
+            line-height: 40px;
+            width: 54px;
+            border-right: 1px  #e8e8e8 solid;
+        }
+        .listtit p{
+            margin:0;
+            float:left;
+        }
+        .listtit i{
+            border-style: solid;
+            border-width: 5px;
+            border-color: #9d9d9d transparent transparent transparent;
+            float:left;
+            margin:17px 0 0 10px;
+        }        
+        .inputbg input{
+            float: left;
+            padding:10px;
+            height:20px;
+        }
+        /*.register-form end*/
+
+        /*submit-btn start*/
+        .submit-btn input{
+            background-color: #ff6700;
+            border:1px solid rgba(186,186,186,0.3);
+            width: 330px;
+            height: 42px;
+            color:white;
+            margin-top:15px;
+        }
+        /*submit-btn end*/
+
+        /*register-msg start*/
+        .register-msg{
+            padding:40px;
+            text-align: center;
+        }        
+        .register-msg a{
+            color: #333;
+            font-weight: bold;
+        }
+        /*register-msg end*/
+
+        /*footer start*/
+        .select-list{
+            text-align: center;
+            margin-top:30px;
+        }
+        .footer li{
+            list-style: none;
+            display: inline-block;
+        }
+        .footer span{
+            margin: 0 10px;
+            color: #757575;
+        }
+        .footer span:hover{
+            color: #333;
+        }
+        .footer p{
+            text-align: center;
+        }
+        .select-list .active{
+            color: #333;
+        }
+        .intro{
+            color: #9d9d9d;
+        }
+        /*footer end*/
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="logo">
+            <a href="javascript:void(0)"></a>
+        </div>
+        <div class="register-info">
+            <h4>注册小米帐号</h4>
+        </div>
+        <div class="register-form">
+            <div class="tit-normal">
+                <h4>国家/地区</h4>
+            </div>
+            <div class="select-regions">
+                <p>中国</p>
+                <i></i>
+            </div>
+            <div class="region-tit-text">成功注册帐号后，国家/地区将不能被修改</div>
+            <div class="tit-normal"><h4>手机号码</h4></div>
+            <div class="phone">
+                <div class="listtit">
+                    <p>+86</p>
+                    <i></i>
+                </div>
+                <div class="inputbg">
+                    <input type="text" placeholder="请输入手机号码">
+                </div>
+            </div>
+            <div class="submit-btn">
+                <input type="submit" value="立即注册">
+            </div>
+        </div>
+        <div class="register-msg">
+                已阅读并同意：小米 
+                <a href="javascript:void(0)">用户协议</a>
+                和 
+                <a href="javascript:void(0)">隐私政策</a>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="select-list">
+            <ul>
+                <li><span class="active">简体</span>|</li>
+                <li><span>繁体</span>|</li>
+                <li><span>English</span>|</li>
+                <li><span>常见问题</span></li>
+            </ul>
+        </div>
+        <p class="intro">
+                小米公司版权所有-京ICP备10046444-<img src="https://account.xiaomi.com/static/res/9204d06/account-static/respassport/acc-2014/img/ghs.png">京公网安备11010802020134号-京ICP证110507号
+        </p>
+    </div>
+</body>
+</html>
