@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .div{
+            background-color: #0eb;
+            display:inline-block;
+        }
+        .div:hover{
+            background-color: #7e7e7e;
+        }
+        .hover{
+            width: 100px;
+            position:absolute;
+            left: -30px;
+            margin-top:5px;
+            background-color: #0be;
+            height: 0;
+            transition:all 0.5s ease;
+        }
+        .div3{
+            position: relative;
+        }
+        .div3:hover .hover{
+            display: block;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="div">菜单1</div>
+    <div class="div">菜单2</div>
+    <div class="div div3">菜单3
+        <div class="hover"></div>
+    </div>
+    <div class="div">菜单4</div>
+</body>
+</html>
