@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /*css reset start*/
+        *{
+            padding:0;
+            margin:0;
+        }
+        a{
+            text-decoration: none;
+        }
+        input{
+            border:0;
+            outline: none;
+        }
+        /*css reset end*/
+        .header {
+            width: 1130px;
+            margin: 0 auto;
+        }
+
+        .h-logo {
+            background-image: url("../images/mistore_logo.png");
+            width: 200px;
+            height: 98px;
+        }
+
+        /*content start*/
+        .content {
+            background-image: url("../images/bg.jpg");
+            height: 588px;
+            background-position: center;
+        }
+
+        .content .layout-panel{
+            width: 1130px;
+            height: 556px;
+            margin: 0 auto;
+        }
+
+        .content .layout {
+            position: relative;
+            width: 410px;
+            /* margin-bottom: 0;
+            margin-right: 0;
+            padding-bottom: 0; */
+            margin:32px 0 0 0;
+            position: relative;
+            z-index: 4;
+            float: right;
+        }
+        .layout-panel::after{
+            content: "";
+            display: block;
+            clear:both;
+        }
+        /*content mainbox start*/
+        .content .layout .mainbox {
+            background-color: #ffffff;
+            text-align: center;
+            min-height: 556px;
+        }
+        .mainbox::after{
+            content: "";
+            display: block;
+            clear:both;
+        }
+        .content .mainbox .line{
+            width: 1px;
+            height: 24px;
+            border: 1px solid #e0e0e0;
+            margin: 0 35px 0 42px;
+            font-size:24px;
+        }
+        .mainbox .nav-tabs{
+            padding:27px 0 24px;
+        }
+        .mainbox a{
+            color: #666;
+            font-size:24px;
+        }
+        .nav-tabs a:hover{
+            color:#ff6700;
+        }
+        .nav-tabs .active{
+            color:#ff6700;
+        }
+        .mainbox .login-area{
+            padding-top:10px;
+        }
+        .mainbox .login-area input{
+            color:#4a4a4a;
+            height: 22px;
+            line-height: 22px;
+            padding: 13px 16px 13px 14px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 14px;
+            width: 314px;
+        }
+        .btn input{
+            color:#ffffff;
+            height: 50px;
+            width:346px;
+            margin-bottom: 14px;
+            background-color: #ff6700;
+            line-height: 50px;
+        }
+        .btn{
+            padding-top:10px;
+        }
+        .mainbox .op-links span{
+            padding:0 5px;
+            display: block;
+            float: left;
+        }
+        .other-panel{            
+            width:348px;
+            margin:0 auto;
+            margin-top:-5px;
+        }
+        .other-panel a{
+            display: block;
+            font-size:14px;
+            float:left;
+        } 
+        .other-panel .op-sms{
+            float:left;
+        } 
+        .op-sms a{
+            color:#ff6700;
+        }
+        .other-panel .op-links{
+            float:right;
+        }
+        /*content mainbox end*/
+
+        /*content end*/
+
+        /*footer start*/
+        .footer{
+            text-align: center;
+            font-size:14px;
+            color: #757575;
+        }
+        .footer .clearfix{
+            padding-top:100px;
+        }
+        .footer .clearfix li{
+            display: inline;
+        }
+        .footer .clearfix span{
+            padding:0 10px;            
+        }
+        .footer .clearfix .active{
+            color: #333;
+        }
+        .footer .beian-record-link{
+            color: #757575;
+        }
+        .footer .intro{
+            padding:10px;
+        }
+        /*footer end*/
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="h-logo"></div>
+    </div>
+    <div class="content">
+        <div class="layout-panel">
+            <div class="layout">
+                <div class="mainbox">
+                    <div class="nav-tabs">
+                        <a class="active" href="javascript:void(0)">帐号登录</a>
+                        <span class="line"></span>
+                        <a href="javascript:void(0)">扫码登录</a>
+                    </div>
+                    <div class="login-area">
+                        <input type="text" placeholder="邮箱/手机号码/小米ID">
+                        <input type="text" placeholder="密码">
+                    </div>
+                    <div class="btn">
+                        <input type="submit" value="登录">
+                    </div>
+                    <div class="other-panel">
+                        <span class="op-sms">
+                            <a href="javascript:void(0)">手机短信登录/注册</a>
+                        </span>
+                        <div class="op-links">
+                            <a href="javascript:void(0)">立即注册</a>
+                            <span>|</span>
+                            <a href="javascript:void(0)">忘记密码?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer">
+        <div class="clearfix">
+            <ul>
+                <li><span class="active">简体</span>|</li>
+                <li><span>繁体</span>|</li>
+                <li><span>English</span>|</li>
+                <li><span>常见问题</span>|</li>
+                <li><span>隐私政策</span></li>
+            </ul>
+        </div>
+        <p class="intro">
+                小米公司版权所有-京ICP备10046444-<a class="beian-record-link" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020134"><span><img src="https://account.xiaomi.com/static/res/9204d06/account-static/respassport/acc-2014/img/ghs.png"></span>京公网安备11010802020134号</a>-京ICP证110507号
+        </p>
+    </div>
+</body>
+
+</html>
