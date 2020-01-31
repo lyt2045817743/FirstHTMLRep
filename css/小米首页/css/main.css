@@ -1,0 +1,234 @@
+/*css reset start*/
+*{
+    padding:0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+input{
+    display: inline-block;
+    border: none;
+    outline: none;
+}
+/*css reset end*/
+
+.container{
+    width: 1226px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*header start*/
+    /*header site-topbar start*/
+    .site-topbar{
+        height: 40px;
+        background-color: #333;
+        color: #b0b0b0;
+        font-size: 12px;
+        position: relative;
+    }
+
+        /*header site-topbar topbar-nav start*/
+        .topbar-nav{
+            height: 40px;
+            float: left;
+        }
+        .topbar-nav .topbar-download{
+            position: relative;
+        }
+            /*topbar-nav appcode start*/
+            .topbar-nav .topbar-download:hover .appcode{
+                height: 143px;
+            }
+            .topbar-nav .appcode{
+                position: absolute;
+                top:40px;
+                text-align: center;
+                left: 50%;
+                background-color: #fff;
+                margin-left: -55px;
+                width: 124px;
+                color: #333;
+                box-shadow: 0 1px 5px #aaa;
+                line-height: 1;
+                height: 0;
+                transition: height .3s ease;
+                overflow: hidden;
+            }
+            .topbar-nav .appcode .trianple{
+                border-style: solid;
+                border-color: transparent transparent yellow transparent;
+                border-width: 12px;
+                width: 0;
+                position: absolute;
+                left:50%;
+                margin-left:-17px;
+                top:-24px;
+            }
+            .topbar-nav .appcode img{
+                width: 90px;
+                height: 90px;
+                display: block;
+                margin: 18px auto 12px;
+            }
+            /*topbar-nav appcode end*/
+        .topbar-nav a,.topbar-info a,.topbar-cart a{
+            color: #b0b0b0;
+            height: 40px;
+            line-height: 40px;
+            display: inline-block;
+        }
+        .topbar-nav a:hover,.topbar-info a:hover{
+            color: white;
+        }
+        .topbar-nav span,.topbar-info span{
+            margin: 0 .3em;
+            color: #424242;
+        }
+        /*header site-topbar topbar-nav end*/
+
+        /*header site-topbar topbar-info start*/
+        .topbar-info{
+            float: right;
+        }
+        /*header site-topbar topbar-info end*/
+
+        /*header site-topbar topbar-cart start*/
+        .topbar-cart{
+            float: right;
+            width: 120px;
+            height: 40px;
+            text-align: center;
+            background-color: #424242;
+            position: relative;
+            margin-left: 15px;
+        }
+        .topbar-cart:hover{
+            background-color: #fff;
+        }
+        .topbar-cart:hover a{
+            color: #ff6700;
+        }
+        .topbar-cart:hover .cart-menu{
+            height: 100px;
+        }
+        .topbar-cart .cart-menu{
+            width: 316px;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            box-shadow: 0 1px 5px #aaa;
+            overflow: hidden;
+            height: 0;
+            transition: height .3s ease;
+            line-height: 100px;
+            text-align: center;
+            color: #424242;
+        }
+
+        /*header site-topbar topbar-cart end*/
+    /*header site-topbar end*/
+
+    /*header site-header start*/
+    .site-header{
+        height: 100px;
+    }
+        /*site-header sh-left start*/
+        .site-header .sh-left{
+            width: 55px;
+            height: 55px;
+            background-color: #ff6700;
+            display: block;
+            margin-top: 22px;
+            float: left;
+            position: relative;
+            overflow: hidden;
+        }
+        .site-header .sh-left:hover .two-img{
+            left: 0px;
+        }
+        .site-header .sh-left .two-img{
+            width: 110px;
+            height: 55px;
+            position: absolute;
+            left: -51px;
+            transition: left .3s ease;
+        }
+        .site-header .sh-center{
+            display: inline-block;
+            margin:0px;
+            padding: 12px 0 0 30px;
+        }        
+        .site-header .sh-center li{
+            display: inline-block;
+            padding: 26px 10px 38px;
+            transition: color .3s ease;
+        }
+        .site-header .sh-center li:hover{
+            color: #ff6700;
+        }
+        .site-header .sh-center .nav-category{
+            width: 127px;
+            padding: 0 15px 0 0;
+        }
+        .site-header .sh-right{
+            display: block;
+            float: right;
+            width: 276px;
+            height: 48px;
+            margin-top: 25px;
+            position: relative;
+        }
+        .site-header .sh-right .search-box{
+            display: inline-block;
+        }
+        .site-header .search-box .search-text{
+            width: 223px;
+            height: 48px;
+            position: absolute;
+            top: 0;
+            left:0;
+            border: 1px solid #e0e0e0;
+        }
+        .site-header .search-box .search-btn{            
+            width: 52px;
+            height: 50px;
+            font-size: 24px;
+            line-height: 24px;
+            background-color: #fff;
+            position: absolute;
+            right: 0;
+            top: 0;
+            border: 1px solid #e0e0e0;
+            color: #616161;
+            transition: color .3s ease;
+        }
+        .site-header .search-box .search-btn:hover{
+            background-color: #ff6700;
+            color: #fff;
+        }
+        .search-box .hot-words{
+            position: absolute;
+            top: 19px;
+            left: 37px;
+            font-size: 12px;
+        }
+        .search-box .hot-words a{
+            color: #757575;
+            background-color: #eee;
+            margin-left: 5px;
+            padding: 0 3px;
+            transition: color .3s ease;
+        }        
+        .search-box .hot-words a:hover{
+            background-color: #ff6700;
+            color: #fff;
+        }
+        /*site-header sh-left end*/
+    /*header site-header end*/
+
+/*header end*/
