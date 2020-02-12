@@ -8,7 +8,7 @@
 </head>
 <body>
     <script>
-        // var a=null,b,c="",d={},e=function(){},f=0,g=true;
+        // var a=null,b,c="",d={},e=function(){},f=0,g=true,h=[];
         // console.log(typeof a); //object  *********特殊值null被认为是一个空对象的引用********
         // console.log(typeof b); //undefined    ****引入undefined这个值是为了正确区分未经初始化的变量和空对象指针****
         // console.log(typeof c); //string
@@ -16,6 +16,10 @@
         // console.log(typeof e); //function
         // console.log(typeof f); //number
         // console.log(typeof g); //boolean
+        // console.log(typeof h); //object         ****数组也是对象****
+        var i=[1];
+        console.log(typeof i);  //object     ****数组也是对象****
+
 
 
         console.log(typeof age);  //undefined 不声明的变量用typeof看数据类不没报错。（可以找出没有声明的变量，前提是所有的变量都已被始化，否则，未经初始化的变量返回的也是undefined类型）
