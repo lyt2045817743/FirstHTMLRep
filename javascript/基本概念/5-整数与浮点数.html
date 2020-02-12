@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var a=1.0,b=1.;
+        // console.log(a); //1     ****由于浮点型占内存是整型的两倍，因此ECMAScript会自动将这种数转换为整型****
+        // console.log(b); //1  
+
+        // var a=0.0000003,b=30000000;
+        // console.log(a);  //3e-7     ****ECMASctipt 会将那些小数点后面带有 6 个零以上的浮点数值转换为以 e 表示法表示的数值****
+        // console.log(b);  //30000000 整数不转换
+
+        // var a=0.1,b=0.2;
+        // var c=0.05,d=0.25;
+        // console.log(a+b==0.3); //false 精度问题
+        // console.log(c+d==0.30);  //true
+         
+        // //最大值与最小值
+        // let result1=Number.MAX_VALUE+Number.MAX_VALUE;
+        // console.log(isFinite(result1)); //false  判断数值是不是在最大值与最小值之间。
+        // console.log(result1); //Infinity
+        // console.log(Number.NEGATIVE_INFINITY);  //-Infinity  负无穷
+        // console.log(Number.POSITIVE_INFINITY);  //Infinity  正无穷
+
+        //NaN
+        console.log(NaN==NaN);  //false  NaN不等于任何一个值，包括它自己
+        console.log(NaN==false); //false  ↑
+
+        //isNaN()函数
+            //可以被转换为数值型的会返回false
+            console.log(isNaN("10"));
+            console.log(isNaN(2));
+            console.log(isNaN(true));  //false                              **** 可以被转换为数值1****
+            //不可以被转换为数值型的会返回true
+            console.log(isNaN("blue"));
+
+        //对于除零异常的处理
+        console.log(0/0);  //NaN
+        console.log(-1/0);  //-Infinity
+        console.log(1/0);  //Infinity
+        
+    </script>
+</body>
+</html>

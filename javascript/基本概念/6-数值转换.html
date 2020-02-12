@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            //转换成数值的三个函数 Number(),parseInt(),parseFloat()
+
+            // //Number()
+            // //布尔
+            // console.log(Number(false)); //0
+            // console.log(Number(true)); //1
+            // //null
+            // console.log(Number(null)); //0
+            // //字符串
+            // console.log(Number("")); //0
+            // console.log(Number("0000011")); //11
+            // console.log(Number("0xf"));  //15 只有十六进制转换为十进制。
+            // console.log(Number("blue"));  //NaN
+            // //"+"操作符                                      ****与Number()作用相同****
+            // console.log(+"0xf"); //15  跟上面例子一样
+
+            // //parseInt()
+            // console.log(parseInt(""));  //NaN
+            // console.log(parseInt("  123"));  //123
+            // console.log(parseInt("  123blue"));  //123
+            // console.log(parseInt("22.5"));  //22
+            // console.log(parseInt("070")); //70      ****ECMAScript 3 认为是 56（八进制），ECMAScript 5 认为是 70（十进制）****
+            // console.log(parseInt("078"));  //78
+            // console.log(parseInt("0xf"));  //15
+            // //parseInt()的第二个参数
+            // console.log(parseInt("070",8));  //56
+            // console.log(parseInt("AE",16));  //174   即使不是以数字开头，但因为传了第二个参数16，因此将其认为十六进制数。
+            
+            //parseFloat()
+            console.log(parseFloat("22.23.4")); //22.23
+            console.log(parseFloat("0xf"));  //0
+            console.log(parseFloat("234"));  //234
+            console.log(parseFloat("3.45e4")); //34500   如果可以表示为整数则转换为整数（浮点数占内存大）
+            console.log(parseFloat("22.23blue")); //22.23
+            
+
+
+            
+    </script>
+</body>
+</html>
