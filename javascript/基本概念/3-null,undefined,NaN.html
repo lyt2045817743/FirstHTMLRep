@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //null & undefined
+        console.log(undefined==null);  //true  ==符号处于比较进行了数据类型转换****undefined是派生自null值的****
+        
+        //null
+        var a=null;
+        console.log(typeof a); //object  *********特殊值null被认为是一个空对象的引用********
+        console.log(null.toString());  //报错 Cannot read property 'toString' of null
+
+
+        //undefined
+        var b;
+        console.log(typeof b); //undefined    ****引入undefined这个值是为了正确区分未经初始化的变量和空对象指针****
+        console.log(typeof age);  //undefined 不声明的变量用typeof看数据类不没报错。（可以找出没有声明的变量，前提是所有的变量都已被始化，否则，未经初始化的变量返回的也是undefined类型）
+        console.log(undefined.toString());  //报错 Cannot read property 'toString' of undefined
+        
+
+        //NaN
+        console.log(typeof NaN); //number
+        console.log(Boolean(NaN));   //false   NaN转换为布尔值为false
+        console.log(NaN==NaN);  //false  NaN不等于任何一个值，包括它自己
+        console.log(NaN==false); //false  ↑
+        console.log(NaN.toString()); //"NaN"
+        console.log(Number(NaN));  //NaN
+    </script>
+</body>
+</html>

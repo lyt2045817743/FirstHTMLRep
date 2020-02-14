@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //非整型数值的自增自减操作
+        var s1 = "2";  //先转换成数值
+        var s2 = "z";   //先转换成NaN
+        var b = false; //先转换成0
+        var f = 1.1; 
+        var o = { 
+            valueOf: function() { 
+            return -1; 
+            } 
+        };//先调用对象的 valueOf()方法以取得一个可供操作的值
+
+        console.log(++s1); //3
+        console.log(++s2); //NaN
+        console.log(++b); //1
+        console.log(++f); //2.1
+        console.log(++o); //0
+
+
+        // //****这种情况下：是先输出变量的值，忽略++****
+        // console.log(s1++);  //2       
+        // console.log(s2++);  //NaN
+        // console.log(b++);  //0
+        // console.log(f++);  //1.1
+        // console.log(o--);  //-1
+        
+
+        //这种情况下：会报错：Invalid left-hand side expression in postfix operation
+        // console.log(true++);  //报错 
+        // console.log(false++);  //报错 
+        // console.log("abc"++);  //报错 
+        // console.log("123"++);  //报错 
+
+
+        
+        
+    </script>
+</body>
+</html>
