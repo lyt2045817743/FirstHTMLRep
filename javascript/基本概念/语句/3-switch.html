@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //ECMAScript里switch语句的特殊用法
+        //可以在switch语句中使用任何数据类型
+        switch('hello world'){
+            case 'hello'+' '+'world':console.log('hello world');break;
+            case 'goodbye':console.log('goodbye');break;
+            default:console.log('nothing')
+        }    //hello world
+
+
+        //switch不会发生强制类型转换
+        switch('1'){
+            case 1:console.log('发生了自动强制转换');break;
+            case '1':console.log('是判断全等的操作（并没有发生强制类型转换）');break;
+            default:console.log('不可能是这条语句')
+        }//是判断全等的操作（并没有发生强制类型转换）
+    </script>
+</body>
+</html>
