@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //相等操作符==  比较之前先自动强制转换为可操作数
+        // console.log(null==0);  //false  ****null和undefined都不能转换为其他数据类型的值****
+        // console.log(undefined==0);  //false
+        // 对象之间的比较
+        // var obj1={
+        //     name:"小明"
+        // }
+        // var obj2=obj1;
+        // var obj3={
+        //     name:"小明"
+        // }
+        // console.log(obj1==obj2); //true  ****指向同一个地址就是相等****
+        // console.log(obj1==obj3); //false  ****不是指向一个地址就是不相等****
+
+        
+        //全等操作符 ===  比较之前不进行数值转换
+        var obj1={
+            name:"小明"
+        }
+        var obj2=obj1;
+        console.log(obj1===obj2);  //true  也是true
+        
+    </script>
+</body>
+</html>

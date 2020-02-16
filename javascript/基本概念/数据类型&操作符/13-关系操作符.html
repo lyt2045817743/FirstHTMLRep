@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str1="Bank";
+        var str2="animals";
+        console.log(str1>str2);  //false  ****大写字母的ASCII码值小于小写字母的ASCII码值****
+
+        str1=str1.toLowerCase(); //转换为小写
+        console.log(str1>str2); //true   
+        
+        str3=str2.toUpperCase(); //转换为大写
+        console.log(str3); //ANIMALS 全部转换为大写
+        
+            
+    </script>
+</body>
+</html>
