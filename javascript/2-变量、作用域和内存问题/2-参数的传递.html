@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //实参为对象时，是按值传递的，而不是按引用传递的。
+        // function setName(obj){
+        //     obj.name="Tom";
+        //     obj=new Object(); //重新创建了一个对象，并将对象的地址赋给了obj变量,obj的指向改变，不再指向之前传过来的对象。
+        //     obj.name="Marry";  //obj已经成为了局部对象的引用，函数执行完后便被销毁。
+        // }    
+        // var person=new Object();
+        // setName(person);
+        // console.log(person.name);  //Tom
+
+        
+
+        //解构赋值:传递对象的值而不改变对象的值。
+        function setName({name,age}){
+            name="Tom";
+        }  
+        var person={name:'a',age:20};
+        setName(person);
+        console.log(person.name);  //a
+        
+    </script>
+</body>
+</html>

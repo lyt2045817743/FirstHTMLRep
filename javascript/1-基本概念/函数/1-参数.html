@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function add(num1, num2) {
+        //     num2 = 10;
+        //     console.log(arguments[1]);
+
+        // }
+        // add(20, 20) //10 ****命名参数的值改变也会映射到相应的arguments值****
+        // add(20)  //undefined
+
+
+        function bark(name, weight) {
+            if (weight > 20) {
+                console.log(name + " says WOOF WOOF");
+            } else {
+                console.log(name + " says woof woof");
+            }
+        }
+        bark("rover", "23");  //自动类型转换  
+
+        bark("spot", 13, 0);  //不报错   ****ECMAScript 函数不介意传递进来多少个参数，也不在乎传进来参数是什么数据类型。****
+
+        bark("spike"); //woof woof
+
+        bark();  //undefined says woof woof  ****没有传递值的命名参数将自动被赋予 undefined 值。****
+    </script>
+</body>
+
+</html>
