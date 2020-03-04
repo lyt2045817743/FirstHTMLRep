@@ -47,3 +47,7 @@ caption{
 tr:nth-child(odd){
   background-color: #fcba7a;
 }
+li{
+  /* list-style-image: url(./images/backpack.gif); */
+  list-style-position:inside;
+}
