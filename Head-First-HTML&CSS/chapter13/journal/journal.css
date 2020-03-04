@@ -22,4 +22,28 @@ h2 {
 blockquote {
   font-style:      italic;
 }
-
+table{
+  margin-left: 20px;
+  margin-right: 20px;
+  border: thin solid black;
+  caption-side: bottom;
+  /* border-spacing: 0px; */
+  border-collapse: collapse;
+}
+table td.center{
+  text-align: center;
+}
+table td.right{
+  text-align: right;
+}
+th,td{
+  border: thin dotted black;
+  padding:5px;
+}
+caption{
+  font-style: italic;
+  padding-top: 8px;
+}
+tr:nth-child(odd){
+  background-color: #fcba7a;
+}
