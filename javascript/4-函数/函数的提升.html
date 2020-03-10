@@ -8,13 +8,19 @@
 </head>
 <body>
     <script>
+        // var result=foo(100);
+        // console.log(result);
+        // function foo(num){
+        //     return num+100;//先提升到最前面
+        // }
+        // function foo(num){
+        //     return num+200;//将已经定义的foo的值覆盖
+        // }
+
         var result=foo(100);
-        console.log(result);
-        function foo(num){
-            return num+100;//先提升到最前面
-        }
-        function foo(num){
-            return num+200;//将已经定义的foo的值覆盖
+        console.log(result);  //报错：foo is not a function
+        var foo=function(num){
+            return num+100;
         }
     </script>
 </body>

@@ -11,13 +11,16 @@
 
         //instance 后面只能跟引用数据类型的才有效，如果后面是基本数据类型（除了null,undefined）则输出false,如果是null/undefined则报错
         var s = "Nicholas"; 
+        var ss=new String("hello")
         var b = true; 
         var i = 22; 
         var u; 
         var n = null; 
         var o = new Object();  
         var arr=[]  
-        console.log(s instanceof string); //false
+        console.log(s instanceof String); //false
+        console.log(ss instanceof String);//true
+        
         console.log(b instanceof Boolean); //false
         console.log(i instanceof Number); // false
         // console.log(u instanceof undefined);  //报错 ：Right-hand side of 'instanceof' is not an object
