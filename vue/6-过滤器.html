@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{time | formatDate}}
+    </div>
+    <script>
+        function padTime(value){
+            return value<10?'0'+value:value;
+        }
+        new Vue({
+            el:"#app",
+            data:{
+                time:new Date()
+            },
+            filters:{
+                formatDate:function(time){
+                    var time2=new Date(time);
+                    var year=time2.getFullYear();
+                    var month=padTime(time2.getMonth()+1);
+                    var day=padTime(time2.getDate());
+                    var hour=padTime(time2.getHours());
+                    var minute=padTime(time2.getMinutes());
+                    var second=padTime(time2.getSeconds());
+                    // var week=time2.getDay();
+                    return year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+                }
+            },
+            mounted() {
+                var _this=this;
+                this.timer=setInterval(function(){
+                    _this.time=new Date();
+                },1000)
+            },
+            beforeDestroy() {
+                if(this.timer){
+                    clearInterval(this.timer);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

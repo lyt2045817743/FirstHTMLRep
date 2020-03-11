@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 正确：双括号里可以写表达式 4 -->
+            <li>{{a+2}}</li>
+            <!-- 报错：双括号里不能写语句 avoid using JavaScript keyword as property name: "if"-->
+            <!-- <li>{{if(a==2) retuan a}}</li> -->
+            <!-- 正确：Math和Date属于vue.js白名单里的全局变量，可以在双引号中使用 0.3192598499664847 -->
+            <li>{{Math.random()}}</li>
+            <!--报错：不能使用自己定义的全局变量 avoid using JavaScript keyword as property name: "var"-->
+            <!-- <li>{{var time=1}}</li> -->
+        </ul>
+    </div>
+    <script> 
+        new Vue ( { 
+            el :'#app',
+            data : {
+                a:2
+            }
+        })
+    </script>
+</body>
+</html>
