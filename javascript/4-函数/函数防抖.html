@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">click</button>
+    <script>
+        var oBtn=document.getElementById('btn');
+        function debounce(fn,delay){
+            //这里的this是window，也就是说，是window调用的debounce函数
+            var timer=null;
+            return function(){
+                //这里的this是button，该函数作为onclick事件处理函数返回--->每次都是被oBtn调用
+                var _this=this;
+                clearTimeout(timer);
+                timer=setTimeout((function(){ //setTimeout的回调函数中不能传this值作为参数
+                    fn.call(_this);
+                }).bind(_this),delay)  //可以通过在函数后面绑定bind(_this)或者使用箭头函数来解决this指向问题。
+            }
+        }
+        oBtn.onclick=debounce(function(){
+            console.log(Date.now());
+            console.log(this);
+        },1000)
+    </script>
+</body>
+</html>
