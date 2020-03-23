@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Timer () { 
+            this.id= 1 ; 
+            var _this = this; 
+            setTimeout(function () { 
+                console . log(this . id) ; 
+                console. log(_this. id) ;  
+            } , 1000);   
+        } 
+        var timer=new Timer();//undefined 1
+        Timer()//1 1
+
+        
+    </script>
+</body>
+</html>

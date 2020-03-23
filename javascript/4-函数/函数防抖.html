@@ -19,7 +19,7 @@
                 clearTimeout(timer);
                 timer=setTimeout((function(){ //setTimeout的回调函数中不能传this值作为参数
                     fn.call(_this);
-                }).bind(_this),delay)  //可以通过在函数后面绑定bind(_this)或者使用箭头函数来解决this指向问题。
+                }),delay)  //可以通过在函数后面绑定bind(_this)或者使用箭头函数来解决this指向问题。
             }
         }
         oBtn.onclick=debounce(function(){
