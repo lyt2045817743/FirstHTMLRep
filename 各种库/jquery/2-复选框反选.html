@@ -22,7 +22,7 @@
         $('#none').click(function(){
             $('input:checkbox:checked').prop("checked",false);
         })
-        $('#reverse').click(function(){
+        $('#reverse').click(function(index,item){  //这里的所有$(this)都可以换成$(item)
             var $checkbox=$('input:checkbox').each(function(){
                 if($(this).prop("checked")){
                     $(this).prop("checked",false);
