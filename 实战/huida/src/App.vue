@@ -4,7 +4,7 @@
       <Navigation class="container" />
       <div class="header_line"></div>
     </div>
-    <!-- <router-view/> -->
+    <router-view/>
   </div>
 </template>
 

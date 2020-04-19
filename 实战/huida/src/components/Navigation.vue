@@ -2,7 +2,7 @@
 <template>
     <div class="main clearfix">
         <div class="logo">
-            <img src="../assets/img/logo.jpg" alt="">
+            <router-link to="/"><img src="../assets/img/logo.jpg" alt=""></router-link>
         </div>
         <Menu class="main_nav" mode="horizontal" :theme="theme1" active-name="1">
             <MenuItem name="1" class="mn_item">
