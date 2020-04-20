@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <div class="banner_img">
-      <img src="../assets/img/banner.jpg" alt="">
-    </div>
+    <div class="banner_img"></div>
     <div class="platfrom_feature container">
       <div class="pf_block clearfix">
         <div class="pf_brief">
@@ -38,7 +36,7 @@
         <div class="pf_brief">
         
             <div class="icon_bg">
-                <Icon class="pb_icon" type="ios-chatbubbles-outline" color="white" size="40"/>
+                <Icon type="md-cart" class="pb_icon" color="white" size="40"/>
             </div>
             <h3>同城商品放心选</h3>
             <p>  同城物流，快速送达</p>  
@@ -67,9 +65,8 @@
       </div>
       <div class="pf_block clearfix">
         <div class="pf_brief">
-
             <div class="icon_bg">
-                <Icon class="pb_icon" type="ios-chatbubbles-outline" color="white" size="40"/>
+                <Icon type="ios-people" class="pb_icon" color="white" size="40"/>
             </div>
             <h3>论坛发布搭配需求</h3>
             <p>  友好的论坛交流界面</p>  
@@ -113,13 +110,12 @@
 
 <style scoped>
   .banner_img{
+    width: 100%;
+    height: 360px;
     margin-top:70px;
-  }
-  .banner_img img{
-    margin-left: -343px;
-  }
-  .pf_block{  
-     
+    background-image: url('../assets/img/banner.jpg');
+    background-position: center top;
+    background-repeat: no-repeat;
   }
   .pf_brief{
       width: 150px;
@@ -151,6 +147,8 @@
       color: #007a8a;
       font-size: 11px;
   }
+
+  /*pf_show start*/
   .pf_show{
     width: 750px;
     height: 243px;
@@ -174,4 +172,5 @@
   .pf_show .pf_card div{
     height: 100%;
   }
+  /*pf_show end*/
 </style>

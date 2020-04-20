@@ -4,28 +4,35 @@
         <div class="logo">
             <router-link to="/"><img src="../assets/img/logo.jpg" alt=""></router-link>
         </div>
-        <Menu class="main_nav" mode="horizontal" :theme="theme1" active-name="1">
-            <MenuItem name="1" class="mn_item">
-                <!-- <Icon type="ios-paper" /> -->
-                首页
-            </MenuItem>
-            <MenuItem name="2" class="mn_item">
-                咨询
-            </MenuItem>
-            <MenuItem name="3" class="mn_item">
-                商城
-            </MenuItem>
-            <MenuItem name="4" class="mn_item">
-                论坛
-            </MenuItem>
-            <div class="personal">
-                <MenuItem  v-show="!islogin" name="4">
-                    登录
+        <div class="head_right">
+            <Menu class="main_nav" mode="horizontal" :theme="theme1" active-name="1" v-show="!logining">
+                <MenuItem name="1" class="mn_item">
+                    <!-- <Icon type="ios-paper" /> -->
+                    首页
                 </MenuItem>
-                <img src="../assets/img/head.jpg" v-show="islogin">
+                <MenuItem name="2" class="mn_item">
+                    咨询
+                </MenuItem>
+                <MenuItem name="3" class="mn_item">
+                    商城
+                </MenuItem>
+                <MenuItem name="4" class="mn_item">
+                    论坛
+                </MenuItem>
+                <div class="personal">
+                    <router-link to="/Login" >
+                        <span  v-show="!islogin" @click="changeHandle">登录</span>
+                    </router-link>
+                    <img src="../assets/img/head.jpg" v-show="islogin">
+                </div>
+            </Menu>
+            <div class="login_show_info" v-show="logining">
+                <span>一对一的搭配咨询</span>
+                <span>同城商品放心选</span>
+                <span>发布搭配需求</span>
             </div>
-            
-        </Menu>
+        </div>
+        
         <!-- <br>
         <p>Change theme</p>
         <RadioGroup v-model="theme1">
@@ -42,7 +49,13 @@
         data() {
             return {
                 theme1: 'light',
-                islogin: true
+                islogin: false,
+                logining: false
+            }
+        },
+        methods: {
+            changeHandle(){
+                this.logining=true;
             }
         },
         created() {
@@ -65,7 +78,7 @@
         width: 100px;
         height: 60px;
     }
-    .main_nav{
+    .head_right{
         float: right;
     }
     .mn_item{
@@ -79,5 +92,12 @@
         height: 50px;
         border-radius: 50%;
         margin-top: 5px;
+    }
+    .login_show_info{
+        margin-top: 20px;
+    }
+    .login_show_info span{
+        margin-left: 40px;
+        color: #999;
     }
 </style>
