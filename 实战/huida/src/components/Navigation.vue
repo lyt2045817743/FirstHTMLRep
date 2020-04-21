@@ -20,10 +20,10 @@
                     论坛
                 </MenuItem>
                 <div class="personal">
-                    <router-link to="/Login" >
-                        <span  v-show="!islogin" @click="changeHandle">登录</span>
+                    <router-link to="/login" >
+                        <span  v-show="!hasLogin" @click="changeHandle">登录</span>
                     </router-link>
-                    <img src="../assets/img/head.jpg" v-show="islogin">
+                    <img src="../assets/img/head.jpg" v-show="hasLogin">
                 </div>
             </Menu>
             <div class="login_show_info" v-show="logining">
@@ -46,11 +46,24 @@
 <script>
     import {Menu,MenuItem} from 'view-design';
     export default {
+        components:{
+            Menu,MenuItem
+        },
         data() {
             return {
                 theme1: 'light',
-                islogin: false,
+                hasLogin: false,
                 logining: false
+            }
+        },
+        computed: {
+            
+        },
+        watch: {
+            hasLogin(newVal){
+                console.log(newVal);
+                
+                this.logining=!newVal;
             }
         },
         methods: {
@@ -60,12 +73,6 @@
         },
         created() {
 
-        },
-        mounted() {
-
-        },
-        components:{
-            Menu,MenuItem
         }
     }
 </script>

@@ -13,7 +13,10 @@ import Navigation from './components/Navigation';
   export default {
     components:{
         Navigation
-    }
+    },
+    beforeCreate() {
+      sessionStorage.setItem("hasLogin",false);
+    },
   }
 </script>
 
