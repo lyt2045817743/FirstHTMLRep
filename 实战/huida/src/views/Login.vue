@@ -67,9 +67,11 @@ export default {
     },
     methods: {
         userLogin(){
+            //如果成功登录，则将用户信息存储至sessionStorage和vuex中
             if(this.userInfo.name==this.loginInfo.name && this.userInfo.pwd==this.loginInfo.pwd){
                 sessionStorage.setItem("userInfo",JSON.stringify(this.userInfo));
-                sessionStorage.setItem("hasLogin",true);
+                this.$store.commit('setUser',this.userInfo);
+                this.$store.commit('changeLogining',false);//切换head内容至导航
                 this.$router.push('/home');
             }
             else{

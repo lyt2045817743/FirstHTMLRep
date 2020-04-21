@@ -15,8 +15,16 @@ import Navigation from './components/Navigation';
         Navigation
     },
     beforeCreate() {
-      sessionStorage.setItem("hasLogin",false);
+      if(sessionStorage.getItem("userInfo")){
+        var userInfo=JSON.parse(sessionStorage.getItem("userInfo"));
+      }
+        var isLogining=JSON.parse(sessionStorage.getItem("isLogining"));
+        if(isLogining){
+          this.$store.commit("changeLogining",isLogining);
+        }
+        this.$store.commit("setUser",userInfo);
     },
+
   }
 </script>
 
