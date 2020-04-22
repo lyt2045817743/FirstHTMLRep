@@ -5,18 +5,18 @@
             <router-link to="/"><img src="../assets/img/logo.jpg" alt=""></router-link>
         </div>
         <div class="head_right">
-            <Menu class="main_nav" mode="horizontal" :theme="theme1" active-name="1" v-show="!$store.state.isLogining">
-                <MenuItem name="1" class="mn_item">
-                    <router-link to="/home">首页</router-link>
+            <Menu class="main_nav" mode="horizontal" :theme="theme1" :active-name="activeName" v-show="!$store.state.isLogining">
+                <MenuItem name="1" class="mn_item" to="/home">
+                    首页
                 </MenuItem>
-                <MenuItem name="2" class="mn_item">
-                    <router-link to="/consult">咨询</router-link>
+                <MenuItem name="2" class="mn_item" to="/consult">
+                    咨询
                 </MenuItem>
-                <MenuItem name="3" class="mn_item">
-                    <router-link to="/store">商城</router-link>
+                <MenuItem name="3" class="mn_item" to="/store">
+                    商城
                 </MenuItem>
-                <MenuItem name="4" class="mn_item">
-                    <router-link to="/forum">论坛</router-link>
+                <MenuItem name="4" class="mn_item" to="/forum">
+                    论坛
                 </MenuItem>
                 <div class="personal">
                     <router-link to="/login" >
@@ -31,7 +31,7 @@
                             <DropdownItem>{{$store.state.loginReturn.name}}</DropdownItem>
                             <DropdownItem>顾客</DropdownItem>
                             <DropdownItem>
-                                <router-link to="/personal">我的主页</router-link>
+                                <router-link to="/personal" class="myPage" @click="changeActiveName">我的主页</router-link>
                             </DropdownItem>
                             <DropdownItem divided>
                                 <span @click="logOut">退出登录</span>
@@ -62,10 +62,20 @@
             }
         },
         computed: {
-            
+            activeName(){
+                if(this.$route.path!="/login"){
+                    this.$store.commit("changeLogining",false);            
+                }
+                return this.$route.path;
+            }
         },
         watch: {
-            
+            nowPath(newVal){
+                if(newVal){
+                    // console.log(newVal);
+                    
+                }
+            }
         },
         methods: {
             changeHandle(){
@@ -74,6 +84,9 @@
             logOut(){
                 this.$store.commit("setUser",null);
                 sessionStorage.setItem("userInfo",null);
+            },
+            changeActiveName(){
+                this.activeName="";
             }
         },
         created() {
@@ -106,6 +119,9 @@
         border-radius: 50%;
         margin-top: 5px;
     }
+    /* .personal .myPage{
+
+    } */
     .login_show_info{
         margin-top: 20px;
     }
