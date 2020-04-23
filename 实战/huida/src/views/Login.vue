@@ -30,7 +30,7 @@
                             <Input v-model="regInfo.name" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 25px"/><br/>
                              <Input v-model="regInfo.pwd" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
                             <Input v-model="regInfo.veriCode" placeholder="请输入验证码" style="width: 130px;margin: 25px 10px 0 auto"/><Button type="default" style="margin: 25px 0 0 10px">获取验证码</Button><br/>
-                            <Button type="success" style="width: 250px;margin-top:25px">注册</Button>
+                            <Button type="success" style="width: 250px;margin-top:25px" @click="register">注册</Button>
                         </TabPane>
                     </Tabs>
                 </div>
@@ -41,6 +41,7 @@
 
 <script>
 import {Tabs,TabPane,Input,Button} from 'view-design';
+import axios from 'axios'
 export default {
     components: {
         Tabs,TabPane,Input,Button
@@ -77,6 +78,12 @@ export default {
             else{
                 this.loginInfo.msg="用户名或密码有误！"
             }
+        },
+        register(){
+            axios.post('http://101.200.80.171:9001/api/user/register',{"username":"lyt","password":"lyt123"}).then(function(res){
+                console.log(res);
+                
+            })
         }
     },
     //生命周期 - 创建完成（访问当前this实例）
