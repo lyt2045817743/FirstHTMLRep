@@ -80,10 +80,15 @@ export default {
             }
         },
         register(){
-            axios.post('http://101.200.80.171:9001/api/user/register',{"username":"lyt","password":"lyt123"}).then(function(res){
+            axios.post('/api/user/register',{"username":"lyt","password":"lyt123"}).then(function(res){
                 console.log(res);
                 
-            })
+            });
+            // axios.get('http://101.200.80.171:9001/api/user/tags').then(function(res){
+            //     console.log(res);
+                
+            // });
+            
         }
     },
     //生命周期 - 创建完成（访问当前this实例）
