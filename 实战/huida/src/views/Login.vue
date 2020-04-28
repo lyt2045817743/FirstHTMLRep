@@ -8,11 +8,11 @@
                 <div class="lr_nav">
                     <Tabs value="login" class="lrn_tabs" style="width: 300px">
                         <TabPane label="登录" name="login" class="lr_form">
-                            <Input v-model="loginInfo.name" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 20px"/><br/>
-                            <Input v-model="loginInfo.pwd" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
+                            <Input v-model="loginInfo.username" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 20px"/><br/>
+                            <Input v-model="loginInfo.password" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
                             <Button type="success" style="width: 250px;margin-top:25px" @click="userLogin">登录</Button>
                             <br/>
-                            <span class="msg">{{loginInfo.msg}}</span>
+                            <span class="msg">{{loginMsg}}</span>
                              <div class="other-login">
                                 <div class="ol-title">
                                     <fieldset>
@@ -27,10 +27,11 @@
                             </div>
                         </TabPane>
                         <TabPane label="注册" name="register">
-                            <Input v-model="regInfo.name" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 25px"/><br/>
-                             <Input v-model="regInfo.pwd" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
-                            <Input v-model="regInfo.veriCode" placeholder="请输入验证码" style="width: 130px;margin: 25px 10px 0 auto"/><Button type="default" style="margin: 25px 0 0 10px">获取验证码</Button><br/>
+                            <Input v-model="regInfo.username" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 25px"/><br/>
+                             <Input v-model="regInfo.password" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
+                            <Input placeholder="请输入验证码" style="width: 130px;margin: 25px 10px 0 auto"/><Button type="default" style="margin: 25px 0 0 10px">获取验证码</Button><br/>
                             <Button type="success" style="width: 250px;margin-top:25px" @click="register">注册</Button>
+                            <span class="msg">{{regMsg}}</span>
                         </TabPane>
                     </Tabs>
                 </div>
@@ -41,7 +42,6 @@
 
 <script>
 import {Tabs,TabPane,Input,Button} from 'view-design';
-import axios from 'axios'
 export default {
     components: {
         Tabs,TabPane,Input,Button
@@ -49,46 +49,58 @@ export default {
     data() {
         return {
             loginInfo:{
-                name:'',
-                pwd:'',
-                msg:'',
+                username:'',
+                password:'',
             },
             regInfo:{
-                name:'',
-                pwd:'',
-                veriCode:'',
+                username:'',
+                password:'',
+                // veriCode:'',
             },
             userInfo:{
                 name:'123456',
                 veriCode:'',
                 pwd:'123456',
-                hasLogin:true
-            }
+                hasLogin:true,
+                role:0
+            },
+            loginMsg:"",
+            regMsg:""
         }
     },
     methods: {
         userLogin(){
+            // let data=JSON.stringify(this.loginInfo);
+            // this.axios.post("/api/user/login",data).then(function(res){
+            //     console.log(res.data);
+                
+            //     if(res.data.flag==true&&res.data.message=="登陆成功"){
+            //         console.log(1);
+                    
+            //     }
+            // })
             //如果成功登录，则将用户信息存储至sessionStorage和vuex中
-            if(this.userInfo.name==this.loginInfo.name && this.userInfo.pwd==this.loginInfo.pwd){
+            if(this.userInfo.name==this.loginInfo.username && this.userInfo.pwd==this.loginInfo.password){
                 sessionStorage.setItem("userInfo",JSON.stringify(this.userInfo));
                 this.$store.commit('setUser',this.userInfo);
                 this.$store.commit('changeLogining',false);//切换head内容至导航
                 this.$router.push('/home');
             }
             else{
-                this.loginInfo.msg="用户名或密码有误！"
+                this.loginMsg="用户名或密码有误！"
             }
         },
         register(){
-            axios.post('/api/user/register',{"username":"lyt","password":"lyt123"}).then(function(res){
-                console.log(res);
-                
+            let data=JSON.stringify(this.regInfo);
+            let _this=this;
+            this.axios.post('/api/user/register',data,{headers:{'content-type':'application/json'}}).then(function(res){
+                if(res.data.flag==true&&res.data.message=="注册成功"){
+                    _this.regMsg="注册成功，快去登录吧！";
+                } 
+                else if(res.data.flag==false&&res.data.message=="用户名已存在"){
+                    _this.regMsg="用户名已存在！";
+                }            
             });
-            // axios.get('http://101.200.80.171:9001/api/user/tags').then(function(res){
-            //     console.log(res);
-                
-            // });
-            
         }
     },
     //生命周期 - 创建完成（访问当前this实例）
