@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../views/Index.vue'
+import {getCookie} from '../util/cookie'
 
 Vue.use(VueRouter)
 
@@ -8,7 +8,14 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Index',
-    component: Index
+    component: ()=>{
+      if(!getCookie("username")){
+        return import('../views/Index.vue');
+      }
+      else if(getCookie("username")){
+        return import('../views/Home/Home.vue');
+      }
+    }
   },
   {
     path: '/login',
@@ -16,14 +23,46 @@ Vue.use(VueRouter)
     component: ()=>import('../views/Login.vue'),
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: () => import('../views/Home/Home.vue')
-  },
-  {
     path: '/personal',
     name: 'Personal',
-    component: () => import('../views/Personal/Personal.vue')
+    component: () => import('../views/Personal/Personal.vue'),
+    children:[
+      {
+        path: '/personal',
+        name: 'Moment',
+        component: () => import('../views/Personal/Moment.vue')
+      },
+      {
+        path: '/personal/goodsOrder',
+        name: 'GoodsOrder',
+        component: () => import('../views/Personal/GoodsOrder.vue')
+      },
+      {
+        path: '/personal/consultOrder',
+        name: 'ConsultOrder',
+        component: () => import('../views/Personal/ConsultOrder.vue')
+      },
+      {
+        path: '/personal/myFollowings',
+        name: 'MyFollowings',
+        component: () => import('../views/Personal/MyFollowings.vue')
+      },
+      {
+        path: '/personal/myPoints',
+        name: 'MyPoints',
+        component: () => import('../views/Personal/MyPoints.vue')
+      },
+      {
+        path: '/personal/trainingCenter',
+        name: 'TrainingCenter',
+        component: () => import('../views/Personal/TrainingCenter.vue')
+      },
+      {
+        path: '/personal/settings',
+        name: 'Settings',
+        component: () => import('../views/Personal/Settings.vue')
+      },
+    ]
   },
   {
     path: '/consult',

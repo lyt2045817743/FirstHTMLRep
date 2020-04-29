@@ -5,8 +5,9 @@ Vue.use(Vuex);
 
 const state={
     loginReturn:"",
-    isLogin:false,
-    isLogining:false
+    hasLogin:false,
+    isLogining:false,
+    isStylist:false,
 }
 
 const mutations={
@@ -23,6 +24,12 @@ const mutations={
             state.loginReturn="";
             state.isLogin=false;
         }
+    },
+    changeHasLogin(state,flag){
+        state.hasLogin=flag;
+    },
+    changeIsStylist(state,flag){
+        state.isStylist=flag;
     }
 }
 

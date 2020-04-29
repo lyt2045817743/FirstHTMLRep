@@ -42,6 +42,7 @@
 
 <script>
 import {Tabs,TabPane,Input,Button} from 'view-design';
+import {setCookie} from '../util/cookie';
 export default {
     components: {
         Tabs,TabPane,Input,Button
@@ -57,38 +58,51 @@ export default {
                 password:'',
                 // veriCode:'',
             },
-            userInfo:{
-                name:'123456',
-                veriCode:'',
-                pwd:'123456',
-                hasLogin:true,
-                role:0
-            },
+            userInfo:"",
+            userToken:"",
             loginMsg:"",
             regMsg:""
         }
     },
     methods: {
         userLogin(){
-            // let data=JSON.stringify(this.loginInfo);
-            // this.axios.post("/api/user/login",data).then(function(res){
-            //     console.log(res.data);
-                
-            //     if(res.data.flag==true&&res.data.message=="登陆成功"){
-            //         console.log(1);
+            //将登录表单键值对存储到fromdata对象中
+            let params=new FormData();
+            params.append("username",this.loginInfo.username);
+            params.append("password",this.loginInfo.password);
+            let _this=this;
+
+            //发送登录请求
+            this.axios.post("/api/user/login",params).then(function(res){
+                console.log(res.data.message,res.data);
+                // 如果成功登录，则将用户信息和token存储至sessionStorage和vuex中
+                if(res.data.flag==true&&res.data.message=="登录成功"){
+                    console.log(1);
+                    let data=res.data.data;
+                    let user={};
+
+                    //将用户信息与token存储到cookie中
+                    let expires=new Date();
+                    expires.setDate(expires.getDate()+7);
                     
-            //     }
-            // })
-            //如果成功登录，则将用户信息存储至sessionStorage和vuex中
-            if(this.userInfo.name==this.loginInfo.username && this.userInfo.pwd==this.loginInfo.password){
-                sessionStorage.setItem("userInfo",JSON.stringify(this.userInfo));
-                this.$store.commit('setUser',this.userInfo);
-                this.$store.commit('changeLogining',false);//切换head内容至导航
-                this.$router.push('/home');
-            }
-            else{
-                this.loginMsg="用户名或密码有误！"
-            }
+                    user.role="顾客";
+                    setCookie("role",user.role,expires,null,null,null);
+                    setCookie("token",data.token,expires,null,null,null);
+                    setCookie("username",data.user.username,expires,null,null,null);
+
+                    //将用户信息存储到vuex中
+                    _this.$store.commit("setUser",user);
+                    //切换header内容至导航
+                    _this.$store.commit('changeLogining',false);
+                    //改变登陆状态
+                    _this.$store.commit("changeHasLogin",true);
+                    //登陆成功后切换路由至home
+                    _this.$router.push('/');
+                }
+                else{
+                    _this.loginMsg="用户名或密码有误！"
+                }
+            })
         },
         register(){
             let data=JSON.stringify(this.regInfo);
@@ -97,7 +111,7 @@ export default {
                 if(res.data.flag==true&&res.data.message=="注册成功"){
                     _this.regMsg="注册成功，快去登录吧！";
                 } 
-                else if(res.data.flag==false&&res.data.message=="用户名已存在"){
+                else if(res.data.message=="用户名已存在"){
                     _this.regMsg="用户名已存在！";
                 }            
             });

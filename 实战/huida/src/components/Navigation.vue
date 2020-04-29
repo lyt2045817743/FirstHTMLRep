@@ -6,26 +6,25 @@
         </div>
         <div class="head_right">
             <Menu class="main_nav" mode="horizontal" :theme="theme1" :active-name="activeName" v-show="!$store.state.isLogining">
-                <MenuItem name="1" class="mn_item" to="/home">
-                    首页
-                </MenuItem>
-                <MenuItem name="2" class="mn_item" to="/consult">
+                <MenuItem name="1" class="mn_item" to="/consult">
                     咨询
                 </MenuItem>
-                <MenuItem name="3" class="mn_item" to="/store">
+                <MenuItem name="2" class="mn_item" to="/store">
                     商城
                 </MenuItem>
-                <MenuItem name="4" class="mn_item" to="/forum">
+                <MenuItem name="3" class="mn_item" to="/forum">
                     论坛
                 </MenuItem>
                 <div class="personal">
                     <router-link to="/login" >
-                        <span  v-show="!$store.state.isLogin" @click="changeHandle">登录</span>
+                        <span  v-show="!$store.state.hasLogin" @click="changeHandle">登录</span>
                     </router-link>
-                    <Dropdown v-show="$store.state.isLogin">
+                    <Dropdown v-show="$store.state.hasLogin">
                         <a href="javascript:void(0)">
-                            <img src="../assets/img/head.jpg">
-                            <!-- <Icon type="ios-arrow-down"></Icon> -->
+                            <!-- <img src="../assets/img/head.jpg"> -->
+                             <Badge :count="1" class="badge" :offset="[12,0]" overflow-count="99">
+                                <Avatar icon="ios-person" size="large"/>
+                            </Badge>
                         </a>
                         <DropdownMenu slot="list">
                             <DropdownItem>{{$store.state.loginReturn.name}}</DropdownItem>
@@ -51,10 +50,11 @@
 </template>
 
 <script>
-    import {Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem} from 'view-design';
+    import {Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem,Badge,Avatar} from 'view-design';
+    import {unsetCookie} from '../util/cookie';
     export default {
         components:{
-            Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem
+            Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem,Badge,Avatar
         },
         data() {
             return {
@@ -83,7 +83,11 @@
             },
             logOut(){
                 this.$store.commit("setUser",null);
-                sessionStorage.setItem("userInfo",null);
+                unsetCookie("username");
+                unsetCookie("role");
+                unsetCookie("token");
+                this.$store.commit("changeHasLogin",false);
+                this.$router.push("/");
             },
             changeActiveName(){
                 this.activeName="";
@@ -113,15 +117,6 @@
         height: 55px;
         float: right;
     }
-    .personal img{
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-top: 5px;
-    }
-    /* .personal .myPage{
-
-    } */
     .login_show_info{
         margin-top: 20px;
     }

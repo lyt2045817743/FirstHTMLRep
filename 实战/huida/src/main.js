@@ -5,9 +5,10 @@ import 'view-design/dist/styles/iview.css'
 import '../my-theme/index.less'
 import store from './store'
 import axios from 'axios'
-
+ 
 Vue.prototype.axios=axios;
 axios.defaults.headers['Content-Type']="application/json";
+axios.defaults.wiwithCredentials=true;
 
 
 axios.defaults.baseURL = '/api'  //关键代码

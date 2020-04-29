@@ -10,19 +10,33 @@
 
 <script>
 import Navigation from './components/Navigation';
+import { getCookie } from './util/cookie';
   export default {
     components:{
         Navigation
     },
     beforeCreate() {
-      if(sessionStorage.getItem("userInfo")){
-        var userInfo=JSON.parse(sessionStorage.getItem("userInfo"));
-      }
-        var isLogining=JSON.parse(sessionStorage.getItem("isLogining"));
-        if(isLogining){
-          this.$store.commit("changeLogining",isLogining);
+      let user={};
+        if(getCookie("username")){
+          user.username=getCookie('username');
+          if(getCookie('role')=="顾客"){
+            this.$store.commit("changeIsStylist",false);
+          }else if(getCookie('role')=="搭配师"){
+            this.$store.commit("changeIsStylist",true);
+          }
+          user.role=getCookie('role');
+          this.$store.commit("setUser",user);
+          this.$store.commit("changeHasLogin",true);
         }
-        this.$store.commit("setUser",userInfo);
+        else{
+          this.$store.commit("changeHasLogin",false);
+        }
+
+      //修改isLogining的值
+      var isLogining=JSON.parse(sessionStorage.getItem("isLogining"));
+      if(isLogining){
+        this.$store.commit("changeLogining",isLogining);
+      }
     },
 
   }

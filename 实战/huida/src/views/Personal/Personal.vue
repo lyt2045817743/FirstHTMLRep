@@ -1,50 +1,68 @@
 <!-- 个人中心页 -->
 <template>
     <div class="personal-box">
-        <div class="personal-header container"></div>
+        <div class="personal-header container clearfix">
+            <div class="ph-left clearfix">
+                <span class="phl-img"><Avatar icon="ios-person" size="60" style="fontSize:40px"/></span>
+                <div class="phl-info">
+                    <div class="phli-top">
+                        <span class="nickname">I'm fine</span>
+                        <span>积极的消费者</span>
+                    </div>
+                    <div class="phli-bottom">
+                        <span>关注：20</span>
+                        <span class="fans">粉丝：20</span>
+                        <span>申请成为搭配师 ></span>
+                    </div>
+                </div>
+            </div>
+            <div class="ph-right"></div>
+        </div>
         <div class="personal-content container clearfix">
             <div class="pc-nav">
-                 <Menu mode="vertical" active-name="1" style="width:100%;textAlign:left">
-                    <MenuItem name="1">
-                        <Icon type="ios-paper" />
+                 <Menu mode="vertical" active-name="1" style="width:100%;height:410px;textAlign:left" class="pnc-box">
+                    <MenuItem name="1" class="pcn-item" to="/personal">
+                        <Icon type="md-aperture" />
                         动态
                     </MenuItem>
-                    <MenuItem name="2">
-                        <Icon type="ios-people" />
+                    <MenuItem name="2" class="pcn-item" to="/personal/myFollowings">
+                        <Icon type="md-star" />
                         我的收藏
                     </MenuItem>
-                    <MenuItem name="3">
-                        <Icon type="ios-people" />
+                    <MenuItem name="3" v-if="!$store.state.isStylist" class="pcn-item" to="/personal/goodsOrder">
+                        <Icon type="md-reorder" />
                         商品订单
                     </MenuItem>
-                    <MenuItem name="4">
-                        <Icon type="ios-people" />
+                    <MenuItem name="4" v-if="$store.state.isStylist" class="pcn-item" to="/personal/consultOrder">
+                        <Icon type="md-reorder" />
                         咨询订单
                     </MenuItem>
-                    <MenuItem name="5">
-                        <Icon type="ios-construct" />
+                    <MenuItem name="5" v-if="!$store.state.isStylist" class="pcn-item" to="/personal/myPoints">
+                        <Icon type="ios-card-outline" />
                         我的积分
                     </MenuItem>
-                    <MenuItem name="6">
-                        <Icon type="ios-construct" />
+                    <MenuItem name="6" v-if="$store.state.isStylist" class="pcn-item" to="/personal/trainingCenter">
+                        <Icon type="md-school" />
                         培训中心
                     </MenuItem>
-                    <MenuItem name="7">
-                        <Icon type="ios-construct" />
+                    <MenuItem name="7" class="pcn-item" to="/personal/settings">
+                        <Icon type="ios-person" />
                         基本资料
                     </MenuItem>
                 </Menu>
             </div>
-            <div class="pc-content"></div>
+            <div class="pc-content">
+                <router-view />
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {Menu,MenuItem,Icon} from 'view-design';
+    import {Menu,MenuItem,Icon,Avatar} from 'view-design';
     export default {
         components:{
-            Menu,MenuItem,Icon
+            Menu,MenuItem,Icon,Avatar
         },
         data() {
             return {
@@ -87,6 +105,36 @@
     height: 90px;
     margin: 10px auto;
 }
+.ph-left{
+    height: 100%;
+    float: left;
+    text-align: left;
+}
+.ph-right{
+    float: right;
+}
+.phl-img{
+    width: 60px;
+    height: 60px;
+    margin: 15px;
+    display: inline-block;
+}
+.phl-info{
+    position: relative;
+    top: -67px;
+    left: 85px;
+    text-align: left;
+    font-size: 12px;
+}
+.phl-info .fans{
+    margin-right: 20px;
+}
+.phl-info .nickname{
+    font-size: 20px;
+}
+.phl-info span{
+    margin-right: 10px;
+}
 .personal-content{
     margin-bottom: 30px;
 }
@@ -94,6 +142,14 @@
     width: 200px;
     height: 410px;
     float: left;
+}
+.pnc-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.pcn-item{
+    font-size: 20px;
 }
 .pc-content{
     width: 780px;
