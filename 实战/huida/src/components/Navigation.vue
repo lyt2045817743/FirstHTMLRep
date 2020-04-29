@@ -22,19 +22,22 @@
                     <Dropdown v-show="$store.state.hasLogin">
                         <a href="javascript:void(0)">
                             <!-- <img src="../assets/img/head.jpg"> -->
-                             <Badge :count="1" class="badge" :offset="[12,0]" overflow-count="99">
+                             <Badge dot :count="1" class="badge" :offset="[14,0]">
                                 <Avatar icon="ios-person" size="large"/>
                             </Badge>
                         </a>
                         <DropdownMenu slot="list">
-                            <DropdownItem>{{$store.state.loginReturn.name}}</DropdownItem>
-                            <DropdownItem>顾客</DropdownItem>
+                            <DropdownItem style="fontSize:15px"><router-link to="/personal" class="myPage" @click="changeActiveName">{{$store.state.loginReturn.role}}</router-link></DropdownItem>
+                            <DropdownItem divided>消息中心 <Badge dot :count="10" :offset="[-6,-4]"></Badge></DropdownItem>
                             <DropdownItem>
                                 <router-link to="/personal" class="myPage" @click="changeActiveName">我的主页</router-link>
                             </DropdownItem>
+                            <DropdownItem v-if="$store.state.isStylist">
+                                <span @click="logOut">切换身份</span>
+                            </DropdownItem>
                             <DropdownItem divided>
                                 <span @click="logOut">退出登录</span>
-                                </DropdownItem>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     
