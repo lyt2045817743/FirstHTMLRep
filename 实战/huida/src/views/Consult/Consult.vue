@@ -1,28 +1,53 @@
 <!-- 咨询页 -->
 <template>
-    <div>
-        <h1>咨询师都去哪了？</h1>
+    <div class="container clearfix">
+        <div class="stylist-list">
+            <div class="sl-nav">
+                <Tabs value="name1" style="marginTop:15px" :animated="false">
+                    <TabPane label="推荐" name="name1">推荐</TabPane>
+                    <TabPane label="关注" name="name2">关注</TabPane>
+                    <TabPane label="分类" name="name3">
+                        <div class="sln-sort">
+                            
+                        </div>
+                    </TabPane>
+                </Tabs>
+            </div>
+        </div>
+        <div class="goods-banner"></div>
     </div>
 </template>
 
 <script>
+import {Tabs,TabPane} from 'view-design'
 export default {
-data() {
-return {
+    components:{
+        Tabs,TabPane
+    },
+    data() {
+        return {
 
-}
-},
-//生命周期 - 创建完成（访问当前this实例）
-created() {
+        }
+    },
+    created() {
 
-},
-//生命周期 - 挂载完成（访问DOM元素）
-mounted() {
+    },
+    mounted() {
 
-}
+    }
 }
 </script>
 <style scoped>
-/* @import url(); 引入css类 */
-
+.stylist-list{
+    width: 750px;
+    height: 440px;
+    background-color: antiquewhite;
+    float: left;
+}
+.goods-banner{
+    width: 230px;
+    height: 440px;
+    background-color: antiquewhite;
+    float: right;
+}
 </style>
