@@ -95,6 +95,7 @@
 
 <style scoped>
 .personal-box{
+    height: 700px;
     background-color: #f7f7f7;
     overflow: hidden;
 }

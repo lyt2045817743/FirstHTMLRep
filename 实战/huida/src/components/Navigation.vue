@@ -2,17 +2,20 @@
 <template>
     <div class="main clearfix">
         <div class="logo">
-            <router-link to="/"><img src="../assets/img/logo.jpg" alt=""></router-link>
+                <router-link to="/"><img src="../assets/img/logo.jpg" alt=""></router-link>
         </div>
         <div class="head_right">
             <Menu class="main_nav" mode="horizontal" :theme="theme1" :active-name="activeName" v-show="!$store.state.isLogining">
-                <MenuItem name="1" class="mn_item" to="/consult">
+                <MenuItem name="1" class="mn_item" to="/home">
+                    首页
+                </MenuItem>
+                <MenuItem name="2" class="mn_item" to="/consult">
                     咨询
                 </MenuItem>
-                <MenuItem name="2" class="mn_item" to="/store">
+                <MenuItem name="3" class="mn_item" to="/store">
                     商城
                 </MenuItem>
-                <MenuItem name="3" class="mn_item" to="/forum">
+                <MenuItem name="4" class="mn_item" to="/forum">
                     论坛
                 </MenuItem>
                 <div class="personal">
@@ -27,7 +30,7 @@
                             </Badge>
                         </a>
                         <DropdownMenu slot="list">
-                            <DropdownItem style="fontSize:15px"><router-link to="/personal" class="myPage" @click="changeActiveName">{{$store.state.loginReturn.role}}</router-link></DropdownItem>
+                            <DropdownItem style="fontSize:15px"><router-link to="/personal" class="myPage" @click="changeActiveName">{{$store.state.user.role}}</router-link></DropdownItem>
                             <DropdownItem divided>消息中心 <Badge dot :count="10" :offset="[-6,-4]"></Badge></DropdownItem>
                             <DropdownItem>
                                 <router-link to="/personal" class="myPage" @click="changeActiveName">我的主页</router-link>

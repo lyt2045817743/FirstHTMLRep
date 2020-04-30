@@ -8,7 +8,7 @@ import axios from 'axios'
  
 Vue.prototype.axios=axios;
 axios.defaults.headers['Content-Type']="application/json";
-axios.defaults.wiwithCredentials=true;
+axios.defaults.withCredentials=true;
 
 
 axios.defaults.baseURL = '/api'  //关键代码

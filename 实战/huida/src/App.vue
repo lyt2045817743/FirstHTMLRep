@@ -43,6 +43,9 @@ import { getCookie } from './util/cookie';
 </script>
 
 <style>
+  body{
+    background-color: #f7f7f7;
+  }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 const state={
-    loginReturn:"",
+    user:"",
     hasLogin:false,
     isLogining:false,
     isStylist:false,
@@ -17,11 +17,11 @@ const mutations={
     },
     setUser(state,user){
         if(user){
-            state.loginReturn=user;
+            state.user=user;
             state.isLogin=true;
         }
         else if(user==null){
-            state.loginReturn="";
+            state.user="";
             state.isLogin=false;
         }
     },

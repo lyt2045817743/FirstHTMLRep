@@ -1,10 +1,10 @@
-<!-- 组件--ListItem -->
+<!-- 组件--菜单 -->
 <template>
-    <div>
-        <li>
-            <slot name="content"></slot>
-        </li>
-    </div>
+<div>
+    <ul>
+        <slot name="items"></slot>
+    </ul>
+</div>
 </template>
 
 <script>
@@ -25,11 +25,6 @@ mounted() {
 }
 </script>
 <style scoped>
-li{
-    width: 100%;
-    height: 35px;
-    padding-left: 25px;
-    line-height: 35px;
-    text-align: left;
-}
+/* @import url(); 引入css类 */
+
 </style>

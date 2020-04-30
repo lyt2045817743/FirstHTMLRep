@@ -42,7 +42,7 @@
 
 <script>
 import {Tabs,TabPane,Input,Button} from 'view-design';
-import {setCookie} from '../util/cookie';
+import {setCookie,getCookie} from '../util/cookie';
 export default {
     components: {
         Tabs,TabPane,Input,Button
@@ -74,10 +74,8 @@ export default {
 
             //发送登录请求
             this.axios.post("/api/user/login",params).then(function(res){
-                console.log(res.data.message,res.data);
                 // 如果成功登录，则将用户信息和token存储至sessionStorage和vuex中
                 if(res.data.flag==true&&res.data.message=="登录成功"){
-                    console.log(1);
                     let data=res.data.data;
                     let user={};
 
@@ -97,7 +95,9 @@ export default {
                     //改变登陆状态
                     _this.$store.commit("changeHasLogin",true);
                     //登陆成功后切换路由至home
-                    _this.$router.push('/');
+                    if(getCookie('username')){
+                        _this.$router.push('/');
+                    }
                 }
                 else{
                     _this.loginMsg="用户名或密码有误！"

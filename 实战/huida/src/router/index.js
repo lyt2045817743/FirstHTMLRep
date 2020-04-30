@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {getCookie} from '../util/cookie'
+import Index from '../views/Index.vue'
 
 Vue.use(VueRouter)
 
@@ -8,14 +8,12 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Index',
-    component: ()=>{
-      if(!getCookie("username")){
-        return import('../views/Index.vue');
-      }
-      else if(getCookie("username")){
-        return import('../views/Home/Home.vue');
-      }
-    }
+    component: Index
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: ()=>import('../views/Home/Home.vue'),
   },
   {
     path: '/login',
