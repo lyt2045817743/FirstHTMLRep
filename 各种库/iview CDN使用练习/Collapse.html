@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="http://unpkg.com/view-design/dist/styles/iview.css">
+    <script type="text/javascript" src="http://vuejs.org/js/vue.min.js"></script>
+    <script type="text/javascript" src="http://unpkg.com/view-design/dist/iview.min.js"></script>
+    <style>
+        .category-list{
+            width: 100%;
+            height: 100%;
+            background-color: antiquewhite;
+            float: left;
+            z-index: 1;
+        }
+        .clearfix::after{
+            content: "";
+            display: block;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <Collapse simple :accordion="showPanel">
+            <Panel name="1" hide-arrow class="clearfix">
+                <div class="category-list">
+                    <span>全部</span>
+                </div>
+                <p slot="content">史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。</p>
+            </Panel>
+            <Panel name="2" hide-arrow class="clearfix">
+                <div class="category-list"></div>
+                <p slot="content">斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。</p>
+            </Panel>
+            <Panel name="3" hide-arrow class="clearfix">
+                <div class="category-list"></div>
+                <p slot="content">乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</p>
+            </Panel>
+        </Collapse>
+        <!-- <Breadcrumb>
+            <BreadcrumbItem to="/consult/recommend">推荐</BreadcrumbItem>
+            <BreadcrumbItem to="/consult/folllow">关注</BreadcrumbItem>
+            <BreadcrumbItem to="/consult/sort">分类</BreadcrumbItem>
+        </Breadcrumb> -->
+        <!-- <List header="Header" footer="Footer" border>
+                <ListItem>This is a piece of text.</ListItem>
+                <ListItem>This is a piece of text.</ListItem>
+                <ListItem>This is a piece of text.</ListItem>
+                <ListItem>This is a piece of text.</ListItem>
+                <ListItem>This is a piece of text.</ListItem>
+        </List> -->
+        <List>
+                <ListItem>
+                    <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
+                </ListItem>
+                <ListItem>
+                    <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
+                </ListItem>
+                <ListItem>
+                    <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
+                    <template slot="action">
+                        <li>
+                            <a href="">Edit</a>
+                        </li>
+                        <li>
+                            <a href="">More</a>
+                        </li>
+                    </template>
+                </ListItem>
+                <ListItem>
+                    <ListItemMeta avatar="https://dev-file.iviewui.com/userinfoPDvn9gKWYihR24SpgC319vXY8qniCqj4/avatar" title="This is title" description="This is description, this is description." />
+                    <template slot="action">
+                        <li>
+                            <a href="">Edit</a>
+                        </li>
+                        <li>
+                            <a href="">More</a>
+                        </li>
+                    </template>
+                </ListItem>
+            </List>
+    </div>
+    
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                showPanel:false
+            },
+        })
+    </script>
+</body>
+</html>

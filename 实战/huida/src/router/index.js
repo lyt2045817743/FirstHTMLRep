@@ -67,7 +67,24 @@ Vue.use(VueRouter)
   {
     path: '/consult',
     name: 'Consult',
-    component: () => import('../views/Consult/Consult.vue')
+    component: () => import('../views/Consult/Consult.vue'),
+    children:[
+      {
+          path: '/consult/recommend',
+          name: 'consultRecommend',
+          component: () => import('../views/Consult/Recommend.vue')
+      },
+      {
+          path: '/consult/follow',
+          name: 'consultFollow',
+          component: () => import('../views/Consult/Follow.vue')
+      },
+      {
+          path: '/consult/sort',
+          name: 'consultSort',
+          component: () => import('../views/Consult/Sort.vue')
+      }
+    ]
   },
   {
     path: '/store',

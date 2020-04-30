@@ -4,12 +4,17 @@
         <div class="stylist-list">
             <div class="sl-nav">
                 <Tabs value="name1" style="marginTop:15px" :animated="false">
-                    <TabPane label="推荐" name="name1">推荐</TabPane>
-                    <TabPane label="关注" name="name2">关注</TabPane>
+                    <TabPane label="推荐" name="name1">
+                        <div class="slb-recommend"></div>
+                    </TabPane>
+                    <TabPane label="关注" name="name2">
+                        <div class="slb-follow"></div>
+                    </TabPane>
                     <TabPane label="分类" name="name3">
-                        <div class="sln-sort">
-                            
+                        <div class="slb-sort">
+                           
                         </div>
+                        <div class="sort-list"></div>
                     </TabPane>
                 </Tabs>
             </div>
