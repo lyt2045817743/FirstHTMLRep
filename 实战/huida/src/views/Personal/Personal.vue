@@ -20,7 +20,7 @@
         </div>
         <div class="personal-content container clearfix">
             <div class="pc-nav">
-                 <Menu mode="vertical" active-name="1" style="width:100%;height:410px;textAlign:left" class="pnc-box">
+                 <Menu mode="vertical" :active-name="nowPath" style="width:100%;height:410px;textAlign:left" class="pnc-box">
                     <MenuItem name="1" class="pcn-item" to="/personal">
                         <Icon type="md-aperture" />
                         动态
@@ -60,6 +60,7 @@
 
 <script>
     import {Menu,MenuItem,Icon,Avatar} from 'view-design';
+    import {initPath} from '../../util/views'
     export default {
         components:{
             Menu,MenuItem,Icon,Avatar
@@ -81,17 +82,22 @@
                         '培训中心':['搭配模板','','申请成为全职搭配师'],
                         '基本资料':['展示板','个人资料','账号设置']
                     }
-                }
+                },
+                nowPath:"5"
             }
         },
+        
         created() {
-
+            //初始化路径
+            let pathSetting=initPath(this.$route.path);
+            this.nowPath=pathSetting.index;
         },
         mounted() {
 
         },
         beforeCreate() {
             let _this=this;
+            //发送请求获取用户个人信息
             this.axios.get("/api/user/"+this.$store.state.user.username).then(function(res){
                 let data=res.data.data;
                 if(res.data.flag==true&&res.data.message=="查询成功"){
@@ -114,6 +120,8 @@
                     
                 }
             })
+
+            
         },
     }
 </script>
