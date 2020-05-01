@@ -6,8 +6,8 @@
             <TabPane label="展示板" name="name1" v-if="$store.state.isStylist">展示板</TabPane>
             <TabPane label="个人资料" name="name2" style="backgroundColor:white">
                 <div class="personal-info clearfix">
+                    <div class="pi-title">身份信息</div>
                     <div class="pi-name">
-                        <span>登录名</span><br/>
                         <span>昵称</span><br/>
                         <span>性别</span><br/>
                         <span>年龄</span><br/>
@@ -15,9 +15,8 @@
                         <span>个性签名</span>
                     </div>
                     <div class="pi-value" v-show="!isShow">
-                        <Input v-model="userInfo.username" size="large" class="piv-item hidden" />
-                        <Input v-model="userInfo.nickname" size="large" class="piv-item hidden"/>
-                        <RadioGroup v-model="userInfo.sex" class="piv-item hidden" style="height:25px">
+                        <Input v-model="userInfo.nickname" size="large" class="piv-item"/>
+                        <RadioGroup v-model="userInfo.sex" class="piv-item" style="height:25px">
                             <Radio label="0">
                                 <Icon type="md-male" />
                                 <span>男</span> 
@@ -27,12 +26,11 @@
                                 <span>女</span>
                             </Radio>
                         </RadioGroup><br/>
-                        <Input v-model="userInfo.age" size="large" number class="piv-item hidden" />
-                        <Input size="large" v-model="userInfo.job" class="piv-item hidden" />
-                        <Input v-model="userInfo.signature" type="textarea" :rows="4" placeholder="个性的展示会吸引相似的人哦~" class="piv-item hidden" style="width:500px;marginTop: 15px;border:none;" />
+                        <Input v-model="userInfo.age" size="large" number class="piv-item" />
+                        <Input size="large" v-model="userInfo.job" class="piv-item" />
+                        <Input v-model="userInfo.signature" type="textarea" :rows="4" placeholder="个性的展示会吸引相似的人哦~" class="piv-item" style="width:500px;marginTop: 15px;border:none;" />
                     </div>
                     <div class="pi-show" v-show="isShow">
-                        <span>{{$store.state.user.username}}</span><br/>
                         <span>{{$store.state.user.nickname}}</span><br/>
                         <span>{{$store.state.user.sex}}</span><br/>
                         <span>{{$store.state.user.age}}</span><br/>
@@ -45,7 +43,54 @@
                      <Button size="large" type="primary" ghost class="pi-btn" @click="cancelModify" v-show="!isShow">取消</Button>
                 </div>
             </TabPane>
-            <TabPane label="帐号设置" name="name3">帐号设置</TabPane>
+            <TabPane label="帐号设置" name="name3">
+                <div class="personal-account">
+                    <div class="pa-username clearfix">
+                        <div class="pa-title">修改用户名</div>
+                        <div class="pa-box">
+                            <div class="pa-name">
+                                <span>用户名</span><br/>
+                            </div>
+                            <div class="pa-value">
+                                <Input v-model="modifyAccount.newUsername" size="large" class="piv-item" />
+                            </div>
+                            <Button size="large" type="primary" class="pa-btn" @click="commitAccount">保存</Button>
+                        </div>
+                    </div>
+                    <div class="pa-pwd clearfix">
+                        <div class="pa-title">修改密码</div>
+                        <div class="pa-box">
+                            <div class="pa-name">
+                                <span>原密码</span><br/>
+                                <span>新密码</span><br/>
+                            </div>
+                            <div class="pa-value">
+                                <Input v-model="modifyAccount.oldPassword" type="password" password class="piv-item" />
+                                <Input v-model="modifyAccount.password" type="password" password class="piv-item" />
+                            </div>
+                            <Button size="large" type="primary" class="pa-btn" @click="commitAccount">保存</Button>
+                        </div>
+                    </div>
+                    <div class="pa-email clearfix">
+                        <div class="pa-title">邮箱验证</div>
+                        <div class="pa-box">
+                            <div class="pa-name">
+                                <span>邮箱</span><br/>
+                            </div>
+                            <div class="pa-value">
+                                <Input v-model="myEmail" size="large" class="piv-item" />
+                            </div>
+                            <Button size="large" type="primary" class="pa-btn" @click="commitAccount">开始验证</Button>
+                        </div>
+                    </div>
+                    <!-- <div class="pa-others clearfix">
+                        <div class="pa-title">关联账号</div>
+                        <div class="pa-box">
+
+                        </div>
+                    </div> -->
+                </div>
+            </TabPane>
         </Tabs>
     </div>
 </template>
@@ -60,6 +105,7 @@ export default {
         return {
             isShow:true,
             modifySuccess:false,
+            myEmail:"",
             userInfo:{
                 username:"",
                 nickname:"",
@@ -68,6 +114,11 @@ export default {
                 job:"",
                 signature:""
             },
+            modifyAccount:{
+                newUsername:"",
+                oldPassword:"",
+                password:""
+            }
         }
     },
     methods: {
@@ -111,6 +162,9 @@ export default {
                 }
                 
             })
+        },
+        commitAccount(){
+
         }
     },
     Mounted() {
@@ -128,17 +182,27 @@ export default {
 }
 </script>
 <style scoped>
-.personal-info{
-    width: 100%;
-    /* height: 500px; */
-    padding-bottom: 20px;
+/**personal-account,personal-info start*/
+.personal-account,.personal-info{
+    margin: 0 auto;
+    padding: 0 20px 20px;
+    background-color: white;
 }
-.pi-name{
+.pa-title,.pi-title{
+    height: 45px;
+    margin-top: 10px;
+    border-bottom: 1px solid #999;
+    text-align: left;
+    font-size: 18px;
+    line-height: 45px;
+    font-weight: bold;
+}
+.pi-name,.pa-name{
     width: 125px;
     float: left;
     text-align: right;
 }
-.pi-name span,.pi-show span{
+.pi-name span,.pi-show span,.pa-name span{
     height: 20px;
     display: inline-block;
     margin-top: 20px;
@@ -147,7 +211,7 @@ export default {
 .pi-show span{
     color: #999;
 }
-.pi-value,.pi-show{
+.pi-value,.pi-show,.pa-value{
     width: 460px;
     float: left;
     margin-left: 45px;
@@ -157,8 +221,16 @@ export default {
     width: 300px;
     margin-top: 10px;
 }
-.pi-btn{
+.pi-btn,.pa-btn{
     float: right;
     margin: 10px 40px 0 auto;
 }
+/**personal-account,personal-info end*/
+
+/*personal-account start*/
+.pa-box{
+    padding:10px 0;
+}
+/*personal-account end*/
+
 </style>
