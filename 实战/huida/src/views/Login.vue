@@ -82,7 +82,7 @@ export default {
                     //将用户信息与token存储到cookie中
                     let expires=new Date();
                     expires.setDate(expires.getDate()+7);
-                    
+                    user.username=data.user.username;
                     user.role="顾客";
                     setCookie("role",user.role,expires,null,null,null);
                     setCookie("token",data.token,expires,null,null,null);

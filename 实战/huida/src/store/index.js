@@ -24,12 +24,18 @@ const mutations={
             state.user="";
             state.isLogin=false;
         }
+        
     },
     changeHasLogin(state,flag){
         state.hasLogin=flag;
     },
     changeIsStylist(state,flag){
         state.isStylist=flag;
+    }
+}
+const actions={
+    setUser(context,data){
+        context.commit("setUser",data);
     }
 }
 
@@ -45,5 +51,6 @@ export default new Vuex.Store({
     state,
     mutations,
     getters,
+    actions,
     modules
 })

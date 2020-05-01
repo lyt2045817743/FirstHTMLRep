@@ -89,7 +89,32 @@
         },
         mounted() {
 
-        }
+        },
+        beforeCreate() {
+            let _this=this;
+            this.axios.get("/api/user/"+this.$store.state.user.username).then(function(res){
+                let data=res.data.data;
+                if(res.data.flag==true&&res.data.message=="查询成功"){
+                    let user={};
+                    user={...data};
+                    if(user.role=="0"){
+                        user.role="顾客";
+                    }
+                    else if(user.role=="1"){
+                        user.role="搭配师";
+                    }
+                    if(user.sex=="0"){
+                        user.sex="男";
+                    }
+                    else if(user.sex=="1"){
+                        user.sex="女";
+                    }
+                    _this.$store.dispatch("setUser",user);
+                    console.log(_this.$store.state.user);
+                    
+                }
+            })
+        },
     }
 </script>
 
