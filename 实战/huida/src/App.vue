@@ -17,7 +17,7 @@ import { getCookie } from './util/cookie';
     },
     beforeCreate() {
       let user={};
-        if(getCookie("username")){
+        if(getCookie("token")){
           user.username=getCookie('username');
           if(getCookie('role')=="顾客"){
             this.$store.commit("changeIsStylist",false);

@@ -116,8 +116,6 @@
                         user.sex="女";
                     }
                     _this.$store.dispatch("setUser",user);
-                    console.log(_this.$store.state.user);
-                    
                 }
             })
 
