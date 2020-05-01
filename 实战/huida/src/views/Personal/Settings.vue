@@ -62,8 +62,83 @@
                     </div>
                 </div>
             </TabPane>
-            <TabPane label="展示板" name="name1" v-if="$store.state.isStylist">展示板</TabPane>
-            <TabPane label="个人资料" name="name2" style="backgroundColor:white">
+            <TabPane label="展示板" name="name2" v-if="!$store.state.isStylist">
+                <div class="stylist-showPanel">
+                    <div class="ss-show">
+                        <div class="ss-title">展示部分</div>
+                        <div class="ss-box">
+                            <div class="spb-info">
+                                <div class="info-item clearfix">
+                                    <span class="ii-name">职位</span><span class="ii-value">兼职搭配师</span>
+                                </div>
+                                <div class="info-item clearfix">
+                                    <span class="ii-name">等级</span><span class="ii-value">一级搭配师</span>
+
+                                </div>
+                                <div class="info-item clearfix">
+                                    <span style="float:left;width:65px;fontWeight:bold;textAlign:left">成交量</span><span style="float:left;width:50px;textAlign:left">1128</span>
+                                    <span style="float:left;width:70px;fontWeight:bold;textAlign:left">活跃度</span><span style="float:left;width:50px;textAlign:left">30</span>
+                                </div>
+                                <div class="info-item clearfix">
+                                    <span class="ii-name" style="width:50px">总评分</span>
+                                    <span class="ii-value" style="width:160px">
+                                        <Rate allow-half v-model="valueCustomText" disabled style="width:150px;">
+                                            <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
+                                        </Rate>
+                                    </span>
+                                </div>
+                                <div class="info-item clearfix">
+                                    <span class="ii-name">服务态度评分</span>
+                                    <span class="ii-value" style=" width:138px;">
+                                        <Rate allow-half v-model="valueCustomText" disabled style="width:150px;">
+                                            <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
+                                        </Rate>
+                                    </span>
+
+                                </div>
+                                <div class="info-item clearfix">
+                                    <span class="ii-name">搭配能力评分</span>
+                                        <span class="ii-value" style="width:138px;">
+                                        <Rate allow-half v-model="valueCustomText" disabled style="width:150px;">
+                                            <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
+                                        </Rate>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="spb-price clearfix">
+                                <span class="price-name">服务价格区间</span>
+                                <div class="prive-value" style="display:inline-block">
+                                    <span style="width:50px;textAlign:center;display:inline-block;">0</span>
+                                    <span class="unit">元</span>
+                                    <span>—</span>
+                                    <span style="width:50px;textAlign:center;display:inline-block;">10</span>
+                                    <span class="unit">元</span>
+                                </div>
+                                
+                            </div>
+                            <div class="spb-comment" style="marginTop:12px;">
+                                <div class="lately-comment clearfix">
+                                    <span class="lc-name">最近评价</span>
+                                    <p class="comment">搭配是很负责任，找的衣服我都很喜欢。真实，态度好，易沟通</p>
+                                </div>
+                                <div class="hot-comment clearfix">
+                                    <span class="hc-name">最热评价</span>
+                                    <p class="comment">搭配是很负责任，找的衣服我都很喜欢。真实，态度好，易沟通</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ss-set">
+                        <div class="ss-title">自我设置</div>
+
+                    </div>
+                    <div class="ss-btn">
+
+                    </div>
+                </div>
+                
+            </TabPane>
+            <TabPane label="个人资料" name="name3" style="backgroundColor:white">
                 <div class="personal-info clearfix">
                     <Alert type="success" closable on-close="closeSucBtn" show-icon v-show="modifySuccess" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
                     <Alert type="error" closable   on-close="closeErrBtn" v-show="errorMessage!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage}}</Alert>
@@ -106,7 +181,7 @@
                     </div>
                 </div>
             </TabPane>
-            <TabPane label="帐号设置" name="name3">
+            <TabPane label="帐号设置" name="name4">
                 <div class="personal-account">
                     <Alert type="success" closable on-close="closeSucBtn" show-icon v-show="modifySuccess" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
                     <Alert type="error" closable   on-close="closeErrBtn" v-show="errorMessage!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage}}</Alert>
@@ -161,11 +236,11 @@
 </template>
 
 <script>
-import {Tabs,TabPane,Input,RadioGroup,Radio,Icon,Button,Alert,Select,Option} from 'view-design';
+import {Tabs,TabPane,Input,RadioGroup,Radio,Icon,Button,Alert,Select,Option,Rate} from 'view-design';
 import {setCookie} from '../../util/cookie'
 export default {
     components:{
-        Tabs,TabPane,Input,RadioGroup,Radio,Icon,Button,Alert,Select,Option
+        Tabs,TabPane,Input,RadioGroup,Radio,Icon,Button,Alert,Select,Option,Rate
     },
     data() {
         return {
@@ -173,6 +248,7 @@ export default {
             modifySuccess:"",
             errorMessage:"",
             myEmail:"",
+            valueCustomText:3.8,
             relkwd:["我","妈妈","姥姥"],
             newRelked:{
                 username:this.$store.state.user.username,
@@ -330,12 +406,12 @@ export default {
 </script>
 <style scoped>
 /**personal-account,personal-info start*/
-.personal-account,.personal-info,.personal-sizeInfo{
+.personal-account,.personal-info,.personal-sizeInfo,.stylist-showPanel{
     margin: 0 auto;
     padding: 0 20px 20px;
     background-color: white;
 }
-.pa-title,.pi-title{
+.pa-title,.pi-title,.ss-title{
     height: 45px;
     margin-top: 10px;
     border-bottom: 1px solid #999;
@@ -409,4 +485,41 @@ export default {
 }
 /**personal-account,personal-info end*/
 
+/*stylist-showPapel start*/
+.info-item{
+    width: 236px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    margin: 10px 10px 0 auto;
+}
+.ii-name,.price-name,.hc-name,.lc-name{
+    width: 85px;
+    float: left;
+    font-weight: bold;
+    text-align: left;
+}
+.price-name,.hc-name,.lc-name{
+    margin-top: 13px;
+}
+.ii-value{
+    width: 135px;
+    float: right;
+    text-align: left;
+}
+.spb-price{
+    text-align: left;
+}
+.prive-value{
+    margin-top: 13px;
+}
+.comment{
+    width: 630px;
+    height: 50px;
+    margin-top: 12px;
+    text-align: left;
+    display: inline-block;
+    background-color: #f7f7f7;
+}
+/*stylist-showPapel end*/
 </style>
