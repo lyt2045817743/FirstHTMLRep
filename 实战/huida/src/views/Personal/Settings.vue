@@ -212,7 +212,7 @@ export default {
     color: #999;
 }
 .pi-value,.pi-show,.pa-value{
-    width: 460px;
+    width: 430px;
     float: left;
     margin-left: 45px;
     text-align: left;
