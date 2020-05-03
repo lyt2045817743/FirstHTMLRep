@@ -58,7 +58,29 @@ Vue.use(VueRouter)
       {
         path: '/personal/settings',
         name: 'Settings',
-        component: () => import('../views/Personal/Settings.vue')
+        component: () => import('../views/Personal/PersonalSet/Settings.vue'),
+        children:[
+          {
+            path: '/personal/settings/sizeInfo',
+            name: 'SizeInfo',
+            component: () => import('../views/Personal/PersonalSet/SizeInfo.vue')
+          },
+          {
+            path: '/personal/settings/showPanel',
+            name: 'ShowPanel',
+            component: () => import('../views/Personal/PersonalSet/ShowPanel.vue')
+          },
+          {
+            path: '/personal/settings/personalInfo',
+            name: 'PersonalInfo',
+            component: () => import('../views/Personal/PersonalSet/PersonalInfo.vue')
+          },
+          {
+            path: '/personal/settings/account',
+            name: 'Account',
+            component: () => import('../views/Personal/PersonalSet/Account.vue')
+          },
+        ]
       },
     ]
   },
