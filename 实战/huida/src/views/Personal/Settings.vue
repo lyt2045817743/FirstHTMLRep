@@ -2,10 +2,15 @@
 <template>
     <div>
         <Tabs value="name1" style="marginTop:15px" :animated="false">
+
+            <!-- --------------------尺码信息---------------------- -->
+
             <TabPane label="尺码信息" name="name1" v-if="!$store.state.isStylist">
                 <div class="personal-sizeInfo clearfix">
-                    <Alert type="success" closable on-close="closeSucBtn" show-icon v-show="modifySuccess" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
-                    <Alert type="error" closable   on-close="closeErrBtn" v-show="errorMessage!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage}}</Alert>
+                    <!-- 提示框 -->
+                    <Alert type="success" closable on-close="closeSucBtn('尺码信息')" show-icon v-show="modifySuccess['尺码信息']!=''" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
+                    <Alert type="error" closable   on-close="closeErrBtn('尺码信息')" v-show="errorMessage['尺码信息']!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage['尺码信息']}}</Alert>
+                    <!-- 表单 -->
                     <div class="ps-box clearfix">
                         <div class="ps-name">
                             <span>他/她是您的</span><br/>
@@ -14,55 +19,60 @@
                             <span>身高</span><br/>
                             <span>三围</span><br/>
                             <span>消费预算</span><br/>
-                            <span>特征标签</span><br/>
+                            <!-- <span>特征标签</span><br/>
                             <span>风格标签</span><br/>
-                            <span>场合标签</span><br/>
+                            <span>场合标签</span><br/> -->
                         </div>
-                        <div class="ps-value" v-show="relkwd.length==0">
+                        <!-- 填写尺码信息 -->
+                        <div class="ps-value" v-show="!showRelked.cwi">
                             <Input v-model="newRelked.cwi" size="default" class="psv-largeItem"/>
                             <RadioGroup v-model="newRelked.sex" class="psv-largeItem" style="height:29px;">
-                                <Radio label="0">
+                                <Radio label="男">
                                     <Icon type="md-male" />
                                     <span>男</span> 
                                 </Radio>
-                                <Radio label="1">
+                                <Radio label="女">
                                     <Icon type="md-female" />
                                     <span>女</span>
                                 </Radio>
                             </RadioGroup><br/>
-                            <Input v-model="newRelked.age" size="default" number class="psv-largeItem" /><br/>
+                            <Input v-model="newRelked.age" size="default" type="number" class="psv-largeItem" /><br/>
                             <div class="inline-box">
-                                <Input size="default" v-model="newRelked.height" class="psv-smallItem" /><span class="unit">cm</span> <span>体重</span> <Input size="default" v-model="newRelked.weight" class="psv-smallItem" /><span class="unit">kg</span>
+                                <Input size="default" v-model="newRelked.height" type="number" class="psv-smallItem" /><span class="unit">cm</span> <span>体重</span> <Input size="default"  type="number" v-model="newRelked.weight" class="psv-smallItem" /><span class="unit">kg</span>
                             </div>
                             <div class="inline-box">
-                                <span>胸围</span> <Input size="default" v-model="newRelked.bust" class="psv-smallItem" /><span class="unit">cm</span> <span>腰围</span> <Input size="default" v-model="newRelked.waistline" class="psv-smallItem" /><span class="unit">cm</span><span>臀围</span><Input size="default" v-model="newRelked.hips" class="psv-smallItem" /><span class="unit">cm</span>
+                                <span>胸围</span> <Input size="default"  type="number" v-model="newRelked.bust" class="psv-smallItem" /><span class="unit">cm</span> <span>腰围</span> <Input size="default"  type="number" v-model="newRelked.waistline" class="psv-smallItem" /><span class="unit">cm</span><span>臀围</span><Input size="default" v-model="newRelked.hips"  type="number" class="psv-smallItem" /><span class="unit">cm</span>
                             </div>
                             <div class="inline-box">
-                                <Input size="default" v-model="newRelked.priceEpt[0]" class="psv-smallItem" /><span class="unit">元</span> <span style="marginRight:20px">——</span><Input size="default" v-model="newRelked.priceEpt[1]" class="psv-smallItem" /><span class="unit">元</span>
+                                <Input size="default" v-model="newRelked.lowPrice"  type="number" class="psv-smallItem" /><span class="unit">元</span> <span style="marginRight:20px">——</span><Input size="default" type="number" v-model="newRelked.highPrice" class="psv-smallItem" /><span class="unit">元</span>
                             </div>
                             <!-- lalalallalalalalalalalalalalalalalalalalalalalaallalaalalalalalallalalalaalalala -->
                         </div>
 
-                        <div class="ps-show" v-show="relkwd.length!=0">
+                        <!-- 展示尺码信息 -->
+                        <div class="ps-show" v-show="showRelked.cwi">
                            <Select v-model="nowShow" style="width:170px;marginTop:17px;height: 27px;">
                                 <Option v-for="i in relkwd" :value="i" :key="i">{{ i }}</Option>
                             </Select><br/>
                             <span>{{showRelked.sex}}</span><br/>
                             <span>{{showRelked.age}}</span><br/>
-                            <span class="psv-smallItem">{{showRelked.height}}</span><span class="unit">cm</span> <span>体重</span> <span class="psv-smallItem">{{showRelked.weight}}</span><span class="unit">kg</span><br/>
-                            <span>胸围</span> <span class="psv-smallItem">{{showRelked.bust}}</span><span class="unit">cm</span> <span>腰围</span> <span class="psv-smallItem">{{showRelked.waistline}}</span><span class="unit">cm</span><span>臀围</span> <span class="psv-smallItem">{{showRelked.hips}}</span><span class="unit">cm</span><br/>
-                            <span class="psv-smallItem">{{showRelked.priceEpt[0]}}</span><span class="unit">元</span> <span style="marginRight:20px">——</span> <span class="psv-smallItem">{{showRelked.priceEpt[1]}}</span><span class="unit">元</span><br/>
+                            <span class="pss-smallItem">{{showRelked.height}}</span><span class="unit">cm</span> <span>体重</span> <span class="pss-smallItem">{{showRelked.weight}}</span><span class="unit">kg</span><br/>
+                            <span>胸围</span> <span class="pss-smallItem">{{showRelked.bust}}</span><span class="unit">cm</span> <span>腰围</span> <span class="pss-smallItem">{{showRelked.waistline}}</span><span class="unit">cm</span><span>臀围</span> <span class="pss-smallItem">{{showRelked.hips}}</span><span class="unit">cm</span><br/>
+                            <span class="pss-smallItem">{{showRelked.lowPrice}}</span><span class="unit">元</span> <span style="marginRight:20px">——</span> <span class="pss-smallItem">{{showRelked.highPrice}}</span><span class="unit">元</span><br/>
                             <!-- lalalallalalalalalalalalalalalalalalalalalalalaallalaalalalalalallalalalaalalala -->
                         </div>
-                       
-                        <Button size="large" type="primary" class="ps-add-btn" @click="modifyInfo" v-show="relkwd.length!=0">新增尺寸信息</Button><br/>
-                        <Button size="large" type="error" class="ps-btn" @click="modifyInfo" v-show="relkwd.length!=0" style="position:relative;left:-60px;">删除</Button>
-                        <Button size="large" type="primary" class="ps-btn" @click="commitInfo" v-show="relkwd.length==0" style="position:relative;left:-120px;">保存</Button>
-                        <Button size="large" type="primary" ghost class="ps-btn" @click="cancelModify" v-show="relkwd.length==0">重置</Button>
+                        <!-- 按钮 -->
+                        <Button size="large" type="primary" class="ps-add-btn" @click="creatNewSizeInfo" v-show="showRelked.cwi">新增尺寸信息</Button><br/>
+                        <Button size="large" type="primary" class="ps-btn" @click="modifyInfo" v-show="showRelked.cwi" style="position:relative;left:-120px;top:60px">修改</Button><br/>
+                        <Button size="large" type="error" class="ps-btn" @click="modifyInfo" v-show="showRelked.cwi">删除</Button>
+                        <Button size="large" type="primary" class="ps-btn" @click="commitSizeInfo" v-show="!showRelked.cwi" style="position:relative;left:-120px;">保存</Button>
+                        <Button size="large" type="primary" ghost class="ps-btn" @click="resetSizeInfo" v-show="!showRelked.cwi">重置</Button>
                     </div>
                 </div>
             </TabPane>
-            <TabPane label="展示板" name="name2" v-if="!$store.state.isStylist">
+
+            <!-- --------------------展示板---------------------- -->
+            <TabPane label="展示板" name="name2" v-if="!$store.state.isStylist" style="height:1000px">
                 <div class="stylist-showPanel">
                     <div class="ss-show">
                         <div class="ss-title">展示部分</div>
@@ -130,7 +140,33 @@
                     </div>
                     <div class="ss-set">
                         <div class="ss-title">自我设置</div>
+                        <div class="ss-box clearfix">
+                            <div class="ssb-name">
+                                <span>当前服务状态</span><br/>
+                                <span style="marginTop:30px">服务开头语</span><br/>
+                                <span style="marginTop:80px">我擅长的风格</span><br/>
+                                <span style="marginTop:40px">我擅长的场合</span><br/>
+                            </div>
+                            <div class="ssb-value">
+                                <RadioGroup v-model="stylist.online" class="ssb-item" style="height:29px;">
+                                    <Radio label="1">
+                                        <span>在线</span> 
+                                    </Radio>
+                                    <Radio label="2">
+                                        <span>可预约</span>
+                                    </Radio>
+                                    <Radio label="0">
+                                        <span>休息中</span>
+                                    </Radio>
+                                </RadioGroup><br/>
+                                <Input v-model="userInfo.signature" type="textarea" :rows="3" placeholder="当顾客打开聊天框，系统就会自动发送的内容哦~" class="ssb-item" style="width:500px;height:65px;border:none;" />
+                            </div>
+                            <div class="ssb-show">
 
+                            </div>
+                            <Button size="large" type="primary" class="ps-btn" @click="commitSizeInfo" v-show="!showRelked.cwi" style="position:relative;left:-120px;">保存</Button>
+                        <Button size="large" type="primary" ghost class="ps-btn" @click="resetSizeInfo" v-show="!showRelked.cwi">重置</Button>
+                        </div>
                     </div>
                     <div class="ss-btn">
 
@@ -138,10 +174,13 @@
                 </div>
                 
             </TabPane>
+
+            <!-- --------------------个人资料---------------------- -->
+
             <TabPane label="个人资料" name="name3" style="backgroundColor:white">
                 <div class="personal-info clearfix">
-                    <Alert type="success" closable on-close="closeSucBtn" show-icon v-show="modifySuccess" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
-                    <Alert type="error" closable   on-close="closeErrBtn" v-show="errorMessage!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage}}</Alert>
+                    <Alert type="success" closable on-close="closeSucBtn('个人资料')" show-icon v-show="modifySuccess['个人资料']!=''" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
+                    <Alert type="error" closable   on-close="closeErrBtn('个人资料')" v-show="errorMessage['个人资料']!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage['个人资料']}}</Alert>
                     <div class="pi-title">身份信息</div>
                     <div class="pi-box clearfix">
                         <div class="pi-name">
@@ -181,10 +220,13 @@
                     </div>
                 </div>
             </TabPane>
+
+            <!-- --------------------账号设置---------------------- -->
+
             <TabPane label="帐号设置" name="name4">
                 <div class="personal-account">
-                    <Alert type="success" closable on-close="closeSucBtn" show-icon v-show="modifySuccess" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
-                    <Alert type="error" closable   on-close="closeErrBtn" v-show="errorMessage!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage}}</Alert>
+                    <Alert type="success" closable on-close="closeSucBtn('账号设置')" show-icon v-show="modifySuccess['账号设置']!=''" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
+                    <Alert type="error" closable   on-close="closeErrBtn('账号设置')" v-show="errorMessage['账号设置']!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage['账号设置']}}</Alert>
                     <div class="pa-username clearfix">
                         <div class="pa-title">修改用户名</div>
                         <div class="pa-box">
@@ -192,7 +234,7 @@
                                 <span>用户名</span><br/>
                             </div>
                             <div class="pa-value">
-                                <Input v-model="modifyAccount.newUsername" size="large" class="piv-item" />
+                                <Input v-model="modifyAccount.username" size="large" class="piv-item" />
                             </div>
                             <Button size="large" type="primary" class="pa-btn" @click="commitUsername">保存</Button>
                         </div>
@@ -237,51 +279,74 @@
 
 <script>
 import {Tabs,TabPane,Input,RadioGroup,Radio,Icon,Button,Alert,Select,Option,Rate} from 'view-design';
-import {setCookie} from '../../util/cookie'
+import {setCookie} from '../../util/cookie';
+import {toRequest,fromResponse} from '../../util/dataTypeConversion';
 export default {
     components:{
         Tabs,TabPane,Input,RadioGroup,Radio,Icon,Button,Alert,Select,Option,Rate
     },
     data() {
         return {
+            //全局
             isShow:true,
-            modifySuccess:"",
-            errorMessage:"",
-            myEmail:"",
+            modifySuccess:{
+                "个人信息":"",
+                "账号设置":"",
+                "尺码信息":"",
+                "展示板":"",
+            },
+            errorMessage:{
+                "个人信息":"",
+                "账号设置":"",
+                "尺码信息":"",
+                "展示板":"",
+            },
+            
+            //展示板
             valueCustomText:3.8,
-            relkwd:["我","妈妈","姥姥"],
+            stylist:{
+                online:"1"
+            },
+
+            //尺码信息z
+            nowShow:"",
+            relkwd:null,
             newRelked:{
-                username:this.$store.state.user.username,
+                uid:this.$store.state.user.uid,
                 cwi:"",
-                age:0,
-                sex:"0",
+                age:"",
+                sex:"男",
                 height:"",
                 weight:"",
                 bust:"",
                 waistline:"",
                 hips:"",
-                priceEpt:[],
+                lowPrice:"",
+                highPrice:"",
                 feature	:[],
                 occasion:[],
                 style:[],
                 preferClothingPic:""
             },
             showRelked:{
-                username:this.$store.state.user.username,
+                uid:this.$store.state.user.uid,
                 cwi:"",
-                age:0,
-                sex:"0",
+                age:"",
+                sex:"",
                 height:"",
                 weight:"",
                 bust:"",
                 waistline:"",
                 hips:"",
-                priceEpt:[],
+                lowPrice:"",
+                highPrice:"",
                 feature	:[],
                 occasion:[],
                 style:[],
                 preferClothingPic:""
             },
+
+            //个人信息
             userInfo:{
                 username:"",
                 nickname:"",
@@ -290,26 +355,63 @@ export default {
                 job:"",
                 signature:""
             },
+
+            //账号设置
+            myEmail:"",
             modifyAccount:{
-                newUsername:"",
+                username:"",
                 oldPassword:"",
                 password:""
             }
         }
     },
     computed: {
-        nowShow(){
-            console.log(this.relkwd[0]);
-            return this.relkwd[0];
+        //展示板
+        autoShow(){
+            if((this.relkwd instanceof Array)&&this.relkwd.length!=0){
+                return this.relkwd[0];
+            }
+            else{
+                return null;
+            }
       }
     },
+    watch: {
+        relkwd(newVal){
+            if(newVal){
+                this.nowShow=this.autoShow;
+            }
+        },
+        nowShow(newVal){
+            if((newVal instanceof Array)&&newVal.length!=0){
+                let url="/api/user/td/"+this.$store.state.user.uid+"/"+newVal;
+                
+                let _this=this;
+                this.axios.get(url).then(function(res){
+                        console.log(res.data);
+                        if(res.data.flag==true){
+                            let newData=fromResponse(res.data.data);
+                            _this.showRelked=newData;
+                        }
+                        else{
+                            console.log(res.data.message);
+                            console.log(url);
+                            
+                        }
+                })
+            }
+        }
+    },
     methods: {
-        closeSucBtn(){
-            this.modifySuccess="";
+        //全局
+        closeSucBtn(pageName){
+            this.modifySuccess[pageName]="";
         },
-        closeErrBtn(){
-            this.errorMessage="";
+        closeErrBtn(pageName){
+            this.errorMessage[pageName]="";
         },
+
+        //个人信息
         modifyInfo(){
             this.isShow=false;
             let userInfo=JSON.parse(JSON.stringify(this.$store.state.user));
@@ -332,7 +434,7 @@ export default {
             this.isShow=true;
             let params=JSON.stringify(this.userInfo);
             let _this=this;
-            this.axios.put("/api/user/"+this.$store.state.user.username,params).then(function(res){
+            this.axios.put("/api/user/"+this.$store.state.user.uid,params).then(function(res){
                 if(res.data.flag==true){
                     let user={};
                     user={...(_this.$store.state.user),...(_this.userInfo)};
@@ -344,28 +446,31 @@ export default {
                         user.sex="";
                     }
                     _this.$store.dispatch("setUser",user);
-                    _this.modifySuccess=true;
+                    _this.modifySuccess['个人信息']=true;
                 }
                 else{
-                    _this.errorMessage=res.data.message;
+                    _this.errorMessage['个人信息']=res.data.message;
                 }
             })
         },
+
+        //账号设置
         commitUsername(){
             let expries=new Date();
             let _this=this;
             expries.setDate(expries.getDate()+7);
-            let params=JSON.stringify({"newUsername":this.modifyAccount.newUsername});
+            let params=JSON.stringify({"username":this.modifyAccount.username});
             
-            this.axios.put("/api/user/"+this.$store.state.user.username,params).then(function(res){
+            this.axios.put("/api/user/"+this.$store.state.user.uid,params).then(function(res){
                 if(res.data.flag==true){
-                    let user={...(_this.$store.state.user),...{username:_this.modifyAccount.newUsername}};
+                    let user={...(_this.$store.state.user),...{username:_this.modifyAccount.username}};
                     setCookie("username",res.data.data.username,expries,null,null,null);
                     _this.$store.commit("setUser",user);
+                    _this.modifySuccess['账号设置']=res.data.message;
                     
                 }
                 else{
-                    _this.errorMessage=res.data.message;
+                    _this.errorMessage['账号设置']=res.data.message;
                 }
                 
             })
@@ -374,43 +479,164 @@ export default {
             let _this=this;
             let params=JSON.stringify({"oldPassword":this.modifyAccount.oldPassword,"password":this.modifyAccount.password});
             
-            this.axios.put("/api/user/"+this.$store.state.user.username,params).then(function(res){
+            this.axios.put("/api/user/"+this.$store.state.user.uid,params).then(function(res){
                 if(res.data.flag==true){
                     let user={...(_this.$store.state.user),...{password:_this.modifyAccount.password}};
                     _this.$store.commit("setUser",user);
-                    _this.modifySuccess=true;                    
+                    _this.modifySuccess['账号设置']=true;                    
                 }
                 else{
-                    _this.errorMessage=res.data.message;
+                    _this.errorMessage['账号设置']=res.data.message;
                 }
                 
             })
         },
         commitEmail(){
 
+        },
+
+        //尺码信息
+        getSizeData(){
+            let url="/api/user/relkwd/"+this.$store.state.user.uid;
+        
+            let _this=this;
+            this.axios.get(url).then(function(res){
+                    if(res.data.flag==true){
+                        if(res.data.data){
+                            _this.relkwd=res.data.data;
+                            if((_this.relkwd instanceof Array) && _this.relkwd.length!=0){
+                                let url="/api/user/td/"+_this.$store.state.user.uid+"/"+_this.relkwd[0];
+                                _this.axios.get(url).then(function(res){
+                                        if(res.data.flag==true){
+                                            let newData=fromResponse(res.data.data);
+                                            _this.showRelked=newData;
+                                            console.log(res.data.data);
+                                            
+                                            console.log(_this.showRelked);
+                                            
+                                        }
+                                        else{
+                                            _this.errorMessage['尺码信息']=res.data.message;                                       
+                                        }
+                                })
+                            }
+                        }
+                        else{
+                            _this.relkwd=[];
+                        }
+                        console.log("axios");
+                        
+                    }
+                    else{
+                        _this.errorMessage['尺码信息']=res.data.message;
+                        console.log(res.data.message);
+                    }
+            })
+        
+        },
+        creatNewSizeInfo(){
+            this.showRelked={
+                uid:this.$store.state.user.uid,
+                cwi:"",
+                age:"",
+                sex:"",
+                height:"",
+                weight:"",
+                bust:"",
+                waistline:"",
+                hips:"",
+                lowPrice:"",
+                highPrice:"",
+                feature	:[],
+                occasion:[],
+                style:[],
+                preferClothingPic:""
+            };
+            this.newRelked={
+                uid:this.$store.state.user.uid,
+                cwi:"",
+                age:"",
+                sex:"",
+                height:"",
+                weight:"",
+                bust:"",
+                waistline:"",
+                hips:"",
+                lowPrice:"",
+                highPrice:"",
+                feature	:[],
+                occasion:[],
+                style:[],
+                preferClothingPic:""
+            };
+            console.log(this.showRelked.cwi);
+            
+        },
+        commitSizeInfo(){
+            let url="/api/user/td";
+            let newRelked={...(this.newRelked),...{uid:this.$store.state.user.uid}};
+            let params=JSON.stringify(toRequest(newRelked));
+            
+            let _this=this;
+            this.axios.post(url,params).then(function(res){
+                    console.log(res.data);
+                    if(res.data.flag==true){
+                        // let newData=fromResponse(res.data.data);
+                        _this.modifySuccess['尺码信息']="修改成功";
+                        let newData=fromResponse(res.data.data);
+                        _this.showRelked=newData;
+
+                        let url="/api/user/relkwd/"+_this.$store.state.user.uid;
+                        _this.axios.get(url).then(function(res){
+                                console.log(res.data);
+                                if(res.data.flag==true){
+                                    _this.relkwd=res.data.data;
+                                }
+                                else{
+                                    _this.errorMessage['尺码信息']=res.data.message;
+                                    console.log(res.data.message);
+                                }
+                        })
+                    }
+                    else{
+                        console.log(res.data.message);
+                    }
+            })
+        },
+        resetSizeInfo(){
+
         }
+        
+        //展示板
     },
     Mounted() {
-        
+       
     },
     beforeUpdated() {
         
     },
-    
+    beforeMount() {
+    },
+
+    created() {
+        this.getSizeData();
+    },
     beforeCreate() {
-        
-        
         
     },
 }
 </script>
 <style scoped>
-/**personal-account,personal-info start*/
+/**personal-account,personal-info,personal-sizeInfo,stylist-showPanelstart*/
 .personal-account,.personal-info,.personal-sizeInfo,.stylist-showPanel{
     margin: 0 auto;
     padding: 0 20px 20px;
     background-color: white;
 }
+.stylist-showPanel{
+    height: 800px;
+}
+
 .pa-title,.pi-title,.ss-title{
     height: 45px;
     margin-top: 10px;
@@ -469,21 +695,26 @@ export default {
     margin-top: 15px;
 }
 .psv-smallItem{
-    width: 50px;
+    width: 55px;
     /* margin-top: 10px; */
+}
+.pss-smallItem{
+    width: 55px;
+    text-align: center;
 }
 .pi-btn,.pa-btn{
     float: right;
     margin: 10px 40px 0 auto;
 }
 .ps-btn{
+    display:inline-block;
     margin:10px auto;
 }
 .ps-add-btn{
     position: absolute;
     left: 620px;
 }
-/**personal-account,personal-info end*/
+/**personal-account,personal-info,personal-sizeInfo,stylist-showPanelstart end*/
 
 /*stylist-showPapel start*/
 .info-item{
@@ -520,6 +751,24 @@ export default {
     text-align: left;
     display: inline-block;
     background-color: #f7f7f7;
+}
+.ssb-name{
+    float:left;
+    text-align: left;
+}
+.ssb-name span{
+    width: 85px;
+    margin-top: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+.ssb-value,.ssb-show{
+    width: 630px;
+    float: right;
+    text-align: left;
+}
+.ssb-item{
+    margin-top:18px;
 }
 /*stylist-showPapel end*/
 </style>

@@ -37,7 +37,10 @@ export function judgeStatus(meg){
 
             }
             else{
-
+                  console.log(res.data.message);
+                  console.log(url);
+                  console.log(params);
+                  
             }
       })
 }

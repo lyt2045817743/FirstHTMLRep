@@ -84,9 +84,12 @@ export default {
                     expires.setDate(expires.getDate()+7);
                     user.username=data.user.username;
                     user.role="顾客";
+                    user.uid=data.user.uid;
                     setCookie("role",user.role,expires,null,null,null);
                     setCookie("token",data.token,expires,null,null,null);
                     setCookie("username",data.user.username,expires,null,null,null);
+                    setCookie("uid",data.user.uid,expires,null,null,null);
+
 
                     //将用户信息存储到vuex中
                     _this.$store.commit("setUser",user);
@@ -96,7 +99,7 @@ export default {
                     _this.$store.commit("changeHasLogin",true);
                     //登陆成功后切换路由至home
                     if(getCookie('username')){
-                        _this.$router.push('/');
+                        _this.$router.push('/home');
                     }
                 }
                 else{

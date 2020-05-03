@@ -98,7 +98,7 @@
         beforeCreate() {
             let _this=this;
             //发送请求获取用户个人信息
-            this.axios.get("/api/user/"+this.$store.state.user.username).then(function(res){
+            this.axios.get("/api/user/"+this.$store.state.user.uid).then(function(res){
                 let data=res.data.data;
                 if(res.data.flag==true&&res.data.message=="查询成功"){
                     let user={};
@@ -126,7 +126,7 @@
 
 <style scoped>
 .personal-box{
-    height: 700px;
+    height: 800px;
     background-color: #f7f7f7;
     overflow: hidden;
 }

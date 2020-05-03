@@ -19,12 +19,14 @@ import { getCookie } from './util/cookie';
       let user={};
         if(getCookie("token")){
           user.username=getCookie('username');
+          user.uid=getCookie("uid");
+          user.role=getCookie('role');
+
           if(getCookie('role')=="顾客"){
             this.$store.commit("changeIsStylist",false);
           }else if(getCookie('role')=="搭配师"){
             this.$store.commit("changeIsStylist",true);
           }
-          user.role=getCookie('role');
           this.$store.commit("setUser",user);
           this.$store.commit("changeHasLogin",true);
         }
