@@ -3,7 +3,7 @@
     <div class="personal-box">
         <div class="personal-header container clearfix">
             <div class="ph-left clearfix">
-                <span class="phl-img"><Avatar icon="ios-person" size="60" style="fontSize:40px"/></span>
+                <span class="phl-img"><Avatar icon="ios-person" size="60" style="fontSize:50px"/></span>
                 <div class="phl-info">
                     <div class="phli-top">
                         <span class="nickname">I'm fine</span>
@@ -90,7 +90,7 @@
         created() {
             //初始化路径
             let pathSetting=initPath(this.$route.path);
-            this.nowPath=pathSetting.index;
+            this.nowPath=pathSetting.parentIndex;
         },
         mounted() {
 
@@ -134,8 +134,8 @@
     background-color: white;
 }
 .personal-header{
-    height: 90px;
-    margin: 10px auto;
+    height: 100px;
+    margin: 20px auto;
 }
 .ph-left{
     height: 100%;
@@ -146,15 +146,15 @@
     float: right;
 }
 .phl-img{
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     margin: 15px;
     display: inline-block;
 }
 .phl-info{
     position: relative;
     top: -67px;
-    left: 85px;
+    left: 95px;
     text-align: left;
     font-size: 12px;
 }

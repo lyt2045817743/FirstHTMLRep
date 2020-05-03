@@ -87,7 +87,6 @@ export default {
         modifyInfo(){
             this.isShow=false;
             let userInfo=JSON.parse(JSON.stringify(this.$store.state.user));
-            this.userInfo.username=userInfo.username;
             this.userInfo.nickname=userInfo.nickname;
             this.userInfo.age=userInfo.age;
             this.userInfo.job=userInfo.job;
@@ -165,7 +164,7 @@ export default {
 .pi-name span,.pi-show span{
     height: 20px;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 24px;
     font-size: 18px;
 }
 .pi-show span{

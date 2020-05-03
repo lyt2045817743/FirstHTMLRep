@@ -1,25 +1,21 @@
 export function initPath(nowPath){
     let pathSetting={};
-    if(nowPath=="/personal/settings"){
-        pathSetting.index="7";
+    let pathArr=nowPath.split('/');
+    let lastPath=pathArr[pathArr.length-1];
+    switch(lastPath){
+        case "personal":pathSetting.parentIndex="1";break;
+        case "myFollowings":pathSetting.parentIndex="2";break;
+        case "goodsOrder":pathSetting.parentIndex="3";break;
+        case "consultOrder":pathSetting.parentIndex="4";break;
+        case "myPoints":pathSetting.parentIndex="5";break;
+        case "trainingCenter":pathSetting.parentIndex="6";break;
+        //个人中心-基本资料
+        case "settings":pathSetting.parentIndex="7";break;
+        case 'sizeInfo':pathSetting.childIndex="1";pathSetting.parentIndex="7";break;
+        case 'showPanel':pathSetting.childIndex="2";pathSetting.parentIndex="7";break;
+        case 'personalInfo':pathSetting.childIndex="3";pathSetting.parentIndex="7";break;
+        case 'account':pathSetting.childIndex="4";pathSetting.parentIndex="7";break;
     }
-    else if(nowPath=="/personal"){
-        pathSetting.index="1";
-    }
-    else if(nowPath=="/personal/trainingCenter"){
-        pathSetting.index="6";
-    }
-    else if(nowPath=="/personal/myPoints"){
-        pathSetting.index="5";
-    }
-    else if(nowPath=="/personal/consultOrder"){
-        pathSetting.index="4";
-    }
-    else if(nowPath=="/personal/goodsOrder"){
-        pathSetting.index="3";
-    }
-    else if(nowPath=="/personal/myFollowings"){
-        pathSetting.index="2";
-    }
+
     return pathSetting;
 }
