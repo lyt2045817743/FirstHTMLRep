@@ -88,11 +88,12 @@
                 this.$store.commit('changeLogining',true);
             },
             logOut(){
+                this.$store.commit("changeHasLogin",false);
                 this.$store.commit("setUser",null);
                 unsetCookie("username");
                 unsetCookie("role");
                 unsetCookie("token");
-                this.$store.commit("changeHasLogin",false);
+                unsetCookie('uid');
                 this.$router.push("/");
             },
             changeActiveName(){

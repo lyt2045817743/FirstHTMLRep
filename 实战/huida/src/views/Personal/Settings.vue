@@ -52,7 +52,7 @@
                         <!-- 展示尺码信息 -->
                         <div class="ps-show" v-show="showRelked.cwi">
                            <Select v-model="nowShow" style="width:170px;marginTop:17px;height: 27px;">
-                                <Option v-for="i in relkwd" :value="i" :key="i">{{ i }}</Option>
+                                <Option v-for="item in relkwd" :value="item.tdId" :key="item.tdId">{{ item.cwi }}</Option>
                             </Select><br/>
                             <span>{{showRelked.sex}}</span><br/>
                             <span>{{showRelked.age}}</span><br/>
@@ -63,16 +63,16 @@
                         </div>
                         <!-- 按钮 -->
                         <Button size="large" type="primary" class="ps-add-btn" @click="creatNewSizeInfo" v-show="showRelked.cwi">新增尺寸信息</Button><br/>
-                        <Button size="large" type="primary" class="ps-btn" @click="modifyInfo" v-show="showRelked.cwi" style="position:relative;left:-120px;top:60px">修改</Button><br/>
-                        <Button size="large" type="error" class="ps-btn" @click="modifyInfo" v-show="showRelked.cwi">删除</Button>
+                        <Button size="large" type="primary" class="ps-btn" @click="modifySizeInfo" v-show="showRelked.cwi" style="position:relative;left:-120px;top:60px">修改</Button><br/>
+                        <Button size="large" type="error" class="ps-btn" @click="deleteSizeInfo" v-show="showRelked.cwi">删除</Button>
                         <Button size="large" type="primary" class="ps-btn" @click="commitSizeInfo" v-show="!showRelked.cwi" style="position:relative;left:-120px;">保存</Button>
-                        <Button size="large" type="primary" ghost class="ps-btn" @click="resetSizeInfo" v-show="!showRelked.cwi">重置</Button>
+                        <Button size="large" type="primary" ghost class="ps-btn" @click="cancelSizeInfo" v-show="!showRelked.cwi">取消</Button>
                     </div>
                 </div>
             </TabPane>
 
             <!-- --------------------展示板---------------------- -->
-            <TabPane label="展示板" name="name2" v-if="!$store.state.isStylist" style="height:1000px">
+            <TabPane label="展示板" name="name2" v-if="$store.state.isStylist" style="height:1000px">
                 <div class="stylist-showPanel">
                     <div class="ss-show">
                         <div class="ss-title">展示部分</div>
@@ -159,7 +159,7 @@
                                         <span>休息中</span>
                                     </Radio>
                                 </RadioGroup><br/>
-                                <Input v-model="userInfo.signature" type="textarea" :rows="3" placeholder="当顾客打开聊天框，系统就会自动发送的内容哦~" class="ssb-item" style="width:500px;height:65px;border:none;" />
+                                <Input v-model="stylist.greeting" type="textarea" :rows="3" placeholder="当顾客打开聊天框，系统就会自动发送的内容哦~" class="ssb-item" style="width:500px;height:65px;border:none;" />
                             </div>
                             <div class="ssb-show">
 
@@ -175,12 +175,12 @@
                 
             </TabPane>
 
-            <!-- --------------------个人资料---------------------- -->
+            <!-- --------------------个人信息---------------------- -->
 
             <TabPane label="个人资料" name="name3" style="backgroundColor:white">
                 <div class="personal-info clearfix">
-                    <Alert type="success" closable on-close="closeSucBtn('个人资料')" show-icon v-show="modifySuccess['个人资料']!=''" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
-                    <Alert type="error" closable   on-close="closeErrBtn('个人资料')" v-show="errorMessage['个人资料']!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage['个人资料']}}</Alert>
+                    <Alert type="success" closable on-close="closeSucBtn('个人信息')" show-icon v-show="modifySuccess['个人信息']!=''" style="width:150px;height:30px;position:absolute;top:35px;left:300px;">修改成功</Alert>
+                    <Alert type="error" closable   on-close="closeErrBtn('个人信息')" v-show="errorMessage['个人信息']!=''" show-icon style="width:150px;height:30px;position:absolute;top:35px;left:300px;">{{errorMessage['个人信息']}}</Alert>
                     <div class="pi-title">身份信息</div>
                     <div class="pi-box clearfix">
                         <div class="pi-name">
@@ -305,11 +305,16 @@ export default {
             //展示板
             valueCustomText:3.8,
             stylist:{
-                online:"1"
+                online:"1",
+                greeting:"",
+                specStyTags:"",
+                specOccTags:""
             },
 
-            //尺码信息z
+            //尺码信息
+            isModify:false,
             nowShow:"",
+            nowShowTdId:0,
             relkwd:null,
             newRelked:{
                 uid:this.$store.state.user.uid,
@@ -348,7 +353,6 @@ export default {
 
             //个人信息
             userInfo:{
-                username:"",
                 nickname:"",
                 sex:"",
                 age:null,
@@ -369,7 +373,10 @@ export default {
         //展示板
         autoShow(){
             if((this.relkwd instanceof Array)&&this.relkwd.length!=0){
-                return this.relkwd[0];
+                let arr=[...this.relkwd];
+                console.log(2222);
+                
+                return arr[0].cwi;
             }
             else{
                 return null;
@@ -383,20 +390,28 @@ export default {
             }
         },
         nowShow(newVal){
-            if((newVal instanceof Array)&&newVal.length!=0){
-                let url="/api/user/td/"+this.$store.state.user.uid+"/"+newVal;
-                
+            if((this.relkwd instanceof Array) && this.relkwd.length!=0){
+                for(var i=0;i<this.relkwd.length;i++){
+                    if(this.relkwd[i].cwi==newVal){
+                        this.nowShowTdId=this.relkwd[i].tdId;
+                        break;
+                    }
+                }
+                let url="/api/user/td/"+this.nowShowTdId;
                 let _this=this;
                 this.axios.get(url).then(function(res){
                         console.log(res.data);
                         if(res.data.flag==true){
                             let newData=fromResponse(res.data.data);
                             _this.showRelked=newData;
+                            console.log(res.data.data);
+                            
+                            console.log(_this.showRelked);
+                            
                         }
                         else{
-                            console.log(res.data.message);
+                            _this.errorMessage['尺码信息']=res.data.message;  
                             console.log(url);
-                            
                         }
                 })
             }
@@ -435,6 +450,8 @@ export default {
             let params=JSON.stringify(this.userInfo);
             let _this=this;
             this.axios.put("/api/user/"+this.$store.state.user.uid,params).then(function(res){
+                console.log(res.data);
+                
                 if(res.data.flag==true){
                     let user={};
                     user={...(_this.$store.state.user),...(_this.userInfo)};
@@ -446,7 +463,7 @@ export default {
                         user.sex="";
                     }
                     _this.$store.dispatch("setUser",user);
-                    _this.modifySuccess['个人信息']=true;
+                    _this.modifySuccess['个人信息']="修改成功";
                 }
                 else{
                     _this.errorMessage['个人信息']=res.data.message;
@@ -497,35 +514,17 @@ export default {
 
         //尺码信息
         getSizeData(){
-            let url="/api/user/relkwd/"+this.$store.state.user.uid;
-        
+            let url="/api/user/td/relkwd/"+this.$store.state.user.uid;
             let _this=this;
             this.axios.get(url).then(function(res){
+                    console.log(url);
+                    console.log(res.data);
+                    
                     if(res.data.flag==true){
                         if(res.data.data){
-                            _this.relkwd=res.data.data;
-                            if((_this.relkwd instanceof Array) && _this.relkwd.length!=0){
-                                let url="/api/user/td/"+_this.$store.state.user.uid+"/"+_this.relkwd[0];
-                                _this.axios.get(url).then(function(res){
-                                        if(res.data.flag==true){
-                                            let newData=fromResponse(res.data.data);
-                                            _this.showRelked=newData;
-                                            console.log(res.data.data);
-                                            
-                                            console.log(_this.showRelked);
-                                            
-                                        }
-                                        else{
-                                            _this.errorMessage['尺码信息']=res.data.message;                                       
-                                        }
-                                })
-                            }
-                        }
-                        else{
-                            _this.relkwd=[];
+                            _this.relkwd=JSON.parse(JSON.stringify(res.data.data));
                         }
                         console.log("axios");
-                        
                     }
                     else{
                         _this.errorMessage['尺码信息']=res.data.message;
@@ -534,29 +533,37 @@ export default {
             })
         
         },
+        modifySizeInfo(){
+            this.newRelked={...this.showRelked};
+            this.showRelked.cwi="";
+            this.isModify=true;
+        },
+        deleteSizeInfo(){
+            // let url="/api/user/td/"+this.nowShowTdId;
+            // let params=JSON.stringify({});
+            // console.log(params);
+            
+            // let _this=this;
+            // this.axios.delete(url).then(function(res){
+            //         console.log(res.data);
+            //         if(res.data.flag==true){
+
+            //         }
+            //         else{
+            //             console.log(res.data.message);
+            //             console.log(url);
+            //             console.log(params);
+                        
+            //         }
+            // })
+        },
         creatNewSizeInfo(){
-            this.showRelked={
-                uid:this.$store.state.user.uid,
-                cwi:"",
-                age:"",
-                sex:"",
-                height:"",
-                weight:"",
-                bust:"",
-                waistline:"",
-                hips:"",
-                lowPrice:"",
-                highPrice:"",
-                feature	:[],
-                occasion:[],
-                style:[],
-                preferClothingPic:""
-            };
+            this.showRelked.cwi="";
             this.newRelked={
                 uid:this.$store.state.user.uid,
                 cwi:"",
                 age:"",
-                sex:"",
+                sex:"男",
                 height:"",
                 weight:"",
                 bust:"",
@@ -569,45 +576,98 @@ export default {
                 style:[],
                 preferClothingPic:""
             };
-            console.log(this.showRelked.cwi);
-            
         },
         commitSizeInfo(){
-            let url="/api/user/td";
-            let newRelked={...(this.newRelked),...{uid:this.$store.state.user.uid}};
-            let params=JSON.stringify(toRequest(newRelked));
+            if(!(this.isModify)){
+                //新增
+                console.log("新增");
+                
+                let url="/api/user/td";
+                let newRelked={...(this.newRelked),...{uid:this.$store.state.user.uid}};
+                console.log(newRelked);
+                
+                let params=JSON.stringify(toRequest(newRelked));
+                
+                let _this=this;
+                this.axios.post(url,params).then(function(res){
+                        console.log(res.data);
+                        if(res.data.flag==true){
+                            // let newData=fromResponse(res.data.data);
+                            _this.modifySuccess['尺码信息']="修改成功";
+                            let newData=fromResponse(res.data.data);
+                            _this.showRelked=newData;
+
+                            let url="/api/user/relkwd/"+_this.$store.state.user.uid;
+                            _this.axios.get(url).then(function(res){
+                                    console.log(res.data);
+                                    if(res.data.flag==true){
+                                        _this.relkwd=res.data.data;
+                                    }
+                                    else{
+                                        _this.errorMessage['尺码信息']=res.data.message;
+                                        console.log(res.data.message);
+                                    }
+                            })
+                        }
+                        else{
+                            console.log(res.data.message);
+                        }
+                })
+            }
+            else{
+                //修改
+                console.log("修改");
+                
+                let url="/api/user/td/"+this.nowShowTdId;
+                let newRelked={...(this.newRelked),...{uid:this.$store.state.user.uid}};
+                let params=JSON.stringify(toRequest(newRelked));
+                
+                let _this=this;
+                this.axios.put(url,params).then(function(res){
+                        console.log(res.data);
+
+                        //修改成功
+                        if(res.data.flag==true){
+                            // let newData=fromResponse(res.data.data);
+                            _this.isModify=false;
+                            _this.modifySuccess['尺码信息']="修改成功";
+                            let newData=fromResponse(res.data.data);
+                            _this.showRelked=newData;
+
+                            let url="/api/user/relkwd/"+_this.$store.state.user.uid;
+                            _this.axios.get(url).then(function(res){
+                                    console.log(res.data);
+                                    if(res.data.flag==true){
+                                        _this.relkwd=res.data.data;
+                                    }
+                                    else{
+                                        _this.errorMessage['尺码信息']=res.data.message;
+                                        console.log(res.data.message);
+                                    }
+                            })
+                        }
+                        else{
+                            console.log(res.data.message);
+                        }
+                })
+            }
             
-            let _this=this;
-            this.axios.post(url,params).then(function(res){
-                    console.log(res.data);
-                    if(res.data.flag==true){
-                        // let newData=fromResponse(res.data.data);
-                        _this.modifySuccess['尺码信息']="修改成功";
-                        let newData=fromResponse(res.data.data);
-                        _this.showRelked=newData;
-
-                        let url="/api/user/relkwd/"+_this.$store.state.user.uid;
-                        _this.axios.get(url).then(function(res){
-                                console.log(res.data);
-                                if(res.data.flag==true){
-                                    _this.relkwd=res.data.data;
-                                }
-                                else{
-                                    _this.errorMessage['尺码信息']=res.data.message;
-                                    console.log(res.data.message);
-                                }
-                        })
-                    }
-                    else{
-                        console.log(res.data.message);
-                    }
-            })
         },
-        resetSizeInfo(){
-
-        }
+        cancelSizeInfo(){
+            if((this.relkwd instanceof Array)&&this.relkwd.length!=0){
+                this.nowShow=this.relkwd[0].cwi;
+                console.log(this.relkwd);
+                
+            }
+            else{
+                this.newRelked={};
+            }
+        },
         
         //展示板
+        getShowPanelInfo(){
+            
+        }
     },
     Mounted() {
        
@@ -619,7 +679,12 @@ export default {
     },
 
     created() {
-        this.getSizeData();
+        if(this.$store.state.user.role=="顾客"){
+            this.getSizeData();
+        }
+        else if(this.$store.state.user.role=="搭配师"){
+            this.getShowPanelInfo();
+        }
     },
     beforeCreate() {
         

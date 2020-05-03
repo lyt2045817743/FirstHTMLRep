@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Stylist from './stylist'
 
 Vue.use(Vuex);
 
@@ -44,7 +45,7 @@ const getters={
 }
 
 const modules={
-
+    Stylist
 }
 
 export default new Vuex.Store({

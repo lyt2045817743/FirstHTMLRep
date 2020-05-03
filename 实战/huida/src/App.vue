@@ -15,6 +15,26 @@ import { getCookie } from './util/cookie';
     components:{
         Navigation
     },
+    methods: {
+      getUserInfo(){
+        if(this.$store.state.user.role=="搭配师"){
+          let url="/api/user/styliInfo/"+this.$store.state.user.uid;
+            
+            let _this=this;
+            this.axios.get(url).then(function(res){
+                    console.log(res.data);
+                    if(res.data.flag==true){
+                        let stylistInfo=JSON.parse(res.data.data);
+                        _this.$store.Stylist.commit('setStylistInfo',stylistInfo);
+                    }
+                    else{
+                        console.log(res.data.message);
+                        console.log(url);
+                    }
+            })
+        }
+      }
+    },
     beforeCreate() {
       let user={};
         if(getCookie("token")){
