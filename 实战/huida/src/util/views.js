@@ -10,7 +10,7 @@ export function initPath(nowPath){
         case "myPoints":pathSetting.parentIndex="5";break;
         case "trainingCenter":pathSetting.parentIndex="6";break;
         //个人中心-基本资料
-        case "settings":pathSetting.parentIndex="7";break;
+        case "settings":pathSetting.childIndex="1";pathSetting.parentIndex="7";break;
         case 'sizeInfo':pathSetting.childIndex="1";pathSetting.parentIndex="7";break;
         case 'showPanel':pathSetting.childIndex="2";pathSetting.parentIndex="7";break;
         case 'personalInfo':pathSetting.childIndex="3";pathSetting.parentIndex="7";break;

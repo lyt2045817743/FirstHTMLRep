@@ -52,7 +52,7 @@
 
 <script>
 import {Input,Button,Alert} from 'view-design';
-import {setCookie} from '../../../util/cookie';
+import {setCookie, unsetCookie} from '../../../util/cookie';
 export default {
     components:{
         Input,Button,Alert
@@ -100,6 +100,7 @@ methods: {
             this.axios.put("/api/user/"+this.$store.state.user.uid,params).then(function(res){
                 if(res.data.flag==true){
                     let user={...(_this.$store.state.user),...{username:_this.modifyAccount.username}};
+                    unsetCookie("username");
                     setCookie("username",res.data.data.username,expries,null,null,null);
                     _this.$store.commit("setUser",user);
                     _this.modifySuccess['账号设置']=res.data.message;

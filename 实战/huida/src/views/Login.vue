@@ -43,6 +43,7 @@
 <script>
 import {Tabs,TabPane,Input,Button} from 'view-design';
 import {setCookie,getCookie} from '../util/cookie';
+import { fromResponse } from '../util/dataTypeConversion';
 export default {
     components: {
         Tabs,TabPane,Input,Button
@@ -82,9 +83,9 @@ export default {
                     //将用户信息与token存储到cookie中
                     let expires=new Date();
                     expires.setDate(expires.getDate()+7);
-                    user.username=data.user.username;
-                    user.role="顾客";
-                    user.uid=data.user.uid;
+                    user=fromResponse(data.user);
+                    // user.username=data.user.username;
+                    // user.uid=data.user.uid;
                     setCookie("role",user.role,expires,null,null,null);
                     setCookie("token",data.token,expires,null,null,null);
                     setCookie("username",data.user.username,expires,null,null,null);

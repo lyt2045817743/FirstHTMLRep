@@ -6,20 +6,20 @@
             <div class="ss-box">
                 <div class="spb-info">
                     <div class="info-item clearfix">
-                        <span class="ii-name">职位</span><span class="ii-value">{{this.$store.state.Stylist.stylistInfo.fullTime}}</span>
+                        <span class="ii-name">职位</span><span class="ii-value">{{this.$store.state.stylistInfo.fullTime}}</span>
                     </div>
                     <div class="info-item clearfix">
-                        <span class="ii-name">等级</span><span class="ii-value">{{$store.state.Stylist.stylistInfo.fullTime}}</span>
+                        <span class="ii-name">等级</span><span class="ii-value">{{$store.state.stylistInfo.fullTime}}</span>
 
                     </div>
                     <div class="info-item clearfix">
-                        <span style="float:left;width:65px;fontWeight:bold;textAlign:left">成交量</span><span style="float:left;width:50px;textAlign:left">{{$store.state.Stylist.stylistInfo.deal}}</span>
-                        <span style="float:left;width:70px;fontWeight:bold;textAlign:left">活跃度</span><span style="float:left;width:50px;textAlign:left">{{$store.state.Stylist.stylistInfo.active}}</span>
+                        <span style="float:left;width:65px;fontWeight:bold;textAlign:left">成交量</span><span style="float:left;width:50px;textAlign:left">{{$store.state.stylistInfo.deal}}</span>
+                        <span style="float:left;width:70px;fontWeight:bold;textAlign:left">活跃度</span><span style="float:left;width:50px;textAlign:left">{{$store.state.stylistInfo.active}}</span>
                     </div>
                     <div class="info-item clearfix">
                         <span class="ii-name" style="width:50px">总评分</span>
                         <span class="ii-value" style="width:160px">
-                            <Rate allow-half v-model="$store.state.Stylist.stylistInfo.mark" disabled style="width:150px;">
+                            <Rate allow-half v-model="$store.state.stylistInfo.mark" disabled style="width:150px;">
                                 <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
                             </Rate>
                         </span>
@@ -27,7 +27,7 @@
                     <div class="info-item clearfix">
                         <span class="ii-name">服务态度评分</span>
                         <span class="ii-value" style=" width:138px;">
-                            <Rate allow-half v-model="$store.state.Stylist.stylistInfo.attiMark" disabled style="width:150px;">
+                            <Rate allow-half v-model="$store.state.stylistInfo.attiMark" disabled style="width:150px;">
                                 <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
                             </Rate>
                         </span>
@@ -36,7 +36,7 @@
                     <div class="info-item clearfix">
                         <span class="ii-name">搭配能力评分</span>
                             <span class="ii-value" style="width:138px;">
-                            <Rate allow-half v-model="$store.state.Stylist.stylistInfo.capaMark" disabled style="width:150px;">
+                            <Rate allow-half v-model="$store.state.stylistInfo.capaMark" disabled style="width:150px;">
                                 <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
                             </Rate>
                         </span>
@@ -45,10 +45,10 @@
                 <div class="spb-price clearfix">
                     <span class="price-name">服务价格区间</span>
                     <div class="prive-value" style="display:inline-block">
-                        <span style="width:50px;textAlign:center;display:inline-block;">0</span>
+                        <span style="width:50px;textAlign:center;display:inline-block;">{{$store.state.stylistInfo.servicePrice[0]}}</span>
                         <span class="unit">元</span>
                         <span>—</span>
-                        <span style="width:50px;textAlign:center;display:inline-block;">10</span>
+                        <span style="width:50px;textAlign:center;display:inline-block;">{{$store.state.stylistInfo.servicePrice[1]}}</span>
                         <span class="unit">元</span>
                     </div>
                     
@@ -56,11 +56,11 @@
                 <div class="spb-comment" style="marginTop:12px;">
                     <div class="lately-comment clearfix">
                         <span class="lc-name">最近评价</span>
-                        <p class="comment">搭配是很负责任，找的衣服我都很喜欢。真实，态度好，易沟通</p>
+                        <p class="comment">{{$store.state.stylistInfo.lc.evalToS}}</p>
                     </div>
                     <div class="hot-comment clearfix">
                         <span class="hc-name">最热评价</span>
-                        <p class="comment">搭配是很负责任，找的衣服我都很喜欢。真实，态度好，易沟通</p>
+                        <p class="comment">{{$store.state.stylistInfo.hc.evalToS}}</p>
                     </div>
                 </div>
             </div>
@@ -91,8 +91,8 @@
                 <div class="ssb-show">
 
                 </div>
-                <Button size="large" type="primary" class="ps-btn" @click="commitSizeInfo" v-show="!showRelked.cwi" style="position:relative;left:-120px;">保存</Button>
-            <Button size="large" type="primary" ghost class="ps-btn" @click="resetSizeInfo" v-show="!showRelked.cwi">重置</Button>
+                <Button size="large" type="primary" class="ps-btn" style="position:relative;left:-120px;">保存</Button>
+            <Button size="large" type="primary" ghost class="ps-btn" >重置</Button>
             </div>
         </div>
         <div class="ss-btn">

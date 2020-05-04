@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Stylist from './stylist'
 
 Vue.use(Vuex);
 
 const state={
     user:"",
+    stylistInfo:"",
     hasLogin:false,
     isLogining:false,
     isStylist:false,
@@ -32,7 +32,25 @@ const mutations={
     },
     changeIsStylist(state,flag){
         state.isStylist=flag;
-    }
+    },
+    //搭配师信息
+    setStylistInfo(state,stylist){
+        if(stylist){
+            state.stylistInfo=stylist;
+        }
+        else{
+            state.stylistInfo="";
+        }
+    },
+
+    //公用的：修改某一对象下某些属性
+    // setAtt(state,obj,modiObj){
+    //     console.log(obj,modiObj);
+        
+    //     for(let item in modiObj){
+    //         state[obj][item]=modiObj[item];
+    //     }
+    // }
 }
 const actions={
     setUser(context,data){
@@ -45,7 +63,7 @@ const getters={
 }
 
 const modules={
-    Stylist
+    
 }
 
 export default new Vuex.Store({

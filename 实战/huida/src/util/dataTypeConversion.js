@@ -107,7 +107,7 @@ export function fromResponse(data){
         //priceEpt
         if(itemString=="priceEpt"){
             newData.lowPrice=data[item][0].toString();
-            newData.highPrice=data[item][0].toString();
+            newData.highPrice=data[item][1].toString();
         }
 
         //fullTime
@@ -130,6 +130,33 @@ export function fromResponse(data){
                 case "4":newData.styliLevel="四级";break;
                 case "5":newData.styliLevel="五级";break;
             }
+        }
+        //featTags
+        if((itemString=="featTags")&&(!data[item])){
+            newData.featTags= [
+                {
+                    id: 0,
+                    tag: "暂无",
+                }
+            ];
+        }
+        //styTags
+        if((itemString=="styTags")&&(!data[item])){
+            newData.styTags=[
+                {
+                    id: 0,
+                    tag: "暂无",
+                }
+            ];
+        }
+        //occaTags
+        if((itemString=="occaTags")&&(!data[item])){
+            newData.occaTags=[
+                {
+                    id: 0,
+                    tag: "暂无",
+                }
+            ];
         }
     }
     return newData;

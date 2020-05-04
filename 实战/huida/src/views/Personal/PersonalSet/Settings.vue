@@ -2,7 +2,7 @@
 <template>
     <div>
         <div class="menu">
-            <Menu mode="horizontal" :active-name="nowPath">
+            <Menu mode="horizontal" :active-name="nowPath" style="width:400px">
                 <MenuItem name="1" v-if="!$store.state.isStylist" to="/personal/settings/sizeInfo">
                     尺码信息
                 </MenuItem>
@@ -60,6 +60,9 @@ export default {
 }
 </script>
 <style scoped>
+.menu{
+    border-bottom: 0.5px solid #999;
+}
 .view{
     position: relative;
 }
