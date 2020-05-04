@@ -80,12 +80,16 @@ export default {
                     let data=res.data.data;
                     let user={};
 
-                    //将用户信息与token存储到cookie中
                     let expires=new Date();
                     expires.setDate(expires.getDate()+7);
                     user=fromResponse(data.user);
-                    // user.username=data.user.username;
-                    // user.uid=data.user.uid;
+
+                    //标识用户身份
+                    if(user.role=="搭配师"){
+                        _this.$store.commit("changeIsStylist",true);
+                    }
+
+                    //将用户信息与token存储到cookie中
                     setCookie("role",user.role,expires,null,null,null);
                     setCookie("token",data.token,expires,null,null,null);
                     setCookie("username",data.user.username,expires,null,null,null);
@@ -98,6 +102,8 @@ export default {
                     _this.$store.commit('changeLogining',false);
                     //改变登陆状态
                     _this.$store.commit("changeHasLogin",true);
+
+                    
                     //登陆成功后切换路由至home
                     if(getCookie('username')){
                         _this.$router.push('/home');

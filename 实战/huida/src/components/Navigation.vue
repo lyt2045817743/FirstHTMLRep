@@ -35,9 +35,6 @@
                             <DropdownItem>
                                 <router-link to="/personal" class="myPage" @click="changeActiveName">我的主页</router-link>
                             </DropdownItem>
-                            <DropdownItem v-if="$store.state.isStylist">
-                                <span @click="logOut">切换身份</span>
-                            </DropdownItem>
                             <DropdownItem divided>
                                 <span @click="logOut">退出登录</span>
                             </DropdownItem>

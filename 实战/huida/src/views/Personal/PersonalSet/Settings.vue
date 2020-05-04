@@ -6,7 +6,7 @@
                 <MenuItem name="1" v-if="!$store.state.isStylist" to="/personal/settings/sizeInfo">
                     尺码信息
                 </MenuItem>
-                <MenuItem name="2" v-if="$store.state.isStylist" style="height:1000px" to="/personal/settings/showPanel">
+                <MenuItem name="2" v-if="$store.state.isStylist" to="/personal/settings/showPanel">
                     展示板
                 </MenuItem>
                 <MenuItem name="3" to="/personal/settings/personalInfo">

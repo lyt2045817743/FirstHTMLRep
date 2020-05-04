@@ -11,6 +11,7 @@
 <script>
 import Navigation from './components/Navigation';
 import { getCookie } from './util/cookie';
+import {fromResponse} from './util/dataTypeConversion';
   export default {
     components:{
         Navigation
@@ -52,32 +53,31 @@ import { getCookie } from './util/cookie';
             let _this=this;
               //发送请求获取用户个人信息
               this.axios.get("/api/user/"+this.$store.state.user.uid).then(function(res){
-                  let data=res.data.data;
-                  // console.log(res.data);
+                  console.log(res.data);
                   
                   if(res.data.flag==true&&res.data.message=="查询成功"){
+                      let data=res.data.data;
                       let user={};
-                      user={...data};
-                      if(user.role=="0"){
-                          user.role="顾客";
-                      }
-                      else if(user.role=="1"){
-                          user.role="搭配师";
-                      }
-                      if(user.sex=="0"){
-                          user.sex="男";
-                      }
-                      else if(user.sex=="1"){
-                          user.sex="女";
-                      }
+
+                      //将用户信息与token存储到cookie中
+                      let expires=new Date();
+                      expires.setDate(expires.getDate()+7);
+                      user=fromResponse(data);
+                      console.log(user,"初始化");
+                      
                       _this.$store.commit("setUser",user);
+
+                      //标识用户身份
+                      if(user.role=="搭配师"){
+                        _this.$store.commit("changeIsStylist",true);
+                      }
                   }
               })
-            }
-            else{
-              this.$store.commit("changeHasLogin",false);
-              
-            }
+          }
+          else{
+            this.$store.commit("changeHasLogin",false);
+            
+          }
 
           //修改isLogining的值
           if(sessionStorage.getItem("isLogining")){

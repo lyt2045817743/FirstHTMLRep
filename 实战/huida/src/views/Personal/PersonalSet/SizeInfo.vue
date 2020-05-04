@@ -322,7 +322,7 @@ export default {
                     console.log(res.data);
                     if(res.data.flag==true){
                         _this.update();
-                        _this.nowShow=_this.$store.state.user.cwis[4];
+                        _this.nowShow=_this.$store.state.user.cwis[0];
                     }
                     else{
                         console.log(res.data.message);
@@ -469,8 +469,8 @@ export default {
     //生命周期 - 创建完成（访问当前this实例）
     created() {
         if(this.$store.state.user.role=="顾客"){
-            this.nowShow=this.$store.state.user.cwis[4];
-            this.showRelked.cwi=this.$store.state.user.cwis[4];
+            this.nowShow=this.$store.state.user.cwis[0];
+            this.showRelked.cwi=this.$store.state.user.cwis[0];
             this.getSizeData();
         }
         //初始化路径
