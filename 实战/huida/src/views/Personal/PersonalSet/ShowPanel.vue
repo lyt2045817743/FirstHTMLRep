@@ -6,10 +6,10 @@
             <div class="ss-box">
                 <div class="spb-info">
                     <div class="info-item clearfix">
-                        <span class="ii-name">职位</span><span class="ii-value">{{this.$store.state.stylistInfo.fullTime}}</span>
+                        <span class="ii-name">职位</span><span class="ii-value">{{$store.state.stylistInfo.fullTime}}</span>
                     </div>
                     <div class="info-item clearfix">
-                        <span class="ii-name">等级</span><span class="ii-value">{{$store.state.stylistInfo.fullTime}}</span>
+                        <span class="ii-name">等级</span><span class="ii-value">{{$store.state.stylistInfo.styliLevel}}</span>
 
                     </div>
                     <div class="info-item clearfix">
@@ -68,68 +68,108 @@
         <div class="ss-set">
             <div class="ss-title">自我设置</div>
             <div class="ss-box clearfix">
-                <div class="ssb-name">
+                <div class="ssb-name" v-show="!pageInit">
                     <span>当前服务状态</span><br/>
                     <span style="marginTop:30px">服务开头语</span><br/>
-                    <span style="marginTop:80px">我擅长的风格</span><br/>
+                    <span style="marginTop:50px">我擅长的风格</span><br/>
                     <span style="marginTop:40px">我擅长的场合</span><br/>
                 </div>
-                <div class="ssb-value">
-                    <RadioGroup v-model="stylist.online" class="ssb-item" style="height:29px;">
-                        <Radio label="1">
+                <div class="ssb-value" v-show="!pageInit">
+                    <RadioGroup v-model="newInfo.online" class="ssb-item" style="height:29px;">
+                        <Radio label="在线">
                             <span>在线</span> 
                         </Radio>
-                        <Radio label="2">
+                        <Radio label="可预约">
                             <span>可预约</span>
                         </Radio>
-                        <Radio label="0">
+                        <Radio label="休息中">
                             <span>休息中</span>
                         </Radio>
                     </RadioGroup><br/>
-                    <Input v-model="stylist.greeting" type="textarea" :rows="3" placeholder="当顾客打开聊天框，系统就会自动发送的内容哦~" class="ssb-item" style="width:500px;height:65px;border:none;" />
+                    <Input v-model="newInfo.greeting" type="textarea" :rows="2" placeholder="当顾客打开聊天框，系统就会自动发送的内容哦~" class="ssb-item" style="width:600px;height:65px;border:none;marginTop:18px" />
+                    <div class="tags">
+                        <CheckboxGroup v-model="newInfo.specSty" style="marginTop:11px;">
+                            <Checkbox v-for="item in styleTags" :key="item.id" :label="item.tag" :value="item.id"></Checkbox>
+                        </CheckboxGroup>
+                    </div>
+                    <div class="tags">
+                        <CheckboxGroup v-model="newInfo.specOcc" style="marginTop:40px;">
+                            <Checkbox v-for="item in occasionTags" :key="item.id" :label="item.tag" :value="item.id"></Checkbox>
+                        </CheckboxGroup>
+                    </div>
                 </div>
-                <div class="ssb-show">
 
+                <div class="ssb-show clearfix" v-show="pageInit">
+                    <div class="title2-box clearfix">
+                        <span class="title2">当前服务状态</span>
+                        <span class="show-cont" style="height:29px;">{{$store.state.stylistInfo.online}}</span>
+                    </div>
+                    <div class="title2-box clearfix">
+                        <span class="title2" style="">服务开头语</span>
+                        <p class="show-cont" style="">{{$store.state.stylistInfo.greeting}}</p>
+                    </div>
+                    <div class="title2-box clearfix">
+                        <span  class="title2" style="">我擅长的风格</span>
+                        <div class="show-cont">
+                            <span v-for="item in $store.state.stylistInfo.specStyTags" :key="item.id">{{item.tag}}</span>
+                        </div>
+                    </div>
+                    <div class="title2-box clearfix">
+                        <span class="title2" style="">我擅长的场合</span>
+                        <div class="show-cont">
+                            <span v-for="item in $store.state.stylistInfo.specOccTags" :key="item.id">{{item.tag}}</span>
+                        </div>
+                    </div>
                 </div>
-                <Button size="large" type="primary" class="ps-btn" style="position:relative;left:-120px;">保存</Button>
-            <Button size="large" type="primary" ghost class="ps-btn" >重置</Button>
             </div>
         </div>
         <div class="ss-btn">
-
+            <Button size="large" type="primary" class="ps-btn" @click="commitShowInfo" style="position:relative;top:-210px;left: 250px;" v-show="!pageInit">保存</Button>
+            <Button size="large" type="primary" class="ps-btn" @click="modiShowInfo" style="position:relative;top:-200px;left: 250px;" v-show="pageInit">修改</Button>
+            <Button size="large" type="primary" ghost class="ps-btn"  @click="cancelModify" v-show="!pageInit" style="position: relative;top: -210px;left: 290px;">取消</Button>
         </div>
     </div>
 </template>
 
 <script>
-import {Input,RadioGroup,Radio,Button,Rate} from 'view-design';
+import {Input,RadioGroup,Radio,Button,Rate,CheckboxGroup,Checkbox} from 'view-design';
+import {toStr, toNumber} from '../../../util/arrayContent';
+import { toRequest ,fromResponse} from '../../../util/dataTypeConversion';
 export default {
     components:{
-        Input,RadioGroup,Radio,Button,Rate
+        Input,RadioGroup,Radio,Button,Rate,CheckboxGroup,Checkbox
     },
 data() {
     return {
         //全局
-            isShow:true,
-            modifySuccess:{
-                "个人信息":"",
-                "账号设置":"",
-                "尺码信息":"",
-                "展示板":"",
-            },
-            errorMessage:{
-                "个人信息":"",
-                "账号设置":"",
-                "尺码信息":"",
-                "展示板":"",
-            },
+        isShow:true,
+        modifySuccess:{
+            "个人信息":"",
+            "账号设置":"",
+            "尺码信息":"",
+            "展示板":"",
+        },
+        errorMessage:{
+            "个人信息":"",
+            "账号设置":"",
+            "尺码信息":"",
+            "展示板":"",
+        },
         //展示板
-        valueCustomText:3.8,
-        stylist:{
+        pageInit:true,
+        styleTags:[],
+        occasionTags:[],
+        newInfo:{
             online:"1",
             greeting:"",
-            specStyTags:"",
-            specOccTags:""
+            specSty:[],
+            specOcc:[]
+        },
+        showInfo:{
+            online:"1",
+            greeting:"",
+            specSty:[],
+            specOcc:[]
         },
     }
 },
@@ -141,14 +181,75 @@ methods: {
         closeErrBtn(pageName){
             this.errorMessage[pageName]="";
         },
-    //展示板
-    getShowPanelInfo(){
-        
-    }
+        getShowPanelInfo(){
+            //获取3tags的信息
+            let url="/api/user/tags";
+            let _this=this;
+            this.axios.get(url).then(function(res){
+                    console.log(res.data);
+                    
+                    if(res.data.flag==true){
+                        if(res.data.data){
+                            let data=res.data.data;
+                            // _this.relkwd=JSON.parse(JSON.stringify(res.data.data));
+                            _this.styleTags=data.styleTags;
+                            _this.occasionTags=data.occasionTags;
+
+                        }
+                    }
+                    else{
+                        _this.errorMessage['尺码信息']=res.data.message;
+                        console.log(res.data.message);
+                    }
+            })
+        },
+        commitShowInfo(){
+            let url="/api/user/styliInfo/"+this.$store.state.user.uid;
+            let params={...this.newInfo};
+            params.specSty=toNumber(params.specSty,this.styleTags);
+            params.specOcc=toNumber(params.specOcc,this.occasionTags);
+            params=toRequest(params);
+            params=JSON.stringify(params);
+            console.log(params);
+            
+            let _this=this;
+            this.axios.put(url,params).then(function(res){
+                    console.log(res.data);
+                    if(res.data.flag==true){
+                        //根据res返回结果更新vuex中数据
+                        let stylistInfo=fromResponse(res.data.data);
+                        _this.$store.commit('setStylistInfo',stylistInfo);
+                        //改变显示状态
+                        _this.pageInit=true;
+                    }
+                    else{
+                        console.log(res.data.message);
+                        console.log(url);
+                        console.log(params);
+                        
+                    }
+            })
+        },
+        modiShowInfo(){
+            this.newInfo={
+                online:this.$store.state.stylistInfo.online,
+                greeting:this.$store.state.stylistInfo.greeting,
+                specSty:[],
+                specOcc:[]
+            }
+            this.newInfo.specSty=toStr(this.$store.state.stylistInfo.specStyTags);
+            this.newInfo.specOcc=toStr(this.$store.state.stylistInfo.specOccTags);
+            this.pageInit=false;
+        },
+        cancelModify(){
+            this.pageInit=true;
+        }
+    
 },
 //生命周期 - 创建完成（访问当前this实例）
 created() {
     if(this.$store.state.user.role=="搭配师"){
+        
         this.getShowPanelInfo();
     }
 },
@@ -215,7 +316,8 @@ mounted() {
 .comment{
     width: 630px;
     height: 50px;
-    margin-top: 12px;
+    margin-top: 3px;
+    padding: 9px;
     text-align: left;
     display: inline-block;
     background-color: #f7f7f7;
@@ -230,12 +332,40 @@ mounted() {
     display: inline-block;
     font-weight: bold;
 }
-.ssb-value,.ssb-show{
+.ssb-value{
     width: 630px;
     float: right;
     text-align: left;
 }
 .ssb-item{
     margin-top:18px;
+}
+.show-cont{
+    width: 630px;
+    float: right;
+    text-align: left;
+    font-size: 15px;
+    color: #999;
+}
+.show-cont span{
+    margin-right: 20px;
+}
+.title2{
+    float: left;
+    text-align: left;
+    font-weight: bold;
+    color: black;
+}
+.ssb-show span{
+    display: inline-block;
+}
+.ssb-show{
+    width: 100%;
+}
+.ssb-show p{
+    /* margin-top: 30px; */
+}
+.title2-box{
+    margin-top: 30px;
 }
 </style>

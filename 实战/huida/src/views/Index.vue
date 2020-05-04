@@ -113,7 +113,7 @@
     width: 100%;
     height: 360px;
     margin-top:70px;
-    background-image: url('../assets/img/banner.jpg');
+    background-image: url('../assets/img/banner2.jpg');
     background-position: center top;
     background-repeat: no-repeat;
   }

@@ -143,26 +143,26 @@ export default {
 }
 .lr_container{
     width: 1130px;
-    margin: -418px auto 0;
+    margin: -458px auto 0;
 }
 .lr_bg{
     width: 100%;
     height: 460px;
     margin: 50px auto 0;
-    background-image: url('../assets/img/login_bg.jpg');
+    background-image: url('../assets/img/banner1.jpg');
     background-repeat: no-repeat;
     background-position: center top;
 }
 .lr_container .lr_box{
     width: 415px;
-    height: 385px;
+    height: 357px;
     float: right;
     z-index: 1;
-    border: 1px solid #999;
+    border: 1px solid #f7f7f7;
     background-color: white;
 }
 .lrn_tabs{
-    margin: 45px auto 0;
+    margin: 30px auto 0;
 }
 .lrn_tabs .msg{
     height: 10px;

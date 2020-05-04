@@ -63,6 +63,18 @@ export function toRequest(data){
                 case "五级":newData.styliLevel="5";break;
             }
         }
+        //online
+        if(itemString=="online"){
+            if(data[item]=="在线"){
+                newData.online="1";
+            }
+            else if(data[item]=="休息中"){
+                newData.online="0";
+            }
+            else if(data[item]=="可预约"){
+                newData.online="2";
+            }
+        }
 
     }
     return newData;
@@ -123,12 +135,12 @@ export function fromResponse(data){
         //styliLevel
         if(itemString=="styliLevel"){
             switch(data[item]){
-                case "0":newData.styliLevel="初级";break;
-                case "1":newData.styliLevel="一级";break;
-                case "2":newData.styliLevel="二级";break;
-                case "3":newData.styliLevel="三级";break;
-                case "4":newData.styliLevel="四级";break;
-                case "5":newData.styliLevel="五级";break;
+                case "0":newData.styliLevel="初级搭配师";break;
+                case "1":newData.styliLevel="一级搭配师";break;
+                case "2":newData.styliLevel="二级搭配师";break;
+                case "3":newData.styliLevel="三级搭配师";break;
+                case "4":newData.styliLevel="四级搭配师";break;
+                case "5":newData.styliLevel="五级搭配师";break;
             }
         }
         //featTags
@@ -141,7 +153,7 @@ export function fromResponse(data){
             ];
         }
         //styTags
-        if((itemString=="styTags")&&(!data[item])){
+        if(itemString=="styTags"&&(!data[item])){
             newData.styTags=[
                 {
                     id: 0,
@@ -150,13 +162,43 @@ export function fromResponse(data){
             ];
         }
         //occaTags
-        if((itemString=="occaTags")&&(!data[item])){
+        if(itemString=="occaTags"&&(!data[item])){
             newData.occaTags=[
                 {
                     id: 0,
                     tag: "暂无",
                 }
             ];
+        }
+        //specSty
+        if((itemString=="specSty")&&(!data[item])){
+            newData.specSty= [
+                {
+                    id: 0,
+                    tag: "暂无",
+                }
+            ];
+        }
+        //specOcc
+        if((itemString=="specOcc")&&(!data[item])){
+            newData.specOcc= [
+                {
+                    id: 0,
+                    tag: "暂无",
+                }
+            ];
+        }
+        //online
+        if(itemString=="online"){
+            if(data[item]=="1"){
+                newData.online="在线";
+            }
+            else if(data[item]=="0"){
+                newData.online="休息中";
+            }
+            else if(data[item]=="2"){
+                newData.online="可预约";
+            }
         }
     }
     return newData;

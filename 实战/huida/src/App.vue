@@ -25,7 +25,7 @@ import {fromResponse} from './util/dataTypeConversion';
             this.axios.get(url).then(function(res){
                     console.log(res.data);
                     if(res.data.flag==true){
-                        let stylistInfo=res.data.data;
+                        let stylistInfo=fromResponse(res.data.data);
                         _this.$store.commit('setStylistInfo',stylistInfo);
                     }
                     else{
@@ -57,14 +57,12 @@ import {fromResponse} from './util/dataTypeConversion';
                   
                   if(res.data.flag==true&&res.data.message=="查询成功"){
                       let data=res.data.data;
-                      let user={};
 
-                      //将用户信息与token存储到cookie中
-                      let expires=new Date();
-                      expires.setDate(expires.getDate()+7);
+                      //转换res返回来的数据
+                      let user={};
                       user=fromResponse(data);
-                      console.log(user,"初始化");
                       
+                      //初始化vuex中的数据
                       _this.$store.commit("setUser",user);
 
                       //标识用户身份
