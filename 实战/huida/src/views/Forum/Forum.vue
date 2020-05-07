@@ -1,12 +1,34 @@
 <!-- 论坛页 -->
 <template>
-    <div>
-        <h1>他们很懒，论坛里什么都没留下...</h1>
+    <div class="container clearfix">
+        <div class="post-list">
+            <div class="menu">
+                <Menu mode="horizontal">
+                    <MenuItem name="1" to="/forum/recommend">
+                        推荐
+                    </MenuItem>
+                    <MenuItem name="2" to="/forum/newest">
+                        最新
+                    </MenuItem>
+                    <MenuItem name="3" to="/forum/following">
+                        关注
+                    </MenuItem>
+                </Menu>
+            </div>
+            <div class="view">
+                <router-view />
+            </div>
+        </div>
+        <div class="goods-banner"></div>
     </div>
 </template>
 
 <script>
+import {Menu,MenuItem} from 'view-design';
 export default {
+    components:{
+        Menu,MenuItem
+    },
 data() {
 return {
 
@@ -24,5 +46,15 @@ mounted() {
 </script>
 <style scoped>
 /* @import url(); 引入css类 */
-
+.post-list{
+    width: 750px;
+    height: 440px;
+    float: left;
+}
+.goods-banner{
+    width: 230px;
+    height: 440px;
+    background-color: antiquewhite;
+    float: right;
+}
 </style>

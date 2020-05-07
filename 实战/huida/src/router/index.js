@@ -95,7 +95,7 @@ Vue.use(VueRouter)
           component: () => import('../views/Consult/Recommend.vue')
       },
       {
-          path: '/consult/follow',
+          path: '/consult/following',
           name: 'consultFollow',
           component: () => import('../views/Consult/Follow.vue')
       },
@@ -109,12 +109,56 @@ Vue.use(VueRouter)
   {
     path: '/store',
     name: 'Store',
-    component: () => import('../views/Store/Store.vue')
+    component: () => import('../views/Store/Store.vue'),
+    children:[
+      {
+        path: '/store/lady',
+        name: 'storeLady',
+        component: () => import('../views/Store/Lady.vue')
+      },
+      {
+        path: '/store/man',
+        name: 'storeMan',
+        component: () => import('../views/Store/Man.vue')
+      },
+      {
+        path: '/store/acce',
+        name: 'storeAcce',
+        component: () => import('../views/Store/Acce.vue')
+      },
+      {
+        path: '/store/shoes-bags',
+        name: 'storeShoesBags',
+        component: () => import('../views/Store/ShoesBags.vue')
+      },
+      {
+        path: '/store/loan',
+        name: 'storeLoan',
+        component: () => import('../views/Store/Loan.vue')
+      },
+    ]
   },
   {
     path: '/forum',
     name: 'Forum',
-    component: () => import('../views/Forum/Forum.vue')
+    component: () => import('../views/Forum/Forum.vue'),
+    children:[
+      {
+        path: '/forum/recommend',
+        name: 'forumRecommend',
+        component: () => import('../views/Forum/Recommend.vue')
+      },
+      {
+        path: '/forum/newest',
+        name: 'forumNewest',
+        component: () => import('../views/Forum/Newest.vue')
+      },
+      {
+        path: '/forum/following',
+        name: 'forumFollowing',
+        component: () => import('../views/Forum/Following.vue')
+      },
+    ]
   }
 ]
 
