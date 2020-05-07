@@ -2,7 +2,12 @@
 <template>
     <div class="main clearfix">
         <div class="logo">
-                <router-link to="/"><img src="../assets/img/logo.jpg" alt=""></router-link>
+            <router-link to="/"><img src="../assets/img/logo.png" alt=""></router-link>
+        </div>
+        <div class="show-info" v-show="!$store.state.isLogining">
+                <span>一对一的搭配咨询</span>
+                <span>同城商品放心选</span>
+                <span>发布搭配需求</span>
         </div>
         <div class="head_right">
             <Menu class="main_nav" mode="horizontal" :theme="theme1" :active-name="activeName" v-show="!$store.state.isLogining">
@@ -103,6 +108,9 @@
     }
 </script>
 <style scoped>
+    /* .main{
+        background-color: #007a8a;
+    } */
     .logo{
         float: left;
         height: 60px;
@@ -110,19 +118,29 @@
     .logo img{
         width: 100px;
         height: 60px;
+        background-color: white;
     }
     .head_right{
         float: right;
     }
     .mn_item{
         margin-right: 40px;
+        /* background-color: #007a8a; */
     }
     .personal{
         height: 55px;
         float: right;
     }
-    .login_show_info{
+    .show-info{
+        float: left;
+        margin-left: 30px;
+    }
+    .show-info,.login_show_info{
         margin-top: 20px;
+    }
+    .show-info span{
+        color: #999;
+        margin-left: 15px;
     }
     .login_show_info span{
         margin-left: 40px;

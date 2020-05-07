@@ -2,8 +2,8 @@
 <template>
     <div class="container clearfix">
         <div class="goods-list">
-            <div class="sl-nav">
-                <Menu mode="horizontal">
+            <div class="sl-nav clearfix">
+                <Menu mode="horizontal" class="menu">
                     <MenuItem name="1" to="/store">
                         全部
                     </MenuItem>
@@ -23,20 +23,34 @@
                         租借专柜
                     </MenuItem>
                 </Menu>
+                <Input search enter-button placeholder="输入你想搜索的宝贝" class="search-input"/>
             </div>
             <div class="view">
                 <router-view />
             </div>
         </div>
-        <div class="stylist-banner"></div>
+        <div class="stylist-banner">
+            <div class="banner">
+                <div class="banner-title clearfix">
+                    <span class="bt-font">
+                        优质搭配师推荐
+                    </span>
+                    <span class="bt-btn">
+                        换一换
+                        <Icon type="md-sync" />
+                    </span>
+                </div>
+                <div class="banner-content"></div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import {Menu,MenuItem} from 'view-design'
+import {Menu,MenuItem,Icon,Input} from 'view-design'
 export default {
     components:{
-        Menu,MenuItem
+        Menu,MenuItem,Icon,Input
     },
 data() {
 return {
@@ -60,10 +74,41 @@ mounted() {
     height: 440px;
     float: left;
 }
+.sl-nav{
+    height: 61px;
+    border-bottom: 2px solid #dcdee2;
+}
+.menu{
+    width: 450px;
+    float: left;
+}
+.search-input{
+    width: 300px;
+    float: right;
+    margin-top: 15px;
+}
 .stylist-banner{
     width: 230px;
     height: 440px;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
+    float: right;
+}
+.banner{
+    height: 620px;
+    margin-top: 20px;
+    border: 0.5px solid #007a8a;
+}
+.banner-title{
+    width:100%;
+    height:40px;
+    line-height: 40px;
+    padding: 0 20px;
+    /* background-color: aqua; */
+}
+.bt-font{
+    float: left;
+}
+.bt-btn{
     float: right;
 }
 </style>

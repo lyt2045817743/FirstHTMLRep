@@ -19,15 +19,28 @@
                 <router-view />
             </div>
         </div>
-        <div class="goods-banner"></div>
+        <div class="goods-banner">
+            <div class="banner">
+                <div class="banner-title clearfix">
+                    <span class="bt-font">
+                        最热商品推荐
+                    </span>
+                    <span class="bt-btn">
+                        换一换
+                        <Icon type="md-sync" />
+                    </span>
+                </div>
+                <div class="banner-content"></div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-import {Menu,MenuItem} from 'view-design';
+import {Menu,MenuItem,Icon} from 'view-design';
 export default {
     components:{
-        Menu,MenuItem
+        Menu,MenuItem,Icon
     },
 data() {
 return {
@@ -54,7 +67,25 @@ mounted() {
 .goods-banner{
     width: 230px;
     height: 440px;
-    background-color: antiquewhite;
+    /* background-color: antiquewhite; */
+    float: right;
+}
+.banner{
+    height: 620px;
+    margin-top: 20px;
+    border: 0.5px solid #007a8a;
+}
+.banner-title{
+    width:100%;
+    height:40px;
+    line-height: 40px;
+    padding: 0 20px;
+    /* background-color: aqua; */
+}
+.bt-font{
+    float: left;
+}
+.bt-btn{
     float: right;
 }
 </style>

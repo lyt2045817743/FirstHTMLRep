@@ -100,9 +100,9 @@ Vue.use(VueRouter)
           component: () => import('../views/Consult/Follow.vue')
       },
       {
-          path: '/consult/sort',
-          name: 'consultSort',
-          component: () => import('../views/Consult/Sort.vue')
+          path: '/consult/classify',
+          name: 'consultClassify',
+          component: () => import('../views/Consult/Classify.vue')
       }
     ]
   },
@@ -111,6 +111,11 @@ Vue.use(VueRouter)
     name: 'Store',
     component: () => import('../views/Store/Store.vue'),
     children:[
+      {
+        path: '/store',
+        name: 'storeLady',
+        component: () => import('../views/Store/AllGoods.vue')
+      },
       {
         path: '/store/lady',
         name: 'storeLady',

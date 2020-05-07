@@ -48,7 +48,7 @@ export function toRequest(data){
             if(data[item]=="全职搭配师"){
                 newData.fullTime="1";
             }
-            else if(data[item]=="兼职搭配师"){
+            else if(data[item]=="大众搭配师"){
                 newData.fullTime="0";
             }
         }
@@ -127,7 +127,10 @@ export function fromResponse(data){
             if(data[item]=="1"){
                 newData.fullTime="全职搭配师";
             }
-            else if(data[item]=="0"){
+            else if(data[item]=="0"&&data.styliLevel=="0"){
+                newData.fullTime="大众搭配师";
+            }
+            else if(data[item]=="0"&&data.styliLevel!="0"){
                 newData.fullTime="兼职搭配师";
             }
         }
@@ -135,7 +138,7 @@ export function fromResponse(data){
         //styliLevel
         if(itemString=="styliLevel"){
             switch(data[item]){
-                case "0":newData.styliLevel="初级搭配师";break;
+                case "0":newData.styliLevel="未评级";break;
                 case "1":newData.styliLevel="一级搭配师";break;
                 case "2":newData.styliLevel="二级搭配师";break;
                 case "3":newData.styliLevel="三级搭配师";break;

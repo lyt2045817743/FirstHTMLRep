@@ -101,6 +101,9 @@ import {fromResponse} from './util/dataTypeConversion';
   body{
     background-color: #f7f7f7;
   }
+  a{
+    font-style: none;
+  }
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

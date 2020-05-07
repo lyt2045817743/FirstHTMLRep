@@ -31,7 +31,6 @@
                                 <!-- <span style="color: #f5a623">{{ valueCustomText }}</span> -->
                             </Rate>
                         </span>
-
                     </div>
                     <div class="info-item clearfix">
                         <span class="ii-name">搭配能力评分</span>
@@ -45,10 +44,10 @@
                 <div class="spb-price clearfix">
                     <span class="price-name">服务价格区间</span>
                     <div class="prive-value" style="display:inline-block">
-                        <span style="width:50px;textAlign:center;display:inline-block;">{{$store.state.stylistInfo.servicePrice[0]}}</span>
+                        <span style="width:50px;textAlign:center;display:inline-block;" v-if="$store.state.stylistInfo.servicePrice">{{$store.state.stylistInfo.servicePrice[0]}}</span>
                         <span class="unit">元</span>
                         <span>—</span>
-                        <span style="width:50px;textAlign:center;display:inline-block;">{{$store.state.stylistInfo.servicePrice[1]}}</span>
+                        <span style="width:50px;textAlign:center;display:inline-block;" v-if="$store.state.stylistInfo.servicePrice">{{$store.state.stylistInfo.servicePrice[1]}}</span>
                         <span class="unit">元</span>
                     </div>
                     
@@ -88,7 +87,7 @@
                     </RadioGroup><br/>
                     <Input v-model="newInfo.greeting" type="textarea" :rows="2" placeholder="当顾客打开聊天框，系统就会自动发送的内容哦~" class="ssb-item" style="width:600px;height:65px;border:none;marginTop:18px" />
                     <div class="tags">
-                        <CheckboxGroup v-model="newInfo.specSty" style="marginTop:11px;">
+                        <CheckboxGroup v-model="newInfo.specSty"  style="marginTop:11px;">
                             <Checkbox v-for="item in styleTags" :key="item.id" :label="item.tag" :value="item.id"></Checkbox>
                         </CheckboxGroup>
                     </div>
@@ -194,7 +193,6 @@ methods: {
                             // _this.relkwd=JSON.parse(JSON.stringify(res.data.data));
                             _this.styleTags=data.styleTags;
                             _this.occasionTags=data.occasionTags;
-
                         }
                     }
                     else{

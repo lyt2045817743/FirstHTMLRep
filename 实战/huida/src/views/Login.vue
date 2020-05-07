@@ -8,7 +8,7 @@
                 <div class="lr_nav">
                     <Tabs value="login" class="lrn_tabs" style="width: 300px">
                         <TabPane label="登录" name="login" class="lr_form">
-                            <Input v-model="loginInfo.username" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 20px"/><br/>
+                            <Input v-model="loginInfo.username" placeholder="请输入用户名" style="width: 250px;margin-top: 20px"/><br/>
                             <Input v-model="loginInfo.password" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
                             <Button type="success" style="width: 250px;margin-top:25px" @click="userLogin">登录</Button>
                             <br/>
@@ -27,7 +27,7 @@
                             </div>
                         </TabPane>
                         <TabPane label="注册" name="register">
-                            <Input v-model="regInfo.username" placeholder="请输入手机号/邮箱" style="width: 250px;margin-top: 25px"/><br/>
+                            <Input v-model="regInfo.username" placeholder="请输入用户名" style="width: 250px;margin-top: 25px"/><br/>
                              <Input v-model="regInfo.password" type="password" password placeholder="请输入密码" style="width: 250px;margin-top: 25px" />
                             <Input placeholder="请输入验证码" style="width: 130px;margin: 25px 10px 0 auto"/><Button type="default" style="margin: 25px 0 0 10px">获取验证码</Button><br/>
                             <Button type="success" style="width: 250px;margin-top:25px" @click="register">注册</Button>
