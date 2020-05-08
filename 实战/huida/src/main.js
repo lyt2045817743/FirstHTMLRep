@@ -5,9 +5,11 @@ import 'view-design/dist/styles/iview.css'
 import '../my-theme/index.less'
 import store from './store'
 import axios from 'axios'
+import qs from 'qs'
  
 Vue.prototype.axios=axios;
-axios.defaults.headers['Content-Type']="application/json";
+Vue.prototype.qs=qs;
+axios.defaults.headers['Content-Type']="application/json;charset=UTF-8";
 axios.defaults.withCredentials=true;
 
 

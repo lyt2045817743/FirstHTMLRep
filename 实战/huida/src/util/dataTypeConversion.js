@@ -1,6 +1,7 @@
 export function toRequest(data){
     var newData={...data};
     var numberDataName=["age","weight","bust","waistline","hips","height"];
+    var mineAttr=["lowPrice","highPrice","mineDeal","mineFans","mineFollows"];
     for(var item in data){
         var itemString=item.toString();
 
@@ -10,9 +11,6 @@ export function toRequest(data){
                 newData[item]=Number(data[item]);
             }
         })
-        //??????存疑
-        // if((itemString in numberDataName)){
-        // }
 
         //将数据转换为其相应代号
         //sex
@@ -75,7 +73,25 @@ export function toRequest(data){
                 newData.online="2";
             }
         }
+        //sGrade
+        if(itemString=="sGrade"){
+            switch(data[item]){
+                case "初级":newData.sGrade="0";break;
+                case "一级":newData.sGrade="1";break;
+                case "二级":newData.sGrade="2";break;
+                case "三级":newData.sGrade="3";break;
+                case "四级":newData.sGrade="4";break;
+                case "五级":newData.sGrade="5";break;
+            }
+        }
 
+
+        //过滤掉自定义的变量
+        for(let i=0;i<mineAttr.length;i++){
+            if(itemString==mineAttr[i]){
+                delete newData[item];
+            }
+        }
     }
     return newData;
 }
@@ -83,8 +99,43 @@ export function toRequest(data){
 export function fromResponse(data){
     var newData={...data};
     var numberDataName=['age','weight','bust','waistline','hips','height'];
+    var bigNum=["deal","fans","follows"];
     for(var item in data){
         var itemString=item.toString();
+
+        //将上万的数值转换为w
+        for(let i=0;i<bigNum.length;i++){
+            if(itemString==bigNum[i]){
+                
+                if(itemString=="deal"){
+                    if(data[item]/10000>1){
+                        newData.mineDeal=(data[item]/10000).toFixed(1)+"w";
+                    }
+                    else{
+                        newData.mineDeal=data[item];
+                    }
+                }
+                if(itemString=="fans"){
+                    if(data[item]/10000>1){
+                console.log(itemString);
+
+                        newData.mineFans=(data[item]/10000).toFixed(1)+"w";
+                    }
+                    else{
+                        newData.mineFans=data[item];
+                    }
+                }
+                if(itemString=="follows"){
+                    if(data[item]/10000>1){
+                        newData.mineFollows=(data[item]/10000).toFixed(1)+"w";
+                    }
+                    else{
+                        newData.mineFollows=data[item];
+                    }
+                }
+            }
+        }
+
 
         //将数据转换成字符串
         numberDataName.forEach(function(val){

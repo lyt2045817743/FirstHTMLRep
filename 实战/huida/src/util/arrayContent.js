@@ -10,6 +10,16 @@ export function toNumber(strArr,model){
     return returnData;
 }
 
+export function toOneNumber(str,model){
+    let returnData=-1;
+    for(let j=0;j<model.length;j++){
+        if(str==model[j].tag){
+            returnData=model[j].id;
+        }
+    }
+    return returnData;
+}
+
 export function toStr(objArr){
     let returnData=[];
     for(let i=0;i<objArr.length;i++){

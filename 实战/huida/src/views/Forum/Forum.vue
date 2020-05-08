@@ -2,8 +2,8 @@
 <template>
     <div class="container clearfix">
         <div class="post-list">
-            <div class="menu">
-                <Menu mode="horizontal">
+            <div class="menu clearfix">
+                <Menu mode="horizontal" class="menu-box">
                     <MenuItem name="1" to="/forum/recommend">
                         推荐
                     </MenuItem>
@@ -14,6 +14,10 @@
                         关注
                     </MenuItem>
                 </Menu>
+                <div class="write-btn">
+                    <Icon type="ios-create-outline" />
+                    去发帖
+                </div>
             </div>
             <div class="view">
                 <router-view />
@@ -74,6 +78,25 @@ mounted() {
     height: 620px;
     margin-top: 20px;
     border: 0.5px solid #007a8a;
+}
+.menu{
+    height: 61px;
+    border-bottom: 2px solid #dcdee2;
+}
+.menu-box{
+    /* width: 450px; */
+    float: left;
+}
+.write-btn{
+    width: 80px;
+    height: 30px;
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    line-height: 30px;
+    color: white;
+    border-radius: 50px;
+    background-color: #007a8a;
 }
 .banner-title{
     width:100%;

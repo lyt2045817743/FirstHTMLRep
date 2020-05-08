@@ -89,6 +89,7 @@ import {fromResponse} from './util/dataTypeConversion';
     created() {
       this.initData();
       this.getUserInfo();
+      // this.getTags();
     },
     beforeCreate() {
       
