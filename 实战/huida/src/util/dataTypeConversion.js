@@ -1,7 +1,7 @@
 export function toRequest(data){
     var newData={...data};
     var numberDataName=["age","weight","bust","waistline","hips","height"];
-    var mineAttr=["lowPrice","highPrice","mineDeal","mineFans","mineFollows"];
+    var mineAttr=["lowPrice","highPrice","mineDeal","mineFans","mineFollows","recReason","hasImgStyle"];
     for(var item in data){
         var itemString=item.toString();
 
@@ -254,6 +254,20 @@ export function fromResponse(data){
                 newData.online="可预约";
             }
         }
+
+
+        //添加新的属性
+        if(itemString=="pics"){
+            if(data[item]){
+                if(data[item].length>0){
+                    newData.hasImgStyle="width: 575px;float: left;margin: 0 10px;";
+                }
+            }
+            else{
+                newData.hasImgStyle="";
+            }
+        }
     }
+
     return newData;
 }

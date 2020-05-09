@@ -47,3 +47,20 @@ export function stylistRec(user,stylist){
 
     return returnData;
 }
+
+export function goodsRec(goodsInfo){
+    let returnData={...goodsInfo};
+    returnData.recReason="平台推荐";
+    //销量
+    if(goodsInfo.goodsSales){
+        if(goodsInfo.goodsSales>=400){
+            returnData.recReason="销量高";
+        }
+    }
+
+    //假的数据 --为了展示效果  后期删掉
+    if(goodsInfo.goodsPrice=="580"||goodsInfo.goodsPrice=="110"){
+        returnData.recReason="猜你喜欢";
+    }
+    return returnData;
+}

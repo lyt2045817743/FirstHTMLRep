@@ -223,5 +223,6 @@ mounted() {
     margin: 20px 10px 0;
     background-color: #E5EDEF;
     color: #666;
+    cursor: pointer;
 }
 </style>
