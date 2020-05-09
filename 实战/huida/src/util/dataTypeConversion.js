@@ -84,6 +84,32 @@ export function toRequest(data){
                 case "五级":newData.sGrade="5";break;
             }
         }
+        //cata
+        // "0" 求助帖
+        // "1" 经验分享帖
+        // "2" 搭配帖 
+        if(itemString=="cata"){
+            if(data[item]=="经验分享"){
+                newData.online="1";
+            }
+            else if(data[item]=="求助帖"){
+                newData.online="0";
+            }
+            else if(data[item]=="搭配帖"){
+                newData.online="2";
+            }
+        }
+        //scope
+        // "0" 已有衣物搭配
+        // "1" 整套搭配
+        if(itemString=="scope"){
+            if(data[item]=="已有衣物搭配"){
+                newData.scope="0";
+            }
+            else if(data[item]=="整套搭配"){
+                newData.scope="1";
+            }
+        }
 
 
         //过滤掉自定义的变量
@@ -254,13 +280,40 @@ export function fromResponse(data){
                 newData.online="可预约";
             }
         }
+        //cata
+        // "0" 求助帖
+        // "1" 经验分享帖
+        // "2" 搭配帖 
+        if(itemString=="cata"){
+            if(data[item]=="1"){
+                newData.cata="经验分享";
+            }
+            else if(data[item]=="0"){
+                newData.cata="求助帖";
+            }
+            else if(data[item]=="2"){
+                newData.cata="搭配帖";
+            }
+        }
+        //scope
+        // "0" 已有衣物搭配
+        // "1" 整套搭配
+        if(itemString=="scope"){
+            if(data[item]=="0"){
+                newData.scope="已有衣物搭配";
+            }
+            else if(data[item]=="1"){
+                newData.scope="整套搭配";
+            }
+        }
+
 
 
         //添加新的属性
         if(itemString=="pics"){
             if(data[item]){
                 if(data[item].length>0){
-                    newData.hasImgStyle="width: 575px;float: left;margin: 0 10px;";
+                    newData.hasImgStyle="width: 575px;float: left;margin: 0 10px;paddingRight: 0;";
                 }
             }
             else{

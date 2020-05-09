@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="showMore-btn">
-                    更多搭配师信息
+                    更多搭配师
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
             <Card class="pl-item" v-for="item in postList" :key="item.id" :padding="10" style="width:750px;padding: 0">
                 <div style="text-align:left" class="clearfix">
                     <div class="pli-left" :style="item.hasImgStyle">
-                        <span class="posts-title"><a href="javascript:void(0)">{{item.title}}</a></span>
+                        <span class="posts-title">{{item.title}}</span>
                         <p class="post-content">{{item.content}}</p>
                         <div class="posts-info clearfix">
                             <span class="posts-writer left">
@@ -31,6 +31,12 @@
                                 <Icon type="ios-time-outline" />
                                 {{item.postTime}}
                             </span>
+                            <span class="posts-cata-req right" v-if="item.cata=='求助帖'">
+                                {{item.cata}}
+                            </span>
+                            <span class="posts-cata right" v-if="item.cata=='搭配帖'">
+                                {{item.cata}}
+                            </span>
                         </div>
                     </div>
                     <div class="pli-img" v-if="item.pics[0]">
@@ -44,35 +50,42 @@
 
 <script>
 import {Card,Icon} from 'view-design';
+import {fromResponse} from '../../util/dataTypeConversion';
 export default {
     components:{
         Card,Icon
     },
 data() {
 return {
-    postList:[
-        {
-            id:1,
-            title:"两代人的烦恼",
-            content:"老张夫妇，退休前都是机关干部。当年，为了培养独生儿子成才，他们放弃了几乎所有个人爱好，把一门心思全放在了培养儿子身上。儿子也很争气，不仅学业有成...",
-            nickname:"一枚老僧",
-            commN:25,
-            likeN:47,
-            followN:10,
-            viewN:105,
-            headPic:"",
-            postTime:"2020-05-09",
-            pics:[
-                "https://m.360buyimg.com/mobilecms/s450x450_jfs/t26734/297/4149446/275302/8649bb1c/5b7fd884Na481d5d6.jpg!q70.jpg.webp"
-            ],
-            hasImgStyle:"width: 575px;float: left;margin: 0 10px;",
-        }
-    ]
+    pageNum:1,
+    postList:[]
 }
+},
+methods: {
+    initData(){
+        let url="/api/post/list/time/"+this.pageNum+"/"+8;
+        
+        let _this=this;
+        this.axios.get(url).then(function(res){
+                console.log(res.data);
+                if(res.data.flag==true){
+                    let newData=res.data.data.list;
+                    for(let i=0;i<newData.length;i++){
+                        newData[i]=fromResponse(newData[i]);
+                    }
+                    _this.postList=newData;
+                    console.log(_this.postList);
+                }
+                else{
+                    console.log(res.data.message);
+                    console.log(url);
+                }
+        })
+    }
 },
 //生命周期 - 创建完成（访问当前this实例）
 created() {
-
+    this.initData();
 },
 //生命周期 - 挂载完成（访问DOM元素）
 mounted() {
@@ -82,13 +95,13 @@ mounted() {
 </script>
 <style scoped>
 /* @import url(); 引入css类 */
-.posts-list{
-}
 .posts-title{
     font-size:20px;
     font-weight:bold;
+    color: #007a8a;
 }
 .post-content{
+    height: 40px;
     margin: 5px 0;
     display: -webkit-box;
     overflow: hidden;
@@ -110,11 +123,18 @@ mounted() {
 .right{
     float:right;
 }
+.posts-cata{
+    color: #007a8a;
+}
+.posts-cata-req{
+    color: #FF5978;
+}
 .posts-info span{
     margin-left:10px;
 }
 .pli-left{
     float: left;
+    padding-right: 20px;
 }
 .pli-img{
     float: right;
@@ -122,6 +142,6 @@ mounted() {
 }
 .pli-img img{
     width: 100px;
-
+    height: 100px;
 }
 </style>
