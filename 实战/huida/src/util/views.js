@@ -1,7 +1,17 @@
 export function initPath(nowPath){
     let pathSetting={};
     let pathArr=nowPath.split('/');
+    let mainIndex=pathArr[1];
     let lastPath=pathArr[pathArr.length-1];
+    console.log(mainIndex);
+    switch(mainIndex){
+        case "home":pathSetting.mainIndex="1";console.log(111);break;
+        case "consult":pathSetting.mainIndex="2";break;
+        case "store":pathSetting.mainIndex="3";break;
+        case "forum":pathSetting.mainIndex="4";break;
+        case "personal":pathSetting.mainIndex="";break;
+    }
+
     switch(lastPath){
         case "personal":pathSetting.parentIndex="1";break;
         case "myFollowings":pathSetting.parentIndex="2";break;

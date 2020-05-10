@@ -10,7 +10,7 @@
                 <span>发布搭配需求</span>
         </div>
         <div class="head_right">
-            <Menu class="main_nav" mode="horizontal" :theme="theme1" :active-name="activeName" v-show="!$store.state.isLogining">
+            <Menu class="main_nav" mode="horizontal" :active-name="activeName" v-show="!$store.state.isLogining">
                 <MenuItem name="1" class="mn_item" to="/home">
                     首页
                 </MenuItem>
@@ -60,33 +60,20 @@
 <script>
     import {Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem,Badge,Avatar} from 'view-design';
     import {unsetCookie} from '../util/cookie';
+    // import {initPath} from '../util/views';
     export default {
         components:{
             Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem,Badge,Avatar
         },
         data() {
             return {
-                theme1: 'light',
-            }
-        },
-        computed: {
-            activeName(){
-                if(this.$route.path!="/login"){
-                    this.$store.commit("changeLogining",false);            
-                }
-                return this.$route.path;
-            }
-        },
-        watch: {
-            nowPath(newVal){
-                if(newVal){
-                    // console.log(newVal);
-                    
-                }
+                activeName:"1"
             }
         },
         methods: {
             changeHandle(){
+                console.log(448444);
+                
                 this.$store.commit('changeLogining',true);
             },
             logOut(){
@@ -103,8 +90,7 @@
             }
         },
         created() {
-
-        }
+        },
     }
 </script>
 <style scoped>

@@ -14,7 +14,6 @@ const state={
 const mutations={
     changeLogining(state,flag){
         state.isLogining=flag;
-        sessionStorage.setItem("isLogining",flag);
     },
     setUser(state,user){
         if(user){

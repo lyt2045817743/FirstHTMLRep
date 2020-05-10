@@ -48,7 +48,9 @@ import {fromResponse} from './util/dataTypeConversion';
               this.$store.commit("changeIsStylist",true);
             }
             this.$store.commit("setUser",user);
+            //修改登录
             this.$store.commit("changeHasLogin",true);
+            this.$store.commit("changeLogining",false);
 
             let _this=this;
               //发送请求获取用户个人信息
@@ -71,20 +73,12 @@ import {fromResponse} from './util/dataTypeConversion';
                       }
                   }
               })
-          }
-          else{
-            this.$store.commit("changeHasLogin",false);
-            
-          }
-
-          //修改isLogining的值
-          if(sessionStorage.getItem("isLogining")){
-            var isLogining=sessionStorage.getItem("isLogining");
-          }
-          if(isLogining){
-            this.$store.commit("changeLogining",isLogining);
-          }
         }
+        else{
+          this.$store.commit("changeHasLogin",false);
+          
+        }
+      }
     },
     created() {
       this.initData();
