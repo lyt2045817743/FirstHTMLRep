@@ -8,26 +8,24 @@
                 <Icon class="pb_icon" type="ios-chatbubbles-outline" color="white" size="40"/>
             </div>
             <h3>一对一咨询服务</h3>
-            <p>  针对职场穿搭、日常穿搭等</p>  
-            <p>  你需要的搭配方案我们都有</p> 
         </div>
         <div class="pf_show clearfix">
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/consult2.jpg">
+                  <h3>个性化服饰推荐</h3>
               </div>
           </Card>
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/consult3.jpg">
+                  <h3>一对一深入交流</h3>
               </div>
           </Card>
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/consult1.jpg">
+                  <h3>大众化搭配咨询</h3>
               </div>
           </Card>
         </div>
@@ -39,26 +37,24 @@
                 <Icon type="md-cart" class="pb_icon" color="white" size="40"/>
             </div>
             <h3>同城商品放心选</h3>
-            <p>  同城物流，快速送达</p>  
-            <p>  礼服与饰品租借</p> 
         </div>
         <div class="pf_show clearfix">
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/goods3.jpg">
+                  <h3>同城礼服租借，解决急需</h3>
               </div>
           </Card>
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/goods2.jpg">
+                  <h3>实地考察，购买更放心</h3>
               </div>
           </Card>
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/goods4.jpg">
+                  <h3>同城物流，快速送达</h3>
               </div>
           </Card>
         </div>
@@ -69,26 +65,24 @@
                 <Icon type="ios-people" class="pb_icon" color="white" size="40"/>
             </div>
             <h3>论坛发布搭配需求</h3>
-            <p>  友好的论坛交流界面</p>  
-            <p>  带给你好的视觉体验</p> 
         </div> 
         <div class="pf_show clearfix">
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/forum2.jpg">
+                  <h3>教你驾驭各种风格</h3>
               </div>
           </Card>
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/forum3.jpg">
+                  <h3>发帖求助已有衣物搭配</h3>
               </div>
           </Card>
           <Card style="width:225px" class="pf_card">
               <div style="text-align:center">
-                  <img src="../assets/img/logo.jpg">
-                  <h3>A high quality UI Toolkit based on Vue.js</h3>
+                  <img src="../assets/img/forum1.jpg">
+                  <h3>流行款式一览无余</h3>
               </div>
           </Card>
         </div>
@@ -113,7 +107,7 @@
     width: 100%;
     height: 360px;
     margin-top:70px;
-    background-image: url('../assets/img/banner2.jpg');
+    background-image: url('../assets/img/banner3.jpg');
     background-position: center top;
     background-repeat: no-repeat;
   }
@@ -122,7 +116,7 @@
       height: 150px;
       float: left;
       text-align: center;
-      margin-top: 182px;
+      margin-top: 130px;
   }
   .icon_bg{
       width: 100px;
@@ -153,12 +147,11 @@
     width: 750px;
     height: 243px;
     float: right;
-    margin-top: 146px;
-    border: 1px solid #bcdde7;
+    margin-top: 85px;
   }
   .pf_show img{
     width: 100%;
-    height: 70%;
+    height: 144px;
     display: inline-block;
   }
   .pf_show .pf_card{

@@ -41,7 +41,7 @@
         width: 100%;
         height: 360px;
         margin-top:70px;
-        background-image: url('../../assets/img/banner3.jpg');
+        background-image: url('../../assets/img/banner1.jpg');
         background-position: center top;
         background-repeat: no-repeat;
     }

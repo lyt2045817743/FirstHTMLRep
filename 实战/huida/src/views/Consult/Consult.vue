@@ -33,10 +33,14 @@
                 </div>
                 <div class="banner-content">
                     <div class="bc-item clearfix" v-for="item in postList" :key="item.id">
-                        <div class="bci-info">
+                        <div class="bci-info clearfix">
                             <span class="bci-title">{{item.title}}</span>
-                            <span class="bci-cata" v-if="item.cata=='搭配帖'">{{item.cata}}</span>
-                            <span class="bci-cata-req" v-if="item.cata=='求助帖'">{{item.cata}}</span>
+                            <span class="bci-cata left" v-if="item.cata=='搭配帖'">{{item.cata}}</span>
+                            <span class="bci-cata-req left" v-if="item.cata=='求助帖'">{{item.cata}}</span>
+                            <span class="bci-viewN right">
+                                <Icon type="ios-eye" />
+                                {{item.viewN}}
+                            </span>
                         </div>
                         <img v-if="item.pics" :src="item.pics[0]" alt="">
                     </div>
@@ -164,6 +168,17 @@ export default {
     margin-top: 5px;
     font-size: 12px;
     color: #FF5978;
+}
+.bci-viewN{
+    margin-top: 5px;
+    font-size: 12px;
+    color: #666;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
 }
 .bci-info{
     height: 60px;
