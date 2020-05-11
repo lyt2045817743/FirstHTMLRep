@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 
 const state={
+    pathSet:{},
     user:"",
     stylistInfo:"",
     hasLogin:false,
@@ -12,8 +13,9 @@ const state={
 }
 
 const mutations={
-    changeLogining(state,flag){
-        state.isLogining=flag;
+    setPathSet(state,pathObj){
+        state.pathSet=pathObj;
+        sessionStorage.setItem("pathSet",JSON.stringify(pathObj));
     },
     setUser(state,user){
         if(user){
@@ -26,12 +28,6 @@ const mutations={
         }
         
     },
-    changeHasLogin(state,flag){
-        state.hasLogin=flag;
-    },
-    changeIsStylist(state,flag){
-        state.isStylist=flag;
-    },
     //搭配师信息
     setStylistInfo(state,stylist){
         if(stylist){
@@ -42,14 +38,15 @@ const mutations={
         }
     },
 
-    //公用的：修改某一对象下某些属性
-    // setAtt(state,obj,modiObj){
-    //     console.log(obj,modiObj);
-        
-    //     for(let item in modiObj){
-    //         state[obj][item]=modiObj[item];
-    //     }
-    // }
+    changeHasLogin(state,flag){
+        state.hasLogin=flag;
+    },
+    changeLogining(state,flag){
+        state.isLogining=flag;
+    },
+    changeIsStylist(state,flag){
+        state.isStylist=flag;
+    },
 }
 const actions={
     setUser(context,data){

@@ -10,7 +10,7 @@
                 <span>发布搭配需求</span>
         </div>
         <div class="head_right">
-            <Menu class="main_nav" mode="horizontal" :active-name="activeName" v-show="!$store.state.isLogining">
+            <Menu class="main_nav" mode="horizontal" @on-select="changePath" :active-name="activeName" v-show="!$store.state.isLogining">
                 <MenuItem name="1" class="mn_item" to="/home">
                     首页
                 </MenuItem>
@@ -60,20 +60,17 @@
 <script>
     import {Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem,Badge,Avatar} from 'view-design';
     import {unsetCookie} from '../util/cookie';
-    // import {initPath} from '../util/views';
     export default {
         components:{
             Menu,MenuItem,Dropdown,DropdownMenu,DropdownItem,Badge,Avatar
         },
         data() {
             return {
-                activeName:"1"
+                activeName:this.$store.state.pathSet.mainIndex
             }
         },
         methods: {
             changeHandle(){
-                console.log(448444);
-                
                 this.$store.commit('changeLogining',true);
             },
             logOut(){
@@ -83,10 +80,24 @@
                 unsetCookie("role");
                 unsetCookie("token");
                 unsetCookie('uid');
-                this.$router.push("/");
+                if(this.$route.path=="/personal"){
+                    this.$router.push("/");
+                    sessionStorage.setItem("pathSet",null);
+                    this.activeName=""
+                }
             },
             changeActiveName(){
                 this.activeName="";
+                let pathSet={...this.$store.state.pathSet};
+                pathSet.mainIndex="";
+                this.$store.commit("setPathSet",pathSet);
+            },
+            changePath(name){
+                let pathSet={};
+                pathSet.mainIndex=name;
+                pathSet.parentIndex="1";
+                pathSet.childIndex="1";
+                this.$store.commit("setPathSet",pathSet);
             }
         },
         created() {

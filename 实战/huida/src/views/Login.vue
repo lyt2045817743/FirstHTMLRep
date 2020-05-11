@@ -44,6 +44,7 @@
 import {Tabs,TabPane,Input,Button} from 'view-design';
 import {setCookie,getCookie} from '../util/cookie';
 import { fromResponse } from '../util/dataTypeConversion';
+import {pathName} from '../util/views';
 export default {
     components: {
         Tabs,TabPane,Input,Button
@@ -106,7 +107,16 @@ export default {
                     
                     //登陆成功后切换路由至home
                     if(getCookie('username')){
-                        _this.$router.push('/home');
+                        if(sessionStorage.getItem("pathSet")){
+                            let pathSet=JSON.parse(sessionStorage.getItem("pathSet"));
+                            let path=pathName(pathSet);
+                            _this.$router.push(path);
+                        }
+                        else{
+                            _this.$router.push('/home');
+                        }
+                        
+
                     }
                 }
                 else{

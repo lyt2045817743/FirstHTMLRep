@@ -3,8 +3,8 @@
     <div class="container clearfix">
         <div class="stylist-list">
             <div class="sl-nav">
-                <Menu mode="horizontal">
-                    <MenuItem name="1" to="/consult/recommend">
+                <Menu mode="horizontal" :active-name="activeName" @on-select="changePath">
+                    <MenuItem name="1" to="/consult">
                         推荐
                     </MenuItem>
                     <MenuItem name="2" to="/consult/classify">
@@ -62,6 +62,7 @@ export default {
     },
     data() {
         return {
+            activeName:this.$store.state.pathSet.parentIndex,
             pageNum:1,
             postList:[
                 {
@@ -97,6 +98,11 @@ export default {
                         console.log(url);
                     }
             })
+        },
+        changePath(name){
+            let pathSet={...this.$store.state.pathSet};
+            pathSet.parentIndex=name;
+            this.$store.commit("setPathSet",pathSet);
         }
     },
     watch: {

@@ -3,7 +3,7 @@
     <div class="container clearfix">
         <div class="goods-list">
             <div class="sl-nav clearfix">
-                <Menu mode="horizontal" class="menu">
+                <Menu mode="horizontal" :active-name="activeName" @on-select="changePath" class="menu">
                     <MenuItem name="1" to="/store">
                         全部
                     </MenuItem>
@@ -73,6 +73,7 @@ export default {
     },
 data() {
 return {
+    activeName:this.$store.state.pathSet.parentIndex,
     stylistList: [
         {
             id: 6,
@@ -101,6 +102,7 @@ return {
 },
 methods: {
     initData(){
+
         //axios请求全部搭配师列表
         let url="/api/user/styliInfo/"+1+"/"+7;
         let _this=this;
@@ -121,6 +123,11 @@ methods: {
                     console.log(url);
                 }
         })
+    },
+    changePath(name){
+        let pathSet={...this.$store.state.pathSet};
+        pathSet.parentIndex=name;
+        this.$store.commit("setPathSet",pathSet);
     }
 },
 //生命周期 - 创建完成（访问当前this实例）

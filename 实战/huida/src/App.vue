@@ -12,6 +12,7 @@
 import Navigation from './components/Navigation';
 import { getCookie } from './util/cookie';
 import {fromResponse} from './util/dataTypeConversion';
+// import {initPath} from './util/views';
   export default {
     components:{
         Navigation
@@ -35,8 +36,23 @@ import {fromResponse} from './util/dataTypeConversion';
             })
         }
       },
+      initPath(){
+          //初始化路径
+          if(JSON.parse(sessionStorage.getItem("pathSet"))){
+            let pathSet=JSON.parse(sessionStorage.getItem("pathSet"));
+            this.$store.commit("setPathSet",pathSet);
+          }
+          else{
+            let pathSet={};
+            pathSet.mainIndex="";
+            pathSet.parentIndex="";
+            pathSet.childIndex="";
+            this.$store.commit("setPathSet",pathSet);
+          }
+      },
       initData(){
         let user={};
+        //判断用户登录是否过期
         if(getCookie("token")){
             user.username=getCookie('username');
             user.uid=getCookie("uid");
@@ -81,12 +97,9 @@ import {fromResponse} from './util/dataTypeConversion';
       }
     },
     created() {
+      this.initPath();
       this.initData();
       this.getUserInfo();
-      // this.getTags();
-    },
-    beforeCreate() {
-      
     }
 
   }

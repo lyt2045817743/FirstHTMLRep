@@ -3,8 +3,8 @@
     <div class="container clearfix">
         <div class="post-list">
             <div class="menu clearfix">
-                <Menu mode="horizontal" class="menu-box">
-                    <MenuItem name="1" to="/forum/recommend">
+                <Menu mode="horizontal" :active-name="activeName" @on-select="changePath" class="menu-box">
+                    <MenuItem name="1" to="/forum">
                         推荐
                     </MenuItem>
                     <MenuItem name="2" to="/forum/newest">
@@ -62,6 +62,7 @@ export default {
     },
 data() {
 return {
+    activeName:this.$store.state.pathSet.parentIndex,
     goodsList:[
         {
             id:1,
@@ -129,6 +130,13 @@ methods: {
         }
         console.log(this.goodsList);
         
+    },
+    changePath(name){
+        console.log(name);
+        
+        let pathSet={...this.$store.state.pathSet};
+        pathSet.parentIndex=name;
+        this.$store.commit("setPathSet",pathSet);
     }
 },
 //生命周期 - 创建完成（访问当前this实例）

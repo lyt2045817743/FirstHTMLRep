@@ -90,7 +90,7 @@ Vue.use(VueRouter)
     component: () => import('../views/Consult/Consult.vue'),
     children:[
       {
-          path: '/consult/recommend',
+          path: '/consult',
           name: 'consultRecommend',
           component: () => import('../views/Consult/Recommend.vue')
       },
@@ -149,7 +149,7 @@ Vue.use(VueRouter)
     component: () => import('../views/Forum/Forum.vue'),
     children:[
       {
-        path: '/forum/recommend',
+        path: '/forum',
         name: 'forumRecommend',
         component: () => import('../views/Forum/Recommend.vue')
       },
