@@ -18,14 +18,14 @@ export function stylistRec(user,stylist){
 
     //评分高
     if(stylist.mark){
-        if(stylist.mark>=4.5){
+        if(stylist.mark>=4.7){
             returnData.recReason="客户评分高";
         }
     }
 
     //粉丝量
     if(stylist.fans){
-        if(Number(stylist.fans)>10000){
+        if(Number(stylist.fans)>10000000){
             returnData.recReason="很受欢迎";
         }
     }

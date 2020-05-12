@@ -205,7 +205,6 @@ methods: {
         this.axios.get(url,params).then(function(res){
                 console.log(res.data);
                 if(res.data.flag==true){
-                    console.log("yeah!");
                     let newData=[];
                     let data=res.data.data.list;
                     for(let i=0;i<data.length;i++){

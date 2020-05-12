@@ -143,8 +143,6 @@ export function fromResponse(data){
                 }
                 if(itemString=="fans"){
                     if(data[item]/10000>1){
-                console.log(itemString);
-
                         newData.mineFans=(data[item]/10000).toFixed(1)+"w";
                     }
                     else{
