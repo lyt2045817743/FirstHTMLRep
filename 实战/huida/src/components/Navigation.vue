@@ -7,7 +7,7 @@
         <div class="show-info" v-show="!$store.state.isLogining">
                 <span>一对一的搭配咨询</span>
                 <span>同城商品放心选</span>
-                <span>发布搭配需求</span>
+                <span>论坛发布搭配需求</span>
         </div>
         <div class="head_right">
             <Menu class="main_nav" mode="horizontal" @on-select="changePath" :active-name="activeName" v-show="!$store.state.isLogining">
@@ -51,7 +51,7 @@
             <div class="login_show_info" v-show="$store.state.isLogining">
                 <span>一对一的搭配咨询</span>
                 <span>同城商品放心选</span>
-                <span>发布搭配需求</span>
+                <span>论坛发布搭配需求</span>
             </div>
         </div>
     </div>
