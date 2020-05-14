@@ -1,6 +1,10 @@
 <!--  -->
 <template>
     <div>
+        <div id="nav">
+            <Navigation class="container" />
+            <div class="header_line"></div>
+        </div>
         <div class="home-bg">
             <div class="banners container">
                 <div id="banner-img1" class="banner-img"></div>
@@ -19,9 +23,11 @@
 
 <script>
     // import {Carousel,CarouselItem} from 'view-design'
+    import Navigation from '../../components/Navigation';
+
     export default {
         components:{
-            
+            Navigation
         },
         data() {
         return {

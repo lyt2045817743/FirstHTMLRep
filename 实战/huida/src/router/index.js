@@ -71,7 +71,7 @@ Vue.use(VueRouter)
             component: () => import('../views/Personal/PersonalSet/ShowPanel.vue')
           },
           {
-            path: '/personal/settings/personalInfo',
+            path: '/personal/settings',
             name: 'PersonalInfo',
             component: () => import('../views/Personal/PersonalSet/PersonalInfo.vue')
           },
@@ -164,7 +164,12 @@ Vue.use(VueRouter)
         component: () => import('../views/Forum/Following.vue')
       },
     ]
-  }
+  },
+  {
+    path: '/forum/writer',
+    name: 'forumWriter',
+    component: () => import('../views/Forum/Writer.vue')
+  },
 ]
 
 const router = new VueRouter({

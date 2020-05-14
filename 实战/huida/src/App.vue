@@ -1,21 +1,16 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <Navigation class="container" />
-      <div class="header_line"></div>
-    </div>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Navigation from './components/Navigation';
 import { getCookie } from './util/cookie';
 import {fromResponse} from './util/dataTypeConversion';
 // import {initPath} from './util/views';
   export default {
     components:{
-        Navigation
+        
     },
     methods: {
       getUserInfo(){
@@ -134,5 +129,15 @@ import {fromResponse} from './util/dataTypeConversion';
       content: "";
       display: block;
       clear: both;
+  }
+  /* 垂直水平居中 */
+  .parent{
+    position: relative;
+  }
+  .child{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
 </style>

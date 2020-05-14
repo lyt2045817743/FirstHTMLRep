@@ -21,9 +21,9 @@ export function initPath(nowPath){
         case "trainingCenter":pathSetting.parentIndex="6";break;
         //个人中心-基本资料
         case "settings":pathSetting.childIndex="1";pathSetting.parentIndex="7";break;
-        case 'sizeInfo':pathSetting.childIndex="1";pathSetting.parentIndex="7";break;
-        case 'showPanel':pathSetting.childIndex="2";pathSetting.parentIndex="7";break;
-        case 'personalInfo':pathSetting.childIndex="3";pathSetting.parentIndex="7";break;
+        case 'sizeInfo':pathSetting.childIndex="2";pathSetting.parentIndex="7";break;
+        case 'showPanel':pathSetting.childIndex="3";pathSetting.parentIndex="7";break;
+        case 'personalInfo':pathSetting.childIndex="1";pathSetting.parentIndex="7";break;
         case 'account':pathSetting.childIndex="4";pathSetting.parentIndex="7";break;
     }
 

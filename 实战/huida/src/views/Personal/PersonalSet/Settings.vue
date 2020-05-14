@@ -3,14 +3,14 @@
     <div>
         <div class="menu">
             <Menu mode="horizontal" :active-name="nowPath" style="width:400px">
-                <MenuItem name="1" v-if="!$store.state.isStylist" to="/personal/settings/sizeInfo">
+                <MenuItem name="1" to="/personal/settings">
+                    个人资料
+                </MenuItem>
+                <MenuItem name="2" v-if="!$store.state.isStylist" to="/personal/settings/sizeInfo">
                     尺码信息
                 </MenuItem>
-                <MenuItem name="2" v-if="$store.state.isStylist" to="/personal/settings/showPanel">
+                <MenuItem name="3" v-if="$store.state.isStylist" to="/personal/settings/showPanel">
                     展示板
-                </MenuItem>
-                <MenuItem name="3" to="/personal/settings/personalInfo">
-                    个人资料
                 </MenuItem>
                 <MenuItem name="4" to="/personal/settings/account">
                     帐号设置
@@ -32,7 +32,7 @@ export default {
     },
     data() {
         return {
-            nowPath:"1"
+            nowPath:""
         }
     },
     

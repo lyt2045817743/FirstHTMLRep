@@ -1,62 +1,68 @@
 <!-- 商城页 -->
 <template>
-    <div class="container clearfix">
-        <div class="goods-list">
-            <div class="sl-nav clearfix">
-                <Menu mode="horizontal" :active-name="activeName" @on-select="changePath" class="menu">
-                    <MenuItem name="1" to="/store">
-                        全部
-                    </MenuItem>
-                    <MenuItem name="2" to="/store/lady">
-                        女装
-                    </MenuItem>
-                    <MenuItem name="3" to="/store/man">
-                        男装
-                    </MenuItem>
-                    <MenuItem name="4" to="/store/acce">
-                        饰品
-                    </MenuItem>
-                    <MenuItem name="5" to="/store/shooes-bags">
-                        鞋包
-                    </MenuItem>
-                    <MenuItem name="6" to="/store/loan">
-                        租借专柜
-                    </MenuItem>
-                </Menu>
-                <Input search enter-button placeholder="输入你想搜索的宝贝" class="search-input"/>
-            </div>
-            <div class="view">
-                <router-view />
-            </div>
+    <div class="clearfix">
+        <div id="nav">
+            <Navigation class="container" />
+            <div class="header_line"></div>
         </div>
-        <div class="stylist-banner">
-            <div class="banner">
-                <div class="banner-title clearfix">
-                    <span class="bt-font">
-                        <Icon type="ios-bookmark" />
-                        优质搭配师推荐
-                    </span>
-                    <span class="bt-btn">
-                        换一换
-                        <Icon type="md-sync" />
-                    </span>
+        <div class="container cont-box">
+            <div class="goods-list">
+                <div class="sl-nav clearfix">
+                    <Menu mode="horizontal" :active-name="activeName" @on-select="changePath" class="menu">
+                        <MenuItem name="1" to="/store">
+                            全部
+                        </MenuItem>
+                        <MenuItem name="2" to="/store/lady">
+                            女装
+                        </MenuItem>
+                        <MenuItem name="3" to="/store/man">
+                            男装
+                        </MenuItem>
+                        <MenuItem name="4" to="/store/acce">
+                            饰品
+                        </MenuItem>
+                        <MenuItem name="5" to="/store/shooes-bags">
+                            鞋包
+                        </MenuItem>
+                        <MenuItem name="6" to="/store/loan">
+                            租借专柜
+                        </MenuItem>
+                    </Menu>
+                    <Input search enter-button placeholder="输入你想搜索的宝贝" class="search-input"/>
                 </div>
-                <div class="banner-content">
-                    <div class="bc-item clearfix" v-for="item in stylistList" :key="item.id">
-                        <div class="bci-left clearfix">
-                            <img :src="item.headPic" alt="">
-                            <div class="bl-info">
-                                <span class="bl-nickname">{{item.nickname}}</span><br/>
-                                <span class="bl-recommend-reason">{{item.recReason}}</span>
+                <div class="view">
+                    <router-view />
+                </div>
+            </div>
+            <div class="stylist-banner">
+                <div class="banner">
+                    <div class="banner-title clearfix">
+                        <span class="bt-font">
+                            <Icon type="ios-bookmark" />
+                            优质搭配师推荐
+                        </span>
+                        <span class="bt-btn">
+                            换一换
+                            <Icon type="md-sync" />
+                        </span>
+                    </div>
+                    <div class="banner-content">
+                        <div class="bc-item clearfix" v-for="item in stylistList" :key="item.id">
+                            <div class="bci-left clearfix">
+                                <img :src="item.headPic" alt="">
+                                <div class="bl-info">
+                                    <span class="bl-nickname">{{item.nickname}}</span><br/>
+                                    <span class="bl-recommend-reason">{{item.recReason}}</span>
+                                </div>
+                            </div>
+                            <div class="bci-right">
+                                +关注
                             </div>
                         </div>
-                        <div class="bci-right">
-                            +关注
-                        </div>
                     </div>
-                </div>
-                <div class="showMore-btn">
-                    更多搭配师
+                    <div class="showMore-btn">
+                        更多搭配师
+                    </div>
                 </div>
             </div>
         </div>
@@ -64,12 +70,15 @@
 </template>
 
 <script>
+
+import Navigation from '../../components/Navigation';
+
 import {Menu,MenuItem,Icon,Input} from 'view-design';
 import {fromResponse} from '../../util/dataTypeConversion';
 import  {stylistRec} from '../../util/dataAnalyze';
 export default {
     components:{
-        Menu,MenuItem,Icon,Input
+        Navigation,Menu,MenuItem,Icon,Input
     },
 data() {
 return {

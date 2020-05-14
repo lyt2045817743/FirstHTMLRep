@@ -1,52 +1,60 @@
 <!-- 论坛页 -->
 <template>
-    <div class="container clearfix">
-        <div class="post-list">
-            <div class="menu clearfix">
-                <Menu mode="horizontal" :active-name="activeName" @on-select="changePath" class="menu-box">
-                    <MenuItem name="1" to="/forum">
-                        推荐
-                    </MenuItem>
-                    <MenuItem name="2" to="/forum/newest">
-                        最新
-                    </MenuItem>
-                    <MenuItem name="3" to="/forum/following">
-                        关注
-                    </MenuItem>
-                </Menu>
-                <div class="write-btn">
-                    <Icon type="ios-create-outline" />
-                    去发帖
-                </div>
-            </div>
-            <div class="view">
-                <router-view />
-            </div>
+    <div class="clearfix">
+        <div id="nav">
+            <Navigation class="container" />
+            <div class="header_line"></div>
         </div>
-        <div class="goods-banner">
-            <div class="banner">
-                <div class="banner-title clearfix">
-                    <span class="bt-font">
-                        <Icon type="ios-bookmark" />
-                        最热商品推荐
-                    </span>
-                    <span class="bt-btn">
-                        换一换
-                        <Icon type="md-sync" />
-                    </span>
-                </div>
-                <div class="banner-content">
-                    <div class="bc-item" v-for="item in goodsList" :key="item.id">
-                        <div class="bci-img">
-                            <img :src="item.goodsPic" alt="">
+        <div class="container con-box">
+            <div class="post-list">
+                <div class="menu clearfix">
+                    <Menu mode="horizontal" :active-name="activeName" @on-select="changePath" class="menu-box">
+                        <MenuItem name="1" to="/forum">
+                            推荐
+                        </MenuItem>
+                        <MenuItem name="2" to="/forum/newest">
+                            最新
+                        </MenuItem>
+                        <MenuItem name="3" to="/forum/following">
+                            关注
+                        </MenuItem>
+                    </Menu>
+                    <router-link target="_blank" to="/forum/writer">
+                        <div class="write-btn">
+                            <Icon type="ios-create-outline" />
+                            去发帖
                         </div>
-                        <div class="bci-info">
-                            <span class="rec-reason">{{item.recReason}}</span>
+                    </router-link>
+                </div>
+                <div class="view">
+                    <router-view />
+                </div>
+            </div>
+            <div class="goods-banner">
+                <div class="banner">
+                    <div class="banner-title clearfix">
+                        <span class="bt-font">
+                            <Icon type="ios-bookmark" />
+                            最热商品推荐
+                        </span>
+                        <span class="bt-btn">
+                            换一换
+                            <Icon type="md-sync" />
+                        </span>
+                    </div>
+                    <div class="banner-content">
+                        <div class="bc-item" v-for="item in goodsList" :key="item.id">
+                            <div class="bci-img">
+                                <img :src="item.goodsPic" alt="">
+                            </div>
+                            <div class="bci-info">
+                                <span class="rec-reason">{{item.recReason}}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="showMore-btn">
-                    更多商品信息
+                    <div class="showMore-btn">
+                        更多商品信息
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,11 +62,13 @@
 </template>
 
 <script>
+import Navigation from '../../components/Navigation';
+
 import {Menu,MenuItem,Icon} from 'view-design';
 import { goodsRec } from '../../util/dataAnalyze';
 export default {
     components:{
-        Menu,MenuItem,Icon
+        Navigation,Menu,MenuItem,Icon
     },
 data() {
 return {

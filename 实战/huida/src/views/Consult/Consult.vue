@@ -1,51 +1,57 @@
 <!-- 咨询页 -->
 <template>
-    <div class="container clearfix">
-        <div class="stylist-list">
-            <div class="sl-nav">
-                <Menu mode="horizontal" :active-name="activeName" @on-select="changePath">
-                    <MenuItem name="1" to="/consult">
-                        推荐
-                    </MenuItem>
-                    <MenuItem name="2" to="/consult/classify">
-                        分类
-                    </MenuItem>
-                    <MenuItem name="3" to="/consult/following">
-                        关注
-                    </MenuItem>
-                </Menu>
-            </div>
-            <div class="view">
-                <router-view />
-            </div>
+    <div class="clearfix">
+        <div id="nav">
+            <Navigation class="container" />
+            <div class="header_line"></div>
         </div>
-        <div class="posts-banner">
-            <div class="banner">
-                <div class="banner-title clearfix">
-                    <span class="bt-font">
-                        <Icon type="ios-bookmark" />
-                        最热帖子推荐
-                    </span>
-                    <span class="bt-btn">
-                        换一换
-                        <Icon type="md-sync" />
-                    </span>
+        <div class="container cont-box">
+            <div class="stylist-list">
+                <div class="sl-nav">
+                    <Menu mode="horizontal" :active-name="activeName" @on-select="changePath">
+                        <MenuItem name="1" to="/consult">
+                            推荐
+                        </MenuItem>
+                        <MenuItem name="2" to="/consult/classify">
+                            分类
+                        </MenuItem>
+                        <MenuItem name="3" to="/consult/following">
+                            关注
+                        </MenuItem>
+                    </Menu>
                 </div>
-                <div class="banner-content">
-                    <div class="bc-item clearfix" v-for="item in postList" :key="item.id">
-                        <div class="bci-info clearfix">
-                            <span class="bci-title">{{item.title}}</span>
-                            <span class="bci-cata left" v-if="item.cata=='搭配帖'">{{item.cata}}</span>
-                            <span class="bci-cata-req left" v-if="item.cata=='求助帖'">{{item.cata}}</span>
-                            <span class="bci-viewN right">
-                                <Icon type="ios-eye" />
-                                {{item.viewN}}
-                            </span>
-                        </div>
-                        <img v-if="item.pics" :src="item.pics[0]" alt="">
+                <div class="view">
+                    <router-view />
+                </div>
+            </div>
+            <div class="posts-banner">
+                <div class="banner">
+                    <div class="banner-title clearfix">
+                        <span class="bt-font">
+                            <Icon type="ios-bookmark" />
+                            最热帖子推荐
+                        </span>
+                        <span class="bt-btn">
+                            换一换
+                            <Icon type="md-sync" />
+                        </span>
                     </div>
-                    <div class="showMore-btn">
-                        更多帖子
+                    <div class="banner-content">
+                        <div class="bc-item clearfix" v-for="item in postList" :key="item.id">
+                            <div class="bci-info clearfix">
+                                <span class="bci-title">{{item.title}}</span>
+                                <span class="bci-cata left" v-if="item.cata=='搭配帖'">{{item.cata}}</span>
+                                <span class="bci-cata-req left" v-if="item.cata=='求助帖'">{{item.cata}}</span>
+                                <span class="bci-viewN right">
+                                    <Icon type="ios-eye" />
+                                    {{item.viewN}}
+                                </span>
+                            </div>
+                            <img v-if="item.pics" :src="item.pics[0]" alt="">
+                        </div>
+                        <div class="showMore-btn">
+                            更多帖子
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,11 +60,13 @@
 </template>
 
 <script>
+import Navigation from '../../components/Navigation';
+
 import {Menu,MenuItem,Icon} from 'view-design';
 import {fromResponse} from '../../util/dataTypeConversion';
 export default {
     components:{
-        Menu,MenuItem,Icon
+        Navigation,Menu,MenuItem,Icon
     },
     data() {
         return {

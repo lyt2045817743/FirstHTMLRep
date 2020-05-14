@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <div id="nav">
+      <Navigation class="container" />
+      <div class="header_line"></div>
+    </div>
     <div class="banner_img"></div>
     <div class="platfrom_feature container">
       <div class="pf_block clearfix">
@@ -93,11 +97,12 @@
 </template>
 
 <script>
+  import Navigation from '../components/Navigation';
   import {Icon,Card} from 'view-design';
   export default {
     name: 'Home',
     components: {
-      Icon,Card
+      Navigation,Icon,Card
     }
   }
 </script>

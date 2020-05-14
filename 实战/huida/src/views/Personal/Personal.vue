@@ -5,18 +5,24 @@
             <div class="ph-left clearfix">
                 <span class="phl-img"><Avatar icon="ios-person" size="60" style="fontSize:50px"/></span>
                 <div class="phl-info">
-                    <div class="phli-top">
-                        <span class="nickname">I'm fine</span>
-                        <span>积极的消费者</span>
+                    <div class="phli-top" style="marginBottom: 5px">
+                        <span class="nickname" v-if="$store.state.user.nickname">{{$store.state.user.nickname}}</span>
+                        <span class="nickname" v-if="!$store.state.user.nickname">未设置昵称</span>
+                        <Icon type="ios-person" />
+                        <span>{{$store.state.user.role}}</span>
                     </div>
                     <div class="phli-bottom">
-                        <span>关注：20</span>
-                        <span class="fans">粉丝：20</span>
+                        <span>关注：{{$store.state.user.mineFollows}}</span>
+                        <span class="fans">粉丝：{{$store.state.user.mineFans}}</span>
                         <span>申请成为搭配师 ></span>
                     </div>
                 </div>
             </div>
-            <div class="ph-right"></div>
+            <div class="ph-right">
+                <div class="pr-btn" v-if="!$store.state.isStylist">咨询中心</div>
+                <div class="pr-btn" v-if="!$store.state.isStylist" style="marginLeft: 80px;">购物车</div>
+                <div class="pr-btn" v-if="$store.state.isStylist">消息中心</div>
+            </div>
         </div>
         <div class="personal-content container clearfix">
             <div class="pc-nav">
@@ -121,9 +127,6 @@
     float: left;
     text-align: left;
 }
-.ph-right{
-    float: right;
-}
 .phl-img{
     width: 70px;
     height: 70px;
@@ -132,7 +135,7 @@
 }
 .phl-info{
     position: relative;
-    top: -67px;
+    top: -75px;
     left: 95px;
     text-align: left;
     font-size: 12px;
@@ -142,10 +145,26 @@
 }
 .phl-info .nickname{
     font-size: 20px;
+    font-weight: bold;
 }
 .phl-info span{
     margin-right: 10px;
 }
+.ph-right{
+    float: right;
+    margin-right: 100px;
+    margin-top: 30px;
+}
+.pr-btn{
+    width: 90px;
+    height: 40px;
+    display: inline-block;
+    line-height: 40px;
+    background-color: #007a8a;
+    font-size: 18px;
+    color: white;
+}
+
 .personal-content{
     margin-bottom: 30px;
 }
