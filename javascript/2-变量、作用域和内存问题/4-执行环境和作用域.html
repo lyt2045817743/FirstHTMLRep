@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //一些基本概念
+        //执行环境：定义了变量或函数有权访问其他数据。
+        //作用域链：保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的顶端，始终是当前执行的代码所在环境的变量对象。
+        //变量对象：每个执行环境都有一个与之关联的变量对象，环境中定义的所有变量和函数都保存在这个变量对象中。
+        //如果这个环境是函数，则该函数的活动对象为变量对象。
+        // var color="blue";
+        // function changeColor(){
+        //     if(color==="blue"){
+        //         color="red";
+        //     }
+        //     else{
+        //         color="blue";
+        //     }
+        // }
+
+        // changeColor();
+        // console.log(color); //red
+        
+
+        var color="blue";
+        function changeColor2(){
+            var anotherColor="red";
+            function swapColors(){
+                var tempColor=anotherColor;
+                anotherColor=color;
+                color=tempColor;
+            }
+            swapColors();
+            console.log(anotherColor);//blue
+        }
+        changeColor2();
+        console.log(color);//red
+        
+
+
+        //延长作用域链 with try-catch
+
+        //块级作用域
+
+
+
+    </script>
+</body>
+</html>

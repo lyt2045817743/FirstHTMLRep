@@ -8,11 +8,37 @@
 </head>
 <body>
     <script>
-        //关于属性
-        var name="a";
-        name.age=20;
-        console.log(name.age);  //undefined  ****不能给基本类型的值添加属性(并不是说基本数据类型没有属性)，但不会导致任何错误****
+        // //关于属性  -->动态地添加属性
+        //     //引用类型可以动态地添加属性，而基本类型不能
+        // var name="a";
+        // name.age=20;
+        // console.log(name.age);  //undefined  ****不能给基本类型的值添加属性(并不是说基本数据类型没有属性)，但不会导致任何错误****
         
+        //复制变量值
+        //基本类型  Number undefined null String boolean Symbel
+        //引用类型  Function->Object Array
+
+
+        //传递参数  引用类型
+        // function setName(obj){
+        //     obj.name="Nich";
+        // }
+        // var person=new Object();
+        // setName(person);
+        // console.log(person.name);//Nich
+
+        function setName2(obj){
+            obj.name="Nich";
+            obj=new Object();
+            obj.name="Greg";
+        }
+        var person=new Object();
+        setName2(person);
+        console.log(person.name);//Nich
+        
+
+        //检测类型
+        //typeof检测基本类型 instanceof检测引用类型
 
 
     </script>
