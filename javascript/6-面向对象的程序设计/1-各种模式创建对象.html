@@ -8,13 +8,70 @@
 </head>
 <body>
     <script>
-        //工厂模式
+        //工厂模式：可以创建多个相似的对象，但不知道对象的类型是什么
+
+        // function createPerson(name,age,job){
+        //     var o=new Object();
+        //     o.name=name;
+        //     o.age=age;
+        //     o.job=job;
+        //     o.sayHello=function(){
+        //         console.log(this.name);
+        //     }
+        //     return o;
+        // }
+         
+        // var person1=createPerson("Nich",20,"teacher");  //在createPerson方法被调用之后，我们无法通过person1对象知道他是一个什么类型的对象。
+        // var person2=createPerson("Lily",19,"doctor");
+
 
         //构造函数模式
+        function Person(name,age,job){
+            this.name=name;
+            this.age=age;
+            this.job=job;
+            this.sayHello=function(){
+                console.log(this.name);
+            }
+        }
+
+        var person1=new Person("Nich",20,"teacher");  //还有constructor属性 指向Person
+        var person2=new Person("Lily",19,"doctor");
+        person1.sayHello();
+        person2.sayHello();
+        console.log(person1.constructor);  //我们可以通过对象的constructor属性找到对象的类型（构造方法）
+
+            //1.把构造函数当作函数
+            // Person("Greg",18,"doctor");
+            // window.sayHello();
+            // console.log(name);
+            // sayHello();
+
+            var o=new Object();
+            Person.call(o,"Kristen",90,"doctor");
+            o.sayHello(); 
+
+
+            //2.构造函数的问题
+            function sayHello(){
+                console.log(this.name);
+            }
+
+
+
+
+
+
 
         //原型模式
 
         //构造函数模式+原型模式
+
+
+
+
+
+
 
         //动态原型模式
 
