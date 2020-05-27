@@ -7,7 +7,7 @@
 		<view class="wrapper">
 			<view class="left-top-sign">LOGIN</view>
 			<view class="welcome">
-				欢迎回来！
+				马上注册！
 			</view>
 			<view class="input-content">
 				<view class="input-item">
@@ -35,15 +35,23 @@
 						@confirm="toLogin"
 					/>
 				</view>
+				<view class="input-item">
+					<text class="tit">手机号</text>
+					<input
+					 type="number" 
+					 maxlength="11" 
+					 placeholder="请输入手机号"
+					   data-key="telephone"
+					   @input="inputChange"
+					   />
+				</view>
+				<view class="input-item input-item1">
+					<text class="tit">短信验证码</text>
+					<input type="string" maxlength="6" placeholder="短信验证码" data-key="authCode" @input="inputChange" :value="authCode"/>
+					<view class="codeimg" @tap="getsmscode">{{smsbtn.text}}</view>
+				</view>
 			</view>
-			<button class="confirm-btn" @click="toLogin" :disabled="logining">登录</button>
-			<view class="forget-section">
-				忘记密码?
-			</view>
-		</view>
-		<view class="register-section">
-			还没有账号?
-			<text @click="toRegist">马上注册</text>
+			<button class="confirm-btn" @click="toRegister" :disabled="logining">立即注册</button>
 		</view>
 	</view>
 </template>
@@ -58,7 +66,15 @@
 			return {
 				username: '',
 				password: '',
-				logining: false
+				telephone:'',
+				authCode:'',
+				logining: false,
+				smsbtn: {
+					text: '获取验证码',
+					status: false,
+					codeTime: 60
+				},
+				timerId: null,
 			}
 		},
 		onLoad(){
@@ -66,6 +82,43 @@
 		},
 		methods: {
 			...mapMutations(['login']),
+			getsmscode: function() {
+				const data={
+					telephone:this.telephone
+				}
+				uni.request({
+					url:'http://localhost:8085/sso/getAuthCode',
+					method:'get',
+					data,
+					header:{'content-type': 'application/x-www-form-urlencoded'},
+					success: (res) => {
+						this.smsbtn.status = true; // 这段代码其实应该加在你request请求 短信发送成功后
+						console.log(res);
+						
+					},
+					fail:(err)=>{
+						console.log(err);
+					}
+				})
+				if (this.smsbtn.status == true ) {
+					console.log('message：', "别着急！短信已经发送了~");
+					return false;
+				}
+				this.timerId = setInterval(() => {
+						var codeTime = this.smsbtn.codeTime;
+						codeTime--;
+						this.smsbtn.codeTime = codeTime;
+						this.smsbtn.text = codeTime + "S";
+						if (codeTime < 1) {
+							clearInterval(this.timerId);
+							this.smsbtn.text = "重新获取";
+							this.smsbtn.codeTime = 60;
+							this.smsbtn.status = false;
+						}
+					},
+					1000);
+				return false;
+			},
 			inputChange(e){
 				const key = e.currentTarget.dataset.key;
 				this[key] = e.detail.value;
@@ -74,14 +127,11 @@
 				uni.navigateBack();
 			},
 			toRegist(){
-				uni.navigateTo({
-					url:"./register"
-				})
 				this.$api.msg('去注册');
 			},
-			async toLogin(){
+			async toRegister(){
 				this.logining = true;
-				const {username, password} = this;
+				const {username, password,telephone,authCode} = this;
 				/* 数据验证模块
 				if(!this.$api.match({
 					mobile,
@@ -93,11 +143,13 @@
 				*/
 				const sendData = {
 					username,
-					password
+					password,
+					telephone,
+					authCode
 				};
-				
+				console.log(sendData);
 				uni.request({
-					url:"http://localhost:8085/sso/login",
+					url:"http://localhost:8085/sso/register",
 					method:"post",
 					data:sendData,
 					header:{
@@ -109,11 +161,8 @@
 						// console.log(data.code);
 						if(data.code === 200){
 							// console.log(data.data);
-							var tokenHead=data.data.tokenHead;
-							var token=data.data.token;
-							this.login(tokenHead+token);
-							uni.switchTab({
-								url:"../index/index"
+							uni.navigateTo({
+								url:"./login"
 							});  
 							// uni.navigateBack();
 						}else{
@@ -123,9 +172,6 @@
 					},
 					fail: (err) => {
 						console.log(err);
-					},
-					complete: (res) => {
-						console.log(res);
 					}
 				})
 				// const result = await this.$api.json('userInfo');
@@ -160,6 +206,55 @@
 		background: #fff;
 		padding-bottom: 40upx;
 	}
+	
+	.registercontent {
+		width: 85%;
+		margin: 0 auto;
+	}/* 
+	.is-input1 {
+		height: 88rpx;
+		width: 100%;
+		line-height: 88rpx;
+		padding: 12rpx;
+		color: #353535;
+		font-size: 32rpx;
+		box-sizing: border-box;
+		appearance: none;
+		border: 2rpx solid #e5e5e5;
+		box-shadow: none;
+		border-radius: 44rpx;
+		outline: 0;
+		display: block;
+		padding-left: 30rpx;
+		margin: 0;
+		font-family: inherit;
+		background: #fff;
+		resize: none;
+	}*/
+	.input-item1{
+		position: relative;
+	}
+	.codeimg{
+		position: absolute;
+		right: 10%;
+		height: 50upx;
+		line-height: 56upx;
+		font-size: $font-sm+2upx;
+	}
+	/* .codeimg {
+		position: absolute;
+		right: 12%;
+		z-index: 999;
+		width: 200rpx;
+		text-align: center;
+		color: #353535;
+		margin-top: -11%;
+		background: #fff;
+		border-top-right-radius: 44rpx;
+		border-bottom-right-radius: 44rpx;
+		height: 80rpx;
+		line-height: 80rpx;
+	} */
 	.back-btn{
 		position:absolute;
 		left: 40upx;
