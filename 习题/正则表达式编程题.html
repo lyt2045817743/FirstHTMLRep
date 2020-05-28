@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -41,5 +41,28 @@
       <p>2018-15-08</p>
       <p>2018年08月15日</p>
   </div>
+  <script>
+      // var reg=/^\d{3,4}-\d{7,8}(-\d{3,4})?$/;
+      // var value=prompt("请填写座机号：");
+  
+      // var reg=/^0*1[35][0-9]{9}$/;
+      // var value=prompt("请填写手机号：");
+
+      // var reg=/^[0-9a-zA-Z_]{11}$/;
+      // var value=prompt("请填写用户名：");
+  
+      // var reg=/^\d{4}-\d{2}-\d{2}$/;
+      // var value=prompt("请填写日期：");
+      
+      var reg=/^(\d{4})-(\d{2})-(\d{2})$/;
+      var value=prompt("请填写日期：");
+      var result=reg.exec(value);
+      if(result){
+        console.log(result[1]+"年"+result[3]+"月"+result[2]+"日");
+      }
+      else{
+        console.log("错误");
+      }
+    </script>
 </body>
 </html>
