@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>牛客网--正则表达式</title>
+    <!-- <link rel="stylesheet" href="./css/choice.css"> -->
+</head>
+<body>
+    <h3>1.下列对符号所表示的意义解释错误的是 ()</h3>
+
+    <!-- <blockquote> -->
+    <p>A.ˆ(尖号)匹配字符串的开头</p>
+    <p>B.$(美元符号)匹配字符串的结尾</p>
+    <p>C.?(问号)匹配前面的子表达式一次或多次</p>
+    <p>D.\(反斜杠)对特殊字符的特殊元字符含义进行转义</p>
+    <!-- </blockquote> -->
+    <h4>正确答案: C</h4>
+
+    2.以下代码执行后，result 的值是：
+    var result = "75team2017".match(/\d+\w*/g);
+        ["75"]
+        ["2017"]
+        ["75team2017"]
+        ["75", "2017"]
+
+    正确答案: C 
+
+    3.var str1=new RegExp("e");
+    document.write(str1.exec("hello"));
+    以上代码输出结果为（      ）
+        e
+        null
+        1
+        其他几项都不对
+
+    正确答案: A
+
+    4.以下哪些正则表达式满足regexp.test('abc') === true？
+    /^abc$/
+    /...(?=.)/
+    /[ab]{2}[^defgh]/
+    /[defgh]*/
+
+    正确答案: A C D 
+    
+    5.以下哪一条Javascript语句会产生运行错误？
+        var obj=( );
+        var obj=[ ];
+        var obj={ };
+        var obj=/ /;
+    正确答案: A 
+
+    6.以下代码的执行后，str 的值是：
+    var str = "Hellllo world";
+    str = str.replace(/(l)\1/g, '$1');
+        Helo world
+        Hello world
+        Helllo world
+        Hellllo world
+    正确答案: B 
+
+    7.下面匹配整数的正则表达式中，正确的是( )
+        (-?[1-9]\d*)|0
+        [1-9]\d*
+        -[1-9]\d*
+        [1-9]\d*|0
+    正确答案: A 
+
+    8.当在手机中需要保存移动手机号码时，怎样才能知道输入的手机号就是11位的移动手机号（      ）
+    
+        var filt=/^1[0-9]{10}+$/;
+        if(!filt.test(str))
+        {
+        alert("手机号输入错误");
+        }
+
+        var filt=^1[0-9]{10};
+        if(!filt.test(str))
+        {
+        alert("手机号输入错误");
+        }
+
+        var filt=/^[0-9]{10}/;
+        if(!filt.test(str))
+        {
+        alert("手机号输入错误");
+        }
+
+        var filt=/^1[0-9]/;
+        if(!filt.test(str))
+        {
+        alert("手机号输入错误");
+        }
+    正确答案: A 
+    
+</body>
+</html>
