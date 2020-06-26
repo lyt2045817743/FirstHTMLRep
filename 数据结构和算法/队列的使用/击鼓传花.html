@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./index.js"></script>
+    <script>
+        function hotPotato(elList,num){
+            let queue=new Queue();
+            //先将人员列表放入队列中
+            elList.forEach((val)=>{
+                queue.enqueue(val);
+            });
+
+            while(queue.size()>1){
+                var removeEl='';
+                for(let i=0;i<num-1;i++){
+                    queue.enqueue(queue.dequeue());//将第一个元素放到最后
+                }
+
+                removeEl=queue.dequeue();
+                console.log(removeEl+"被淘汰");
+            }
+            
+            return queue.dequeue();
+        }
+        let list=["lily","john","tom","lucy","jony"];
+        console.log(hotPotato(list,7)+"是最终的赢家");
+        
+    </script>
+</body>
+</html>
